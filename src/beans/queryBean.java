@@ -9,6 +9,8 @@ import javax.faces.bean.SessionScoped;
 public class queryBean {
 	//el formato de los atributos de busqueda es: tabla_atributo
 	
+	
+	
 	/*
 	private static final ArrayList<String> searchFields = new ArrayList<String>(Arrays.asList("solicitud.numerosolicitud","solicitud.numeroregistro",
 			"solicitud.categoriaid","solicitud.coberturaid", "solicitud.tipomarcaid","solicitud.estadoid","solicitud.fechapresentacion",
