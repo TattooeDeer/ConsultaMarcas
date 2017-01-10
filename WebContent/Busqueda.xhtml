@@ -10,22 +10,22 @@ Busqueda
     <h:panelGrid columns="2" cellpadding="5">
     
         <p:outputLabel value="Numero de Solicitud:" for="acSimple1" />
-        <p:autoComplete id="acSimple1" value="#{queryBean.solicitud_numeroSolicitud}" completeMethod="#{autoCompleteView.completeText}" />
+        <p:inputText id="acSimple1" value="#{queryBean.solicitud_numeroSolicitud}" />
         
         <p:outputLabel value="Numero de Registro:" for="acSimple2" />
-        <p:autoComplete id="acSimple2" value="#{queryBean.solicitud_numeroRegistro}" completeMethod="#{autoCompleteView.completeText}" />
+        <p:inputText id="acSimple2" value="#{queryBean.solicitud_numeroRegistro}" />
         
         <p:outputLabel value="Tipo de Marca:" for="dd1" />
-        <p:autoComplete id="dd1" dropdown="true" value="#{queryBean.solicitud_tipoMarcaId}" completeMethod="#{autoCompleteView.completeText}" />
+        <p:inputText id="dd1" dropdown="true" value="#{queryBean.solicitud_tipoMarcaId}" />
  
  		<p:outputLabel value="Tipo de Cobertura:" for="acSimple3" />
-        <p:autoComplete id="acSimple3" value="#{queryBean.solicitud_coberturaId}" completeMethod="#{autoCompleteView.completeText}" />
+        <p:inputText id="acSimple3" value="#{queryBean.solicitud_coberturaId}" />
         
         <p:outputLabel value="Tipo de Categoria:" for="dd2" />
-        <p:autoComplete id="dd2" dropdown="true" value="#{queryBean.solicitud_categoriaId}" completeMethod="#{autoCompleteView.completeText}" />
+        <p:inputText id="dd2" dropdown="true" value="#{queryBean.solicitud_categoriaId}" />
  
 		<p:outputLabel value="Estado de Marca:" for="dd3" />
-        <p:autoComplete id="dd3" dropdown="true" value="#{queryBean.solicitud_estadoId}" completeMethod="#{autoCompleteView.completeText}" />
+        <p:inputText id="dd3" dropdown="true" value="#{queryBean.solicitud_estadoId}" />
  		
  		<p:outputLabel value="Fecha de Presentacion:" for="mask1"/>
         <p:calendar id="mask1" value="#{queryBean.solicitud_fechaPresentacion}" pattern="dd-MM-yyyy" mask="true" />
@@ -40,24 +40,9 @@ Busqueda
  
  	</h:panelGrid>
  
-    <p:commandButton value="Submit" icon="ui-icon-check" update="output msgs" oncomplete="PF('dlg').show()" />
+    <p:commandButton value="Submit" icon="ui-icon-check" oncomplete="PF('dlg').show()" />
  	
- 	<p:dialog header="Values" resizable="false" showEffect="fade" widgetVar="dlg">
-        <p:panelGrid id="output" columns="2" columnClasses="label, value">
-        
-            <h:outputText value="Simple:" />
-            <h:outputText value="#{autoCompleteView.txt1}" />
-            
-            <h:outputText value="Dropdown:" />
-            <h:outputText value="#{autoCompleteView.txt6}" />
- 			
- 			<h:outputText value="Mask:" />
-            <h:outputText value="#{calendarView.date9}"/>
-             
-             
-            
-         </p:panelGrid>
-    </p:dialog>
+ 	
     
 </h:form>
 </html>
