@@ -10,31 +10,31 @@ Busqueda
     <h:panelGrid columns="2" cellpadding="5">
     
         <p:outputLabel value="Numero de Solicitud:" for="acSimple1" />
-        <p:autoComplete id="acSimple1" value="#{autoCompleteView.numerosolicitud}" completeMethod="#{autoCompleteView.completeText}" />
+        <p:autoComplete id="acSimple1" value="#{queryBean.solicitud_numeroSolicitud}" completeMethod="#{autoCompleteView.completeText}" />
         
         <p:outputLabel value="Numero de Registro:" for="acSimple2" />
-        <p:autoComplete id="acSimple2" value="#{autoCompleteView.numeroregistro}" completeMethod="#{autoCompleteView.completeText}" />
+        <p:autoComplete id="acSimple2" value="#{queryBean.solicitud_numeroRegistro}" completeMethod="#{autoCompleteView.completeText}" />
         
         <p:outputLabel value="Tipo de Marca:" for="dd1" />
-        <p:autoComplete id="dd1" dropdown="true" value="#{autoCompleteView.tipomarcaid}" completeMethod="#{autoCompleteView.completeText}" />
+        <p:autoComplete id="dd1" dropdown="true" value="#{queryBean.solicitud_tipoMarcaId}" completeMethod="#{autoCompleteView.completeText}" />
  
  		<p:outputLabel value="Tipo de Cobertura:" for="acSimple3" />
-        <p:autoComplete id="acSimple3" value="#{autoCompleteView.coberturaid}" completeMethod="#{autoCompleteView.completeText}" />
+        <p:autoComplete id="acSimple3" value="#{queryBean.solicitud_coberturaId}" completeMethod="#{autoCompleteView.completeText}" />
         
         <p:outputLabel value="Tipo de Categoria:" for="dd2" />
-        <p:autoComplete id="dd2" dropdown="true" value="#{autoCompleteView.categoriaid}" completeMethod="#{autoCompleteView.completeText}" />
+        <p:autoComplete id="dd2" dropdown="true" value="#{queryBean.solicitud_categoriaId}" completeMethod="#{autoCompleteView.completeText}" />
  
 		<p:outputLabel value="Estado de Marca:" for="dd3" />
-        <p:autoComplete id="dd3" dropdown="true" value="#{autoCompleteView.estadoid}" completeMethod="#{autoCompleteView.completeText}" />
+        <p:autoComplete id="dd3" dropdown="true" value="#{queryBean.solicitud_estadoId}" completeMethod="#{autoCompleteView.completeText}" />
  		
  		<p:outputLabel value="Fecha de Presentacion:" for="mask1"/>
-        <p:calendar id="mask1" value="#{calendarView.fechapresentacion}" pattern="dd-MM-yyyy" mask="true" />
+        <p:calendar id="mask1" value="#{queryBean.solicitud_fechaPresentacion}" pattern="dd-MM-yyyy" mask="true" />
  	
  		<p:outputLabel value="Fecha de Publicacion" for="mask2"/>
-        <p:calendar id="mask2" value="#{calendarView.fechapublicacion}" pattern="dd-MM-yyyy" mask="true" />
+        <p:calendar id="mask2" value="#{queryBean.solicitud_fechaPublicacion}" pattern="dd-MM-yyyy" mask="true" />
  
  		<p:outputLabel value="Fecha de Presentacion:" for="mask3"/>
-        <p:calendar id="mask3" value="#{calendarView.fecharegistro}" pattern="dd-MM-yyyy" mask="true" />
+        <p:calendar id="mask3" value="#{queryBean.solicitud_fechaRegistro}" pattern="dd-MM-yyyy" mask="true" />
  
  
  
@@ -52,11 +52,12 @@ Busqueda
             <h:outputText value="#{autoCompleteView.txt6}" />
  			
  			<h:outputText value="Mask:" />
-            <h:outputText value="#{calendarView.date9}">
-               <f:convertDateTime pattern="MM/dd/yyyy" />
-            </h:outputText>
+            <h:outputText value="#{calendarView.date9}"/>
+             
+             
             
          </p:panelGrid>
     </p:dialog>
+    
 </h:form>
 </html>
