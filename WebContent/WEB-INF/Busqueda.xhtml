@@ -1,0 +1,62 @@
+<html xmlns="http://www.w3c.org/1999/xhtml"
+   xmlns:h="http://java.sun.com/jsf/html"
+   xmlns:p="http://primefaces.org/ui">
+<h:head>
+Busqueda
+</h:head>
+<h:form>
+    <p:growl id="msgs" showDetail="true" />
+ 
+    <h:panelGrid columns="2" cellpadding="5">
+    
+        <p:outputLabel value="Numero de Solicitud:" for="acSimple1" />
+        <p:autoComplete id="acSimple1" value="#{autoCompleteView.numerosolicitud}" completeMethod="#{autoCompleteView.completeText}" />
+        
+        <p:outputLabel value="Numero de Registro:" for="acSimple2" />
+        <p:autoComplete id="acSimple2" value="#{autoCompleteView.numeroregistro}" completeMethod="#{autoCompleteView.completeText}" />
+        
+        <p:outputLabel value="Tipo de Marca:" for="dd1" />
+        <p:autoComplete id="dd1" dropdown="true" value="#{autoCompleteView.tipomarcaid}" completeMethod="#{autoCompleteView.completeText}" />
+ 
+ 		<p:outputLabel value="Tipo de Cobertura:" for="acSimple3" />
+        <p:autoComplete id="acSimple3" value="#{autoCompleteView.coberturaid}" completeMethod="#{autoCompleteView.completeText}" />
+        
+        <p:outputLabel value="Tipo de Categoria:" for="dd2" />
+        <p:autoComplete id="dd2" dropdown="true" value="#{autoCompleteView.categoriaid}" completeMethod="#{autoCompleteView.completeText}" />
+ 
+		<p:outputLabel value="Estado de Marca:" for="dd3" />
+        <p:autoComplete id="dd3" dropdown="true" value="#{autoCompleteView.estadoid}" completeMethod="#{autoCompleteView.completeText}" />
+ 		
+ 		<p:outputLabel value="Fecha de Presentacion:" for="mask1"/>
+        <p:calendar id="mask1" value="#{calendarView.fechapresentacion}" pattern="dd-MM-yyyy" mask="true" />
+ 	
+ 		<p:outputLabel value="Fecha de Publicacion" for="mask2"/>
+        <p:calendar id="mask2" value="#{calendarView.fechapublicacion}" pattern="dd-MM-yyyy" mask="true" />
+ 
+ 		<p:outputLabel value="Fecha de Presentacion:" for="mask3"/>
+        <p:calendar id="mask3" value="#{calendarView.fecharegistro}" pattern="dd-MM-yyyy" mask="true" />
+ 
+ 
+ 
+ 	</h:panelGrid>
+ 
+    <p:commandButton value="Submit" icon="ui-icon-check" update="output msgs" oncomplete="PF('dlg').show()" />
+ 	
+ 	<p:dialog header="Values" resizable="false" showEffect="fade" widgetVar="dlg">
+        <p:panelGrid id="output" columns="2" columnClasses="label, value">
+        
+            <h:outputText value="Simple:" />
+            <h:outputText value="#{autoCompleteView.txt1}" />
+            
+            <h:outputText value="Dropdown:" />
+            <h:outputText value="#{autoCompleteView.txt6}" />
+ 			
+ 			<h:outputText value="Mask:" />
+            <h:outputText value="#{calendarView.date9}">
+               <f:convertDateTime pattern="MM/dd/yyyy" />
+            </h:outputText>
+            
+         </p:panelGrid>
+    </p:dialog>
+</h:form>
+</html>
