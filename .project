@@ -30,7 +30,7 @@
 	</natures>
 	<linkedResources>
 		<link>
-			<name>WebContent/WEB-INF/lib/primefaces-5.3.jar</name>
+			<name>src/WebContent/WEB-INF/lib/primefaces-5.3.jar</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/DevTools/primefaces-5.3.jar</locationURI>
 		</link>
