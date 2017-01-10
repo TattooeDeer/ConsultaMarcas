@@ -1,9 +1,10 @@
 package beans;
 
 import java.lang.String;
-import java.sql.Date;
+import java.sql.*;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+
 
 @ManagedBean
 @SessionScoped
@@ -54,7 +55,11 @@ public class queryBean {
 	
 	}
 
-
+	//ListSearch[] = <not null> 
+	//
+	public ResultSet search(){
+		
+	}
 
 
 	public int getSolicitud_numeroSolicitud() {
