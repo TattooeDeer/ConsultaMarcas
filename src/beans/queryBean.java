@@ -49,6 +49,7 @@ public class queryBean {
 	private Integer representante_rut;							//segun el numero de solicitud que tiene cierto representante,
 	private String  representante_nombre;						//rut del representante o el nombre del mismo
 	
+	//Hay que ver bien a que se refiere con el campo de marcas del cliente
 	private Integer marcaCliente_numeroSolicitud;				//Para el campo Marcas del cliente se dan las opciones de busqueda por
 	private Date    marcaCliente_fechaAlta;						//'numero de solicitud', 'fecha de alta' y 'fecha de baja'
 	private Date    marcaCliente_fechaBaja;
@@ -72,12 +73,42 @@ public class queryBean {
 	//Metodo de busqueda
 	public ResultSet search(){
 		
+		ResultSet myRs = null;
+		
 		try {
 			//Creamos la conexion a la BD
 			Connection my_conn;
 			my_conn = conexion.crearConexion();
 			//Creamos el objeto Statement, en este se ejecutara la query final
 			Statement myStmt = my_conn.createStatement();
+			
+			//las querys se crean en base a el conjunto de campos asociados a la tabla correspondiente
+			//De esta forma, si el usuario pregunta por la fecha de una instancia, no se le mostraran TODOS los
+			//titulares que hay en la BD
+			
+			setSolicitud_stmt("SELECT * FROM marcas.solicitud WHERE (numerosolicitud,numeroregistro,categoriaid,coberturaid,"
+					+ "tipomarcaid,estadoid,fechapresentacion,fechapublicacion,fecharegistro,clases) = (" + getSolicitud_numeroSolicitud().toString() + ","
+					+ getSolicitud_numeroRegistro().toString() + "," + getSolicitud_coberturaId().toString() + "," + getSolicitud_tipoMarcaId().toString() + ","
+					+ getSolicitud_estadoId() + "," + getSolicitud_fechaPresentacion().toString()
+					+ ","+ getSolicitud_fechaPublicacion().toString() + "," + getSolicitud_fechaRegistro().toString() + "," + getSolicitud_clases().toString() + ");");
+			 
+			setAnotacion_stmt("SELECT * FROM marcas.anotacion WHERE (estadoanotacionid,fechacreacion) = (" + getAnotacion_estadoAnotacionId() + ","
+					+ getAnotacion_fechaCreacion().toString() + getAnotacion_fechaVencimiento().toString() + ");");
+			
+			setInstanciaAdministrativa_stmt("SELECT * FROM marcas.instancia WHERE (fechavencimiento,estadoinstancia,fechacreacion) = ("
+					+ getInstanciaAdministrativa_fechaVencimiento().toString() + "," + getInstanciaAdministrativa_estadoInstanciaId().toString()
+					+ "," + getInstanciaAdministrativa_fechaCreacion().toString() + ");");
+			
+			setTitular_stmt("SELECT * FROM marcas.titular WHERE (nombre,rut,numerosolicitud) = ("
+					+ getTitular_nombre() + "," + getTitular_rut().toString() + "," + getTitular_numeroSolicitud().toString() + ");");
+			
+			setRepresentante_stmt("SELECT * FROM marcas.representante WHERE (numerosolicitud,rut,nombre) = ("
+					+ getRepresentante_numeroSolicitud().toString() + "," + getRepresentante_rut().toString()
+					+ "," + getRepresentante_nombre() + ");");
+			
+			//Falta la busqueda por marcas del cliente
+			myRs = myStmt.executeQuery(getSolicitud_stmt());
+			
 		
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -109,11 +140,14 @@ public class queryBean {
 				+ getTitular_nombre() + "," + getTitular_rut().toString() + "," + getTitular_numeroSolicitud().toString() + ");");
 		
 		
+		return myRs;
 	}
 
 	
 	
 	/***********VALIDADORES**************/
+	
+	//				TODO
 	//Los validadores confirman que el valor ingresado corresponda al tipo de dato que debe ser el campo
 	//Ademas, fijan el valor de la variable correspondiente a la wildcard "%" si no es llenado
 	public void stringValidator(){};
