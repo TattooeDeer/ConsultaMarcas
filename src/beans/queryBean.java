@@ -119,27 +119,7 @@ public class queryBean {
 			e.printStackTrace();
 		}
 		
-		//las querys se crean en base a el conjunto de campos asociados a la tabla correspondiente
-		//De esta forma, si el usuario pregunta por la fecha de una instancia, no se le mostraran TODOS los
-		//titulares que hay en la BD
-		
-		setSolicitud_stmt("SELECT * FROM marcas.solicitud WHERE (numerosolicitud,numeroregistro,categoriaid,coberturaid,"
-				+ "tipomarcaid,estadoid,fechapresentacion,fechapublicacion,fecharegistro,clases) = (" + getSolicitud_numeroSolicitud().toString() + ","
-				+ getSolicitud_numeroRegistro().toString() + "," + getSolicitud_coberturaId().toString() + "," + getSolicitud_tipoMarcaId().toString() + ","
-				+ getSolicitud_estadoId() + "," + getSolicitud_fechaPresentacion().toString()
-				+ ","+ getSolicitud_fechaPublicacion().toString() + "," + getSolicitud_fechaRegistro().toString() + "," + getSolicitud_clases().toString() + ");");
-		 
-		setAnotacion_stmt("SELECT * FROM marcas.anotacion WHERE (estadoanotacionid,fechacreacion) = (" + getAnotacion_estadoAnotacionId() + ","
-				+ getAnotacion_fechaCreacion().toString() + getAnotacion_fechaVencimiento().toString() + ");");
-		
-		setInstanciaAdministrativa_stmt("SELECT * FROM marcas.instancia WHERE (fechavencimiento,estadoinstancia,fechacreacion) = ("
-				+ getInstanciaAdministrativa_fechaVencimiento().toString() + "," + getInstanciaAdministrativa_estadoInstanciaId().toString()
-				+ "," + getInstanciaAdministrativa_fechaCreacion().toString() + ");");
-		
-		setTitular_stmt("SELECT * FROM marcas.titular WHERE(nombre,rut,numerosolicitud) = ("
-				+ getTitular_nombre() + "," + getTitular_rut().toString() + "," + getTitular_numeroSolicitud().toString() + ");");
-		
-		
+			
 		return myRs;
 	}
 
