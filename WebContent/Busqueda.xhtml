@@ -40,7 +40,8 @@ Busqueda
  
  	</h:panelGrid>
  
-    <p:commandButton value="Submit" icon="ui-icon-check" oncomplete="Resultado" />
+    <p:commandButton value="Submit" icon="ui-icon-check" update="display" action = "#{queryBean.search}"/>
+    <h:outputText id="display" value="#{queryBean.myRs}"/>
  	
  	
     

@@ -7,7 +7,7 @@ import javax.faces.bean.SessionScoped;
 import Connection.conexion;
 
 
-@ManagedBean
+@ManagedBean(name = "queryBean")
 @SessionScoped
 public class queryBean {
 	//el formato de los atributos de busqueda es: tabla_atributo
@@ -62,6 +62,8 @@ public class queryBean {
 	private String  representante_stmt;
 	private String  marcasCliente_stmt;
 	
+	private ResultSet myRs;
+	
 	
 	
 	
@@ -71,9 +73,9 @@ public class queryBean {
 	}
 
 	//Metodo de busqueda
-	public ResultSet search(){
+	public String search(){
 		
-		ResultSet myRs = null;
+		
 		
 		try {
 			//Creamos la conexion a la BD
@@ -86,11 +88,13 @@ public class queryBean {
 			//De esta forma, si el usuario pregunta por la fecha de una instancia, no se le mostraran TODOS los
 			//titulares que hay en la BD
 			
-			setSolicitud_stmt("SELECT * FROM marcas.solicitud WHERE (numerosolicitud,numeroregistro,categoriaid,coberturaid,"
+			String sql = "SELECT * FROM marcas.solicitud WHERE (numerosolicitud,numeroregistro,categoriaid,coberturaid,"
 					+ "tipomarcaid,estadoid,fechapresentacion,fechapublicacion,fecharegistro,clases) = (" + getSolicitud_numeroSolicitud().toString() + ","
 					+ getSolicitud_numeroRegistro().toString() + "," + getSolicitud_coberturaId().toString() + "," + getSolicitud_tipoMarcaId().toString() + ","
 					+ getSolicitud_estadoId() + "," + getSolicitud_fechaPresentacion().toString()
-					+ ","+ getSolicitud_fechaPublicacion().toString() + "," + getSolicitud_fechaRegistro().toString() + "," + getSolicitud_clases().toString() + ");");
+					+ ","+ getSolicitud_fechaPublicacion().toString() + "," + getSolicitud_fechaRegistro().toString() + "," + getSolicitud_clases().toString() + ");";
+			
+			setSolicitud_stmt(sql);
 			 
 			setAnotacion_stmt("SELECT * FROM marcas.anotacion WHERE (estadoanotacionid,fechacreacion) = (" + getAnotacion_estadoAnotacionId() + ","
 					+ getAnotacion_fechaCreacion().toString() + getAnotacion_fechaVencimiento().toString() + ");");
@@ -107,9 +111,21 @@ public class queryBean {
 					+ "," + getRepresentante_nombre() + ");");
 			
 			//Falta la busqueda por marcas del cliente
-			myRs = myStmt.executeQuery(getSolicitud_stmt());
 			
-		
+			
+			//Se ejecuta la Query sobre la BD
+			System.out.println(getSolicitud_stmt());
+			setMyRs(getSolicitud_stmt(),myStmt);
+			
+			if(myRs == null){
+				return "fail";
+			}
+			else{
+				System.out.println("\nExito en la busqueda-1");
+				return "success";
+			}
+				
+			
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -118,9 +134,15 @@ public class queryBean {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		if(myRs == null){
+			return "fail";
+		}
+		else{
+			System.out.println("\nExito en la busqueda-2");
+			return "success";
+		}
 			
-		return myRs;
+		
 	}
 
 	
@@ -380,6 +402,15 @@ public class queryBean {
 
 	public void setMarcasCliente_stmt(String marcasCliente_stmt) {
 		this.marcasCliente_stmt = marcasCliente_stmt;
+	}
+
+	public void setMyRs(String stmt, Statement myStmt) throws SQLException {
+		this.myRs = myStmt.executeQuery(stmt);
+		
+	}
+
+	public ResultSet getMyRs() {
+		return this.myRs;
 	}
 
 	
