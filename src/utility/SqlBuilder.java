@@ -26,8 +26,8 @@ import java.util.ArrayList;
  * */
 public class SqlBuilder {
 	private String SELECT_stmt = "SELECT ";
-	private String FROM_stmt = "FROM ";
-	private String WHERE_stmt = "WHERE ";
+	private String FROM_stmt = " FROM ";
+	private String WHERE_stmt = " WHERE ";
 	
 
 	
@@ -53,11 +53,12 @@ public class SqlBuilder {
 		/************WHERE***********/
 		boolean aux = false;
 		for(int i = 0; i < fields_names.size(); i++){
-			if(responses.get(i) == null)
+			System.out.println(responses.get(i) == "0" );
+			if(responses.get(i).equals("0") || responses.get(i) == "")
 				continue;
 			else{
 				if (aux == true)
-					AddWHERE_stmt("AND");
+					AddWHERE_stmt(" AND ");
 				AddWHERE_stmt(fields_names.get(i).toString());
 				AddWHERE_stmt("="+responses.get(i).toString());	
 				aux = true;

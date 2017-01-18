@@ -31,9 +31,9 @@ public class queryBean {
 	private Integer solicitud_coberturaId;
 	private String  solicitud_tipoMarcaId;
 	private String  solicitud_estadoId;
-	private Date    solicitud_fechaPresentacion;
-	private Date    solicitud_fechaPublicacion;
-	private Date    solicitud_fechaRegistro;
+	private String    solicitud_fechaPresentacion;
+	private String    solicitud_fechaPublicacion;
+	private String    solicitud_fechaRegistro;
 	private String  solicitud_clases;
 	
 	private String  anotacion_estadoAnotacionId;
@@ -159,41 +159,67 @@ public class queryBean {
 			/*********Solicitud*********/
 			ArrayList<String> solicitud_columns = new ArrayList<String>(Arrays.asList("*"));
 			ArrayList<String> solicitud_fields = new ArrayList<String>(Arrays.asList("numerosolicitud","numeroregistro","categoriaid",
-					"coberturaid","tipomarcaid","estadoid","fechapresentacion","fechapublicacion","fecharegistro","clases"));
-			ArrayList<String> solicitud_response = new ArrayList<String>(Arrays.asList(getSolicitud_numeroSolicitud().toString(), 
-					getSolicitud_numeroRegistro().toString(), getSolicitud_categoriaId().toString(), getSolicitud_coberturaId().toString(),
+					"coberturaid","tipomarcaid","estadoid","fechapresentacion","fechapublicacion","fecharegistro"/*,"clases"*/));
+			ArrayList<String> solicitud_response = new ArrayList<String>(Arrays.asList(
+					getSolicitud_numeroSolicitud().toString(), 
+					getSolicitud_numeroRegistro().toString(),
+					getSolicitud_categoriaId().toString(),
+					getSolicitud_coberturaId().toString(),
 					getSolicitud_tipoMarcaId().toString(),
-					getSolicitud_tipoMarcaId().toString(), getSolicitud_estadoId().toString(), getSolicitud_fechaPresentacion().toString(),
+					getSolicitud_estadoId().toString(),
+					getSolicitud_fechaPresentacion().toString(),
 					getSolicitud_fechaPublicacion().toString(),
-					getSolicitud_fechaRegistro().toString(), getSolicitud_clases().toString()));
+					getSolicitud_fechaRegistro().toString()/*,
+					getSolicitud_clases().toString()*/));
+			
+			
 			
 			/*********Anotacion*********/
+			
+			
 			ArrayList<String> anotacion_columns = new ArrayList<String>(Arrays.asList("numeroinapi","numerosolicitud","numeroregistro",
 					"fecha","fechavencimiento","estadoanotacionid","observacion"));
 			ArrayList<String> anotacion_fields = new ArrayList<String>(Arrays.asList("estadoanotacionid", "fechacreacion",
 					"fechavencimiento"));
-			ArrayList<String> anotacion_response = new ArrayList<String>(Arrays.asList(getAnotacion_estadoAnotacionId().toString(),
-					getAnotacion_fechaCreacion().toString(), getAnotacion_fechaVencimiento().toString()));
+			ArrayList<String> anotacion_response = new ArrayList<String>(Arrays.asList(
+					getAnotacion_estadoAnotacionId().toString(),
+					getAnotacion_fechaCreacion().toString(),
+					getAnotacion_fechaVencimiento().toString()));
+					
 			
 			/*********Instancia Administrativa*********/
+			
+			
 			ArrayList<String> instanciaAdministrativa_columns = new ArrayList<String>(Arrays.asList("numeroinapi","numerosolicitud",
 					"fecha","fechavencimiento","estadoinstanciaid","observacion"));
 			ArrayList<String> instanciaAdministrativa_fields = new ArrayList<String>(Arrays.asList("fechavencimiento",
 					"fechacreacion", "estadoinstanciaid"));
-			ArrayList<String> instanciaAdministrativa_response = new ArrayList<String>(Arrays.asList(getInstanciaAdministrativa_fechaVencimiento().toString(),
-					getInstanciaAdministrativa_fechaCreacion().toString(), getInstanciaAdministrativa_estadoInstanciaId().toString()));
+			ArrayList<String> instanciaAdministrativa_response = new ArrayList<String>(Arrays.asList(
+					getInstanciaAdministrativa_fechaVencimiento().toString(),
+					getInstanciaAdministrativa_fechaCreacion().toString(),
+					getInstanciaAdministrativa_estadoInstanciaId().toString()));
+			
 			
 			/**************Titular***************/
+			
+			
 			ArrayList<String> titular_columns = new ArrayList<String>(Arrays.asList("nombre","rut","numerosolicitud","email","fono","domicilio","idpais","idciudad"));
 			ArrayList<String> titular_fields = new ArrayList<String>(Arrays.asList("nombre", "rut", "numerosolicitud"));
-			ArrayList<String> titular_response = new ArrayList<String>(Arrays.asList(getTitular_nombre().toString(),
-					getTitular_rut().toString(), getTitular_numeroSolicitud().toString()));
+			ArrayList<String> titular_response = new ArrayList<String>(Arrays.asList(
+					getTitular_nombre().toString(),
+					getTitular_rut().toString(),
+					getTitular_numeroSolicitud().toString()));
+			
 			
 			/**************Representante************/
+			
 			ArrayList<String> representante_columns = new ArrayList<String>(Arrays.asList("rut","nombre","numerosolicitud","email","fono","domicilio","idpais","idciudad"));
 			ArrayList<String> representante_fields = new ArrayList<String>(Arrays.asList("numerosolicitud","rut","nombre"));
-			ArrayList<String> representante_response = new ArrayList<String>(Arrays.asList(getRepresentante_numeroSolicitud().toString(),
-					getRepresentante_rut().toString(), getRepresentante_nombre().toString()));
+			ArrayList<String> representante_response = new ArrayList<String>(Arrays.asList(
+					getRepresentante_numeroSolicitud().toString(),
+					getRepresentante_rut().toString(),
+					getRepresentante_nombre().toString()));
+			
 			
 			SqlBuilder builder = new SqlBuilder();
 			
@@ -257,7 +283,7 @@ public class queryBean {
 		return solicitud_numeroRegistro;
 	}
 	public void setSolicitud_numeroRegistro(Integer solicitud_numeroRegistro) {
-		this.solicitud_numeroRegistro = solicitud_numeroRegistro;
+			this.solicitud_numeroRegistro = solicitud_numeroRegistro;
 	}
 
 	
@@ -293,26 +319,26 @@ public class queryBean {
 	}
 
 	
-	public Date getSolicitud_fechaPresentacion() {
+	public String getSolicitud_fechaPresentacion() {
 		return solicitud_fechaPresentacion;
 	}
-	public void setSolicitud_fechaPresentacion(Date solicitud_fechaPresentacion) {
+	public void setSolicitud_fechaPresentacion(String solicitud_fechaPresentacion) {
 		this.solicitud_fechaPresentacion = solicitud_fechaPresentacion;
 	}
 
 	
-	public Date getSolicitud_fechaPublicacion() {
+	public String getSolicitud_fechaPublicacion() {
 		return solicitud_fechaPublicacion;
 	}
-	public void setSolicitud_fechaPublicacion(Date solicitud_fechaPublicacion) {
+	public void setSolicitud_fechaPublicacion(String solicitud_fechaPublicacion) {
 		this.solicitud_fechaPublicacion = solicitud_fechaPublicacion;
 	}
 
 	
-	public Date getSolicitud_fechaRegistro() {
+	public String getSolicitud_fechaRegistro() {
 		return solicitud_fechaRegistro;
 	}
-	public void setSolicitud_fechaRegistro(Date solicitud_fechaRegistro) {
+	public void setSolicitud_fechaRegistro(String solicitud_fechaRegistro) {
 		this.solicitud_fechaRegistro = solicitud_fechaRegistro;
 	}
 
