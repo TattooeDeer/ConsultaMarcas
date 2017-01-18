@@ -53,7 +53,6 @@ public class SqlBuilder {
 		/************WHERE***********/
 		boolean aux = false;
 		for(int i = 0; i < fields_names.size(); i++){
-			System.out.println(responses.get(i) == "0" );
 			if(responses.get(i).equals("0") || responses.get(i) == "")
 				continue;
 			else{
@@ -74,8 +73,10 @@ public class SqlBuilder {
 		
 	}
 
+	
 
-
+	
+	/**************GETTER/SETTER****************/
 	public String getSELECT_stmt() {
 		return SELECT_stmt;
 	}

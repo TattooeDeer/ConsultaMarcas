@@ -153,11 +153,10 @@ public class queryBean {
 			
 			*/
 			
-			SqlBuilder solicitud_builder = new SqlBuilder();
-			SqlBuilder anotacion_builder = new SqlBuilder();
-			SqlBuilder instanciaAdministrativa_builder = new SqlBuilder();
-			SqlBuilder titular_builder = new SqlBuilder();
-			SqlBuilder representante_builder = new SqlBuilder();
+			
+			
+			
+			//Construccion de los parametros que recibe, por cada tabla, el metodo buildQuery de sqlBuilder 
 			
 			/*********Solicitud*********/
 			ArrayList<String> solicitud_columns = new ArrayList<String>(Arrays.asList("*"));
@@ -174,7 +173,6 @@ public class queryBean {
 					getSolicitud_fechaPublicacion().toString(),
 					getSolicitud_fechaRegistro().toString()/*,
 					getSolicitud_clases().toString()*/));
-			
 			
 			
 			/*********Anotacion*********/
@@ -224,20 +222,44 @@ public class queryBean {
 					getRepresentante_nombre().toString()));
 			
 			
-			SqlBuilder builder = new SqlBuilder();
 			
+			//Constructores de las sentencias sql para cada tabla
+			SqlBuilder solicitud_builder = new SqlBuilder();
+			SqlBuilder anotacion_builder = new SqlBuilder();
+			SqlBuilder instanciaAdministrativa_builder = new SqlBuilder();
+			SqlBuilder titular_builder = new SqlBuilder();
+			SqlBuilder representante_builder = new SqlBuilder();
+			
+			//Se llama al metodo buildQuery para construir las sentencias de busqueda para cada tabla
+			/*
+			solicitud_builder.buildQuery(solicitud_columns, "solicitud", solicitud_fields, solicitud_response);
+			anotacion_builder.buildQuery(anotacion_columns, "anotacion", anotacion_fields, anotacion_response);
+			instanciaAdministrativa_builder.buildQuery(instanciaAdministrativa_columns, "instancia",
+					instanciaAdministrativa_fields, instanciaAdministrativa_response);
+			titular_builder.buildQuery(titular_columns, "titular", titular_fields, titular_response);
+			representante_builder.buildQuery(representante_columns, "representante", representante_fields, representante_response);
+			*/
+			
+			 
+			
+			/*
 			setSolicitud_query(builder.buildQuery(solicitud_columns,"solicitud",solicitud_fields,solicitud_response));
 			setAnotacion_query(builder.buildQuery(anotacion_columns,"anotacion",anotacion_fields,anotacion_response));
 			setInstancia_query(builder.buildQuery(instanciaAdministrativa_columns,"instancia",instanciaAdministrativa_fields,instanciaAdministrativa_response));
 			setTitular_query(builder.buildQuery(titular_columns,"titular",titular_fields,titular_response));
 			setRepresentante_query(builder.buildQuery(representante_columns,"representante",representante_fields,representante_response));
-			
+			*/
 			
 			//Se ejecuta la Query sobre la BD
-			/*
-			System.out.println(getSolicitud_stmt());
-			setMyRs(getSolicitud_stmt(),myStmt);
-			*/
+			setMyRs(solicitud_builder.buildQuery(solicitud_columns, "solicitud", solicitud_fields, solicitud_response),myStmt);
+			
+			while(myRs.next()){
+				System.out.println("\n"+"Numero de Solicitud:" + myRs.getString("numerosolicitud"));
+				System.out.println("Numero de Registro:" + myRs.getString("numeroregistro"));
+				System.out.println("Categoria:" + myRs.getString("categoriaid"));
+				System.out.println("Tipo de Marca: "+myRs.getString("tipomarcaid"));
+				System.out.println("Estado de la Solicitud: " + myRs.getString("estadoid"));
+			}
 			if(myRs == null){
 				return "fail";
 			}
