@@ -37,11 +37,11 @@ public class queryBean {
 	private String  solicitud_clases;
 	
 	private String  anotacion_estadoAnotacionId;
-	private Date    anotacion_fechaCreacion;
-	private Date    anotacion_fechaVencimiento;
+	private String    anotacion_fechaCreacion;
+	private String    anotacion_fechaVencimiento;
 	
-	private Date    instanciaAdministrativa_fechaVencimiento;
-	private Date    instanciaAdministrativa_fechaCreacion;
+	private String    instanciaAdministrativa_fechaVencimiento;
+	private String    instanciaAdministrativa_fechaCreacion;
 	private String  instanciaAdministrativa_estadoInstanciaId;
 	
 	private String  titular_nombre;								//para el campo 'titular' se dan las opciones de busqueda por 'nombre',
@@ -54,8 +54,8 @@ public class queryBean {
 	
 	//Hay que ver bien a que se refiere con el campo de marcas del cliente
 	private Integer marcaCliente_numeroSolicitud;				//Para el campo Marcas del cliente se dan las opciones de busqueda por
-	private Date    marcaCliente_fechaAlta;						//'numero de solicitud', 'fecha de alta' y 'fecha de baja'
-	private Date    marcaCliente_fechaBaja;
+	private String    marcaCliente_fechaAlta;						//'numero de solicitud', 'fecha de alta' y 'fecha de baja'
+	private String    marcaCliente_fechaBaja;
 	
 	/*
 	private String  solicitud_stmt;
@@ -68,7 +68,10 @@ public class queryBean {
 	private ResultSet myRs;
 	
 	private String solicitud_query;
-	
+	private String anotacion_query;
+	private String instancia_query;
+	private String titular_query;
+	private String representante_query;
 	
 	//Constructor de la clase
 	public queryBean(){
@@ -224,6 +227,10 @@ public class queryBean {
 			SqlBuilder builder = new SqlBuilder();
 			
 			setSolicitud_query(builder.buildQuery(solicitud_columns,"solicitud",solicitud_fields,solicitud_response));
+			setAnotacion_query(builder.buildQuery(anotacion_columns,"anotacion",anotacion_fields,anotacion_response));
+			setInstancia_query(builder.buildQuery(instanciaAdministrativa_columns,"instancia",instanciaAdministrativa_fields,instanciaAdministrativa_response));
+			setTitular_query(builder.buildQuery(titular_columns,"titular",titular_fields,titular_response));
+			setRepresentante_query(builder.buildQuery(representante_columns,"representante",representante_fields,representante_response));
 			
 			
 			//Se ejecuta la Query sobre la BD
@@ -359,34 +366,34 @@ public class queryBean {
 	}
 
 	
-	public Date getAnotacion_fechaCreacion() {
+	public String getAnotacion_fechaCreacion() {
 		return anotacion_fechaCreacion;
 	}
-	public void setAnotacion_fechaCreacion(Date anotacion_fechaCreacion) {
+	public void setAnotacion_fechaCreacion(String anotacion_fechaCreacion) {
 		this.anotacion_fechaCreacion = anotacion_fechaCreacion;
 	}
 
 	
-	public Date getAnotacion_fechaVencimiento() {
+	public String getAnotacion_fechaVencimiento() {
 		return anotacion_fechaVencimiento;
 	}
-	public void setAnotacion_fechaVencimiento(Date anotacion_fechaVencimiento) {
+	public void setAnotacion_fechaVencimiento(String anotacion_fechaVencimiento) {
 		this.anotacion_fechaVencimiento = anotacion_fechaVencimiento;
 	}
 
 	
-	public Date getInstanciaAdministrativa_fechaVencimiento() {
+	public String getInstanciaAdministrativa_fechaVencimiento() {
 		return instanciaAdministrativa_fechaVencimiento;
 	}
-	public void setInstanciaAdministrativa_fechaVencimiento(Date instanciaAdministrativa_fechaVencimiento) {
+	public void setInstanciaAdministrativa_fechaVencimiento(String instanciaAdministrativa_fechaVencimiento) {
 		this.instanciaAdministrativa_fechaVencimiento = instanciaAdministrativa_fechaVencimiento;
 	}
 
 	
-	public Date getInstanciaAdministrativa_fechaCreacion() {
+	public String getInstanciaAdministrativa_fechaCreacion() {
 		return instanciaAdministrativa_fechaCreacion;
 	}
-	public void setInstanciaAdministrativa_fechaCreacion(Date instanciaAdministrativa_fechaCreacion) {
+	public void setInstanciaAdministrativa_fechaCreacion(String instanciaAdministrativa_fechaCreacion) {
 		this.instanciaAdministrativa_fechaCreacion = instanciaAdministrativa_fechaCreacion;
 	}
 
@@ -454,19 +461,19 @@ public class queryBean {
 		this.marcaCliente_numeroSolicitud = marcaCliente_numeroSolicitud;
 	}
 
-	public Date getMarcaCliente_fechaAlta() {
+	public String getMarcaCliente_fechaAlta() {
 		return marcaCliente_fechaAlta;
 	}
 
-	public void setMarcaCliente_fechaAlta(Date marcaCliente_fechaAlta) {
+	public void setMarcaCliente_fechaAlta(String marcaCliente_fechaAlta) {
 		this.marcaCliente_fechaAlta = marcaCliente_fechaAlta;
 	}
 
-	public Date getMarcaCliente_fechaBaja() {
+	public String getMarcaCliente_fechaBaja() {
 		return marcaCliente_fechaBaja;
 	}
 
-	public void setMarcaCliente_fechaBaja(Date marcaCliente_fechaBaja) {
+	public void setMarcaCliente_fechaBaja(String marcaCliente_fechaBaja) {
 		this.marcaCliente_fechaBaja = marcaCliente_fechaBaja;
 	}
 /*
@@ -533,6 +540,42 @@ public class queryBean {
 
 	public void setSolicitud_query(String solicitud_query) {
 		this.solicitud_query = solicitud_query;
+	}
+
+	public String getAnotacion_query() {
+		return anotacion_query;
+	}
+
+	public void setAnotacion_query(String anotacion_query) {
+		this.anotacion_query = anotacion_query;
+	}
+
+	public String getInstancia_query() {
+		return instancia_query;
+	}
+
+	public void setInstancia_query(String instancia_query) {
+		this.instancia_query = instancia_query;
+	}
+
+	public String getTitular_query() {
+		return titular_query;
+	}
+
+	public void setTitular_query(String titular_query) {
+		this.titular_query = titular_query;
+	}
+
+	public String getRepresentante_query() {
+		return representante_query;
+	}
+
+	public void setRepresentante_query(String representante_query) {
+		this.representante_query = representante_query;
+	}
+
+	public void setMyRs(ResultSet myRs) {
+		this.myRs = myRs;
 	}
 
 	
