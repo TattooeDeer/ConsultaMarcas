@@ -6,11 +6,13 @@
     version="2.2">
 	<navigation-rule>
 		<display-name>Busqueda.xhtml</display-name>
-		<from-view-id>Busqueda.xhtml</from-view-id>
+		<from-view-id>/Busqueda.xhtml</from-view-id>
 		<navigation-case>
-			<from-outcome>success</from-outcome>
-			<to-view-id>Resultado.xhtml</to-view-id>
+			<from-action>#{queryBean.search}</from-action>
+			<from-outcome>sucess</from-outcome>
+			<to-view-id>/Resultado.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
+	
 
 </faces-config>

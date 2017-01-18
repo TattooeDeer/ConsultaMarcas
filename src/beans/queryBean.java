@@ -1,7 +1,10 @@
 package beans;
-
+import utility.SqlBuilder;
 import java.lang.String;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import Connection.conexion;
@@ -54,22 +57,53 @@ public class queryBean {
 	private Date    marcaCliente_fechaAlta;						//'numero de solicitud', 'fecha de alta' y 'fecha de baja'
 	private Date    marcaCliente_fechaBaja;
 	
-	
+	/*
 	private String  solicitud_stmt;
 	private String  anotacion_stmt;
 	private String  instanciaAdministrativa_stmt;
 	private String  titular_stmt;
 	private String  representante_stmt;
 	private String  marcasCliente_stmt;
-	
+	*/
 	private ResultSet myRs;
 	
-	
+	private String solicitud_query;
 	
 	
 	//Constructor de la clase
 	public queryBean(){
-	
+		//Valores por defecto de cada variable son null
+		setSolicitud_numeroSolicitud(null);
+		setSolicitud_numeroRegistro(null);
+		setSolicitud_categoriaId(null);
+		setSolicitud_coberturaId(null);
+		setSolicitud_tipoMarcaId(null);
+		setSolicitud_estadoId(null);
+		setSolicitud_fechaPresentacion(null);
+		setSolicitud_fechaPublicacion(null);
+		setSolicitud_fechaRegistro(null);
+		setSolicitud_clases(null);
+		
+		setAnotacion_estadoAnotacionId(null);
+		setAnotacion_fechaCreacion(null);
+		setAnotacion_fechaVencimiento(null);
+		
+		setInstanciaAdministrativa_fechaVencimiento(null);
+		setInstanciaAdministrativa_fechaCreacion(null);
+		setInstanciaAdministrativa_estadoInstanciaId(null);
+		
+		setTitular_nombre(null);
+		setTitular_rut(null);
+		setTitular_numeroSolicitud(null);
+		
+		setRepresentante_numeroSolicitud(null);
+		setRepresentante_rut(null);
+		setRepresentante_nombre(null);
+		
+		setMarcaCliente_numeroSolicitud(null);
+		setMarcaCliente_fechaAlta(null);
+		setMarcaCliente_fechaBaja(null);
+		
 	}
 
 	//Metodo de busqueda
@@ -84,10 +118,12 @@ public class queryBean {
 			//Creamos el objeto Statement, en este se ejecutara la query final
 			Statement myStmt = my_conn.createStatement();
 			
-			//las querys se crean en base a el conjunto de campos asociados a la tabla correspondiente
+			//las querys se crean en base a el conjunto de campos asociados a la tabla correspondiente ar
 			//De esta forma, si el usuario pregunta por la fecha de una instancia, no se le mostraran TODOS los
 			//titulares que hay en la BD
 			
+			
+			/*
 			String sql = "SELECT * FROM marcas.solicitud WHERE (numerosolicitud,numeroregistro,categoriaid,coberturaid,"
 					+ "tipomarcaid,estadoid,fechapresentacion,fechapublicacion,fecharegistro,clases) = (" + getSolicitud_numeroSolicitud().toString() + ","
 					+ getSolicitud_numeroRegistro().toString() + "," + getSolicitud_coberturaId().toString() + "," + getSolicitud_tipoMarcaId().toString() + ","
@@ -112,11 +148,63 @@ public class queryBean {
 			
 			//Falta la busqueda por marcas del cliente
 			
+			*/
+			
+			SqlBuilder solicitud_builder = new SqlBuilder();
+			SqlBuilder anotacion_builder = new SqlBuilder();
+			SqlBuilder instanciaAdministrativa_builder = new SqlBuilder();
+			SqlBuilder titular_builder = new SqlBuilder();
+			SqlBuilder representante_builder = new SqlBuilder();
+			
+			/*********Solicitud*********/
+			ArrayList<String> solicitud_columns = new ArrayList<String>(Arrays.asList("*"));
+			ArrayList<String> solicitud_fields = new ArrayList<String>(Arrays.asList("numerosolicitud","numeroregistro","categoriaid",
+					"coberturaid","tipomarcaid","estadoid","fechapresentacion","fechapublicacion","fecharegistro","clases"));
+			ArrayList<String> solicitud_response = new ArrayList<String>(Arrays.asList(getSolicitud_numeroSolicitud().toString(), 
+					getSolicitud_numeroRegistro().toString(), getSolicitud_categoriaId().toString(), getSolicitud_coberturaId().toString(),
+					getSolicitud_tipoMarcaId().toString(),
+					getSolicitud_tipoMarcaId().toString(), getSolicitud_estadoId().toString(), getSolicitud_fechaPresentacion().toString(),
+					getSolicitud_fechaPublicacion().toString(),
+					getSolicitud_fechaRegistro().toString(), getSolicitud_clases().toString()));
+			
+			/*********Anotacion*********/
+			ArrayList<String> anotacion_columns = new ArrayList<String>(Arrays.asList("numeroinapi","numerosolicitud","numeroregistro",
+					"fecha","fechavencimiento","estadoanotacionid","observacion"));
+			ArrayList<String> anotacion_fields = new ArrayList<String>(Arrays.asList("estadoanotacionid", "fechacreacion",
+					"fechavencimiento"));
+			ArrayList<String> anotacion_response = new ArrayList<String>(Arrays.asList(getAnotacion_estadoAnotacionId().toString(),
+					getAnotacion_fechaCreacion().toString(), getAnotacion_fechaVencimiento().toString()));
+			
+			/*********Instancia Administrativa*********/
+			ArrayList<String> instanciaAdministrativa_columns = new ArrayList<String>(Arrays.asList("numeroinapi","numerosolicitud",
+					"fecha","fechavencimiento","estadoinstanciaid","observacion"));
+			ArrayList<String> instanciaAdministrativa_fields = new ArrayList<String>(Arrays.asList("fechavencimiento",
+					"fechacreacion", "estadoinstanciaid"));
+			ArrayList<String> instanciaAdministrativa_response = new ArrayList<String>(Arrays.asList(getInstanciaAdministrativa_fechaVencimiento().toString(),
+					getInstanciaAdministrativa_fechaCreacion().toString(), getInstanciaAdministrativa_estadoInstanciaId().toString()));
+			
+			/**************Titular***************/
+			ArrayList<String> titular_columns = new ArrayList<String>(Arrays.asList("nombre","rut","numerosolicitud","email","fono","domicilio","idpais","idciudad"));
+			ArrayList<String> titular_fields = new ArrayList<String>(Arrays.asList("nombre", "rut", "numerosolicitud"));
+			ArrayList<String> titular_response = new ArrayList<String>(Arrays.asList(getTitular_nombre().toString(),
+					getTitular_rut().toString(), getTitular_numeroSolicitud().toString()));
+			
+			/**************Representante************/
+			ArrayList<String> representante_columns = new ArrayList<String>(Arrays.asList("rut","nombre","numerosolicitud","email","fono","domicilio","idpais","idciudad"));
+			ArrayList<String> representante_fields = new ArrayList<String>(Arrays.asList("numerosolicitud","rut","nombre"));
+			ArrayList<String> representante_response = new ArrayList<String>(Arrays.asList(getRepresentante_numeroSolicitud().toString(),
+					getRepresentante_rut().toString(), getRepresentante_nombre().toString()));
+			
+			SqlBuilder builder = new SqlBuilder();
+			
+			setSolicitud_query(builder.buildQuery(solicitud_columns,"solicitud",solicitud_fields,solicitud_response));
+			
 			
 			//Se ejecuta la Query sobre la BD
+			/*
 			System.out.println(getSolicitud_stmt());
 			setMyRs(getSolicitud_stmt(),myStmt);
-			
+			*/
 			if(myRs == null){
 				return "fail";
 			}
@@ -355,7 +443,7 @@ public class queryBean {
 	public void setMarcaCliente_fechaBaja(Date marcaCliente_fechaBaja) {
 		this.marcaCliente_fechaBaja = marcaCliente_fechaBaja;
 	}
-
+/*
 	public String getSolicitud_stmt() {
 		return solicitud_stmt;
 	}
@@ -403,7 +491,7 @@ public class queryBean {
 	public void setMarcasCliente_stmt(String marcasCliente_stmt) {
 		this.marcasCliente_stmt = marcasCliente_stmt;
 	}
-
+*/
 	public void setMyRs(String stmt, Statement myStmt) throws SQLException {
 		this.myRs = myStmt.executeQuery(stmt);
 		
@@ -411,6 +499,14 @@ public class queryBean {
 
 	public ResultSet getMyRs() {
 		return this.myRs;
+	}
+
+	public String getSolicitud_query() {
+		return solicitud_query;
+	}
+
+	public void setSolicitud_query(String solicitud_query) {
+		this.solicitud_query = solicitud_query;
 	}
 
 	

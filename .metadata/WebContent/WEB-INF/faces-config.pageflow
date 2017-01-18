@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf14840235160370" configfile="/gitConsultaMarcas/WebContent/WEB-INF/faces-config.xml">
-  <nodes xsi:type="pageflow:PFPage" name="Busqueda.xhtml" id="pf14843171581883" referenceLink="//@navigationRule.0/@fromViewId|" outlinks="pf14843171581884" path="Busqueda.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="Resultado.xhtml" id="pf14843171581895" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf14843171581884" path="Resultado.xhtml"/>
-  <links id="pf14843171581884" target="pf14843171581895" source="pf14843171581883" outcome="success"/>
+  <nodes xsi:type="pageflow:PFPage" name="Busqueda.xhtml" x="163" y="165" id="pf14845418973696" outlinks="pf14845418973697" path="/Busqueda.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="Resultado.xhtml" x="452" y="189" id="pf14845418973698" inlinks="pf14845418973697" path="/Resultado.xhtml"/>
+  <links id="pf14845418973697" target="pf14845418973698" source="pf14845418973696" outcome="sucess" fromaction="#{queryBean.search}"/>
 </pageflow:Pageflow>
