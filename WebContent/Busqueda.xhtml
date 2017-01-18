@@ -36,8 +36,42 @@ Busqueda
  		<p:outputLabel value="Fecha de Presentacion:" for="mask3"/>
         <p:calendar id="mask3" value="#{queryBean.solicitud_fechaRegistro}" pattern="dd-MM-yyyy" mask="true" />
  
- 
- 
+		<p:outputLabel value="Estado Anotacion" for="acSimple4" />
+        <p:inputText id="acSimple4" value="#{queryBean.anotacion_estadoAnotacionId}" />
+        
+ 		<p:outputLabel value="Fecha creacion Anotacion" for="acSimple5" />
+        <p:inputText id="acSimple5" value="#{queryBean.anotacion_fechaCreacion}" />
+        
+        <p:outputLabel value="Fecha vencimiento Anotacion" for="acSimple6" />
+        <p:inputText id="acSimple6" value="#{queryBean.anotacion_fechaVencimiento}" />
+        
+        <p:outputLabel value="Fecha vencimiento Admin" for="acSimple7" />
+        <p:inputText id="acSimple7" value="#{queryBean.instanciaAdministrativa_fechaVencimiento}" />
+        
+        <p:outputLabel value="Fecha creacion Admin" for="acSimple8" />
+        <p:inputText id="acSimple8" value="#{queryBean.instanciaAdministrativa_fechaCreacion}" />
+        
+        <p:outputLabel value="estado Admin" for="acSimple9" />
+        <p:inputText id="acSimple9" value="#{queryBean.instanciaAdministrativa_estadoInstanciaId}" />
+        
+        <p:outputLabel value="nombre titular" for="acSimple10" />
+        <p:inputText id="acSimple10" value="#{queryBean.titular_nombre}" />
+        
+        <p:outputLabel value="rut titular" for="acSimple11" />
+        <p:inputText id="acSimple11" value="#{queryBean.titular_rut}" />
+        
+        <p:outputLabel value="numero solicitud titular" for="acSimple12" />
+        <p:inputText id="acSimple12" value="#{queryBean.titular_numeroSolicitud}" />
+        
+        <p:outputLabel value="numero solicitud representante" for="acSimple13" />
+        <p:inputText id="acSimple13" value="#{queryBean.representante_numeroSolicitud}" />
+        
+        <p:outputLabel value="rut representante" for="acSimple14" />
+        <p:inputText id="acSimple14" value="#{queryBean.representante_rut}" />
+        
+        <p:outputLabel value="nobmre representante" for="acSimple15" />
+        <p:inputText id="acSimple15" value="#{queryBean.representante_nombre}" />
+
  	</h:panelGrid>
  
     <p:commandButton value="Submit" icon="ui-icon-check" update="display" action = "#{queryBean.search}"/>
