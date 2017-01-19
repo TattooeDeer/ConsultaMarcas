@@ -25,13 +25,14 @@ import java.util.ArrayList;
  * 						a cada campo.
  * */
 public class SqlBuilder {
-	private String SELECT_stmt = "SELECT ";
-	private String FROM_stmt = " FROM ";
-	private String WHERE_stmt = " WHERE ";
+	private static String SELECT_stmt = "SELECT ";
+	private static String FROM_stmt = " FROM ";
+	private static String WHERE_stmt = " WHERE ";
 	
 
 	
 	public String buildQuery(ArrayList<String> columns, String table_name, ArrayList<String> fields_names, ArrayList<String> responses){
+		
 		if(fields_names.size() != responses.size()){
 			System.out.println("No son del mismo tamaño!");
 			return "";
@@ -42,11 +43,12 @@ public class SqlBuilder {
 		for(int i = 0; i < columns.size(); i++){
 			if(aux2 == true)
 				AddSELECT_stmt(",");
-			AddSELECT_stmt(columns.get(i).toString());
+			AddSELECT_stmt(table_name+"."+columns.get(i).toString());
 			aux2=true;
 			}
 		
 		/*************FROM**************/
+		
 		AddFROM_stmt(table_name); 
 		
 		
@@ -58,7 +60,7 @@ public class SqlBuilder {
 			else{
 				if (aux == true)
 					AddWHERE_stmt(" AND ");
-				AddWHERE_stmt(fields_names.get(i).toString());
+				AddWHERE_stmt(table_name + "." + fields_names.get(i).toString());
 				AddWHERE_stmt("="+responses.get(i).toString());	
 				aux = true;
 			}
@@ -68,7 +70,6 @@ public class SqlBuilder {
 		
 			
 			
-		
 		return SELECT_stmt + FROM_stmt + WHERE_stmt;
 		
 	}

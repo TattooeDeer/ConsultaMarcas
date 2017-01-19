@@ -27,35 +27,37 @@ public class queryBean {
 	
 	private Integer solicitud_numeroSolicitud;
 	private Integer solicitud_numeroRegistro;
-	private String  solicitud_categoriaId;
-	private Integer solicitud_coberturaId;
-	private String  solicitud_tipoMarcaId;
-	private String  solicitud_estadoId;
-	private String    solicitud_fechaPresentacion;
-	private String    solicitud_fechaPublicacion;
-	private String    solicitud_fechaRegistro;
+	private String  solicitud_fechaPresentacion;
+	private String  solicitud_fechaPublicacion;
+	private String  solicitud_fechaRegistro;
 	private String  solicitud_clases;
 	
-	private String  anotacion_estadoAnotacionId;
-	private String    anotacion_fechaCreacion;
-	private String    anotacion_fechaVencimiento;
+	private String  categoria_id;
 	
-	private String    instanciaAdministrativa_fechaVencimiento;
-	private String    instanciaAdministrativa_fechaCreacion;
-	private String  instanciaAdministrativa_estadoInstanciaId;
+	private Integer cobertura_id;
+	
+	private String  tipoMarca_id;
+	
+	private String  estado_id;
+	
+	private String  anotacion_estadoAnotacionId;
+	private String  anotacion_fechaCreacion;
+	private String  anotacion_fechaVencimiento;
+	
+	private String  instanciaAdministrativa_fechaVencimiento;
+	private String  instanciaAdministrativa_fechaCreacion;
+	
+	private String  estadoInstancia_id;
 	
 	private String  titular_nombre;								//para el campo 'titular' se dan las opciones de busqueda por 'nombre',
-	private Integer titular_rut;								//'rut' o 'numero de solicitud' que mantiene dicho titular
-	private Integer titular_numeroSolicitud;			
-	
-	private Integer representante_numeroSolicitud;				//Para el campo 'representante' se dan las opciones de busqueda..
+	private Integer titular_rut;								//'rut' o 'numero de solicitud' que mantiene dicho titular	
+
 	private Integer representante_rut;							//segun el numero de solicitud que tiene cierto representante,
 	private String  representante_nombre;						//rut del representante o el nombre del mismo
 	
 	//Hay que ver bien a que se refiere con el campo de marcas del cliente
-	private Integer marcaCliente_numeroSolicitud;				//Para el campo Marcas del cliente se dan las opciones de busqueda por
-	private String    marcaCliente_fechaAlta;						//'numero de solicitud', 'fecha de alta' y 'fecha de baja'
-	private String    marcaCliente_fechaBaja;
+	private String  marcaCliente_fechaAlta;						//'numero de solicitud', 'fecha de alta' y 'fecha de baja'
+	private String  marcaCliente_fechaBaja;
 	
 	/*
 	private String  solicitud_stmt;
@@ -73,19 +75,30 @@ public class queryBean {
 	private String titular_query;
 	private String representante_query;
 	
+	private String opcion_busqueda;
+	
+	//columnas que hay que mostrar
+	private ArrayList<String> columns;
+	
+	
+	
 	//Constructor de la clase
 	public queryBean(){
 		//Valores por defecto de cada variable son null
 		setSolicitud_numeroSolicitud(null);
 		setSolicitud_numeroRegistro(null);
-		setSolicitud_categoriaId(null);
-		setSolicitud_coberturaId(null);
-		setSolicitud_tipoMarcaId(null);
-		setSolicitud_estadoId(null);
 		setSolicitud_fechaPresentacion(null);
 		setSolicitud_fechaPublicacion(null);
 		setSolicitud_fechaRegistro(null);
 		setSolicitud_clases(null);
+		
+		setCategoria_id(null);
+		
+		setCobertura_id(null);
+		
+		setTipoMarca_id(null);
+		
+		setEstado_id(null);
 		
 		setAnotacion_estadoAnotacionId(null);
 		setAnotacion_fechaCreacion(null);
@@ -93,21 +106,25 @@ public class queryBean {
 		
 		setInstanciaAdministrativa_fechaVencimiento(null);
 		setInstanciaAdministrativa_fechaCreacion(null);
-		setInstanciaAdministrativa_estadoInstanciaId(null);
+		
+		setEstadoInstancia_id(null);
 		
 		setTitular_nombre(null);
 		setTitular_rut(null);
-		setTitular_numeroSolicitud(null);
 		
-		setRepresentante_numeroSolicitud(null);
 		setRepresentante_rut(null);
 		setRepresentante_nombre(null);
 		
-		setMarcaCliente_numeroSolicitud(null);
+		
 		setMarcaCliente_fechaAlta(null);
 		setMarcaCliente_fechaBaja(null);
 		
+		setColumns("s.numerosolicitud","s.numeroregistro","s.denominacion","t.titular","e.descripcion","s.fechapresentacion",
+				"s.fechapublicacion","s.fecharegistro","c.descripcion","p.descripcion","r.nombre","r.idcomuna",
+				"r.id","i.fecha","i.observacion");
 	}
+	
+		
 
 	//Metodo de busqueda
 	public String search(){
@@ -159,34 +176,35 @@ public class queryBean {
 			//Construccion de los parametros que recibe, por cada tabla, el metodo buildQuery de sqlBuilder 
 			
 			/*********Solicitud*********/
+			if(getOpcion_busqueda()=="Numero Solicitud"){
 			ArrayList<String> solicitud_columns = new ArrayList<String>(Arrays.asList("*"));
 			ArrayList<String> solicitud_fields = new ArrayList<String>(Arrays.asList("numerosolicitud","numeroregistro","categoriaid",
 					"coberturaid","tipomarcaid","estadoid","fechapresentacion","fechapublicacion","fecharegistro"/*,"clases"*/));
-			ArrayList<String> solicitud_response = new ArrayList<String>(Arrays.asList(
+			ArrayList<String> opcion_response = new ArrayList<String>(Arrays.asList(
 					getSolicitud_numeroSolicitud().toString(), 
 					getSolicitud_numeroRegistro().toString(),
-					getSolicitud_categoriaId().toString(),
-					getSolicitud_coberturaId().toString(),
-					getSolicitud_tipoMarcaId().toString(),
-					getSolicitud_estadoId().toString(),
+					getCategoria_id().toString(),
+					getCobertura_id().toString(),
+					getTipoMarca_id().toString(),
+					getEstado_id().toString(),
 					getSolicitud_fechaPresentacion().toString(),
 					getSolicitud_fechaPublicacion().toString(),
 					getSolicitud_fechaRegistro().toString()/*,
 					getSolicitud_clases().toString()*/));
 			
-			
+			}
 			/*********Anotacion*********/
 			
-			
-			ArrayList<String> anotacion_columns = new ArrayList<String>(Arrays.asList("numeroinapi","numerosolicitud","numeroregistro",
-					"fecha","fechavencimiento","estadoanotacionid","observacion"));
+			if(getOpcion_busqueda() == "Numero Anotacion"){
+			/*ArrayList<String> anotacion_columns = new ArrayList<String>(Arrays.asList("numeroinapi","numerosolicitud","numeroregistro",
+					"fecha","fechavencimiento","estadoanotacionid","observacion"));*/
 			ArrayList<String> anotacion_fields = new ArrayList<String>(Arrays.asList("estadoanotacionid", "fechacreacion",
 					"fechavencimiento"));
 			ArrayList<String> anotacion_response = new ArrayList<String>(Arrays.asList(
 					getAnotacion_estadoAnotacionId().toString(),
 					getAnotacion_fechaCreacion().toString(),
 					getAnotacion_fechaVencimiento().toString()));
-					
+			}
 			
 			/*********Instancia Administrativa*********/
 			
@@ -198,7 +216,7 @@ public class queryBean {
 			ArrayList<String> instanciaAdministrativa_response = new ArrayList<String>(Arrays.asList(
 					getInstanciaAdministrativa_fechaVencimiento().toString(),
 					getInstanciaAdministrativa_fechaCreacion().toString(),
-					getInstanciaAdministrativa_estadoInstanciaId().toString()));
+					getEstadoInstancia_id().toString()));
 			
 			
 			/**************Titular***************/
@@ -209,7 +227,7 @@ public class queryBean {
 			ArrayList<String> titular_response = new ArrayList<String>(Arrays.asList(
 					getTitular_nombre().toString(),
 					getTitular_rut().toString(),
-					getTitular_numeroSolicitud().toString()));
+					getSolicitud_numeroSolicitud().toString()));
 			
 			
 			/**************Representante************/
@@ -217,7 +235,7 @@ public class queryBean {
 			ArrayList<String> representante_columns = new ArrayList<String>(Arrays.asList("rut","nombre","numerosolicitud","email","fono","domicilio","idpais","idciudad"));
 			ArrayList<String> representante_fields = new ArrayList<String>(Arrays.asList("numerosolicitud","rut","nombre"));
 			ArrayList<String> representante_response = new ArrayList<String>(Arrays.asList(
-					getRepresentante_numeroSolicitud().toString(),
+					getSolicitud_numeroSolicitud().toString(),
 					getRepresentante_rut().toString(),
 					getRepresentante_nombre().toString()));
 			
@@ -251,7 +269,13 @@ public class queryBean {
 			*/
 			
 			//Se ejecuta la Query sobre la BD
-			setMyRs(solicitud_builder.buildQuery(solicitud_columns, "solicitud", solicitud_fields, solicitud_response),myStmt);
+			
+			switch(getOpcion_busqueda()){
+				case ("Numero de Solicitud"): setMyRs(solicitud_builder.buildQuery(getColumns(), "solicitud", solicitud_fields, opcion_response),myStmt);
+				case ("Numero de Registro"): setMyRs(solicitud_builder.buildQuery(getColumns(), "solicitud", solicitud_fields, opcion_response),myStmt);
+			}
+				
+			
 			
 			while(myRs.next()){
 				System.out.println("\n"+"Numero de Solicitud:" + myRs.getString("numerosolicitud"));
@@ -316,38 +340,7 @@ public class queryBean {
 	}
 
 	
-	public String getSolicitud_categoriaId() {
-		return solicitud_categoriaId;
-	}
-	public void setSolicitud_categoriaId(String solicitud_categoriaId) {
-		this.solicitud_categoriaId = solicitud_categoriaId;
-	}
-
-	
-	public Integer getSolicitud_coberturaId() {
-		return solicitud_coberturaId;
-	}
-	public void setSolicitud_coberturaId(Integer solicitud_coberturaId) {
-		this.solicitud_coberturaId = solicitud_coberturaId;
-	}
-
-	
-	public String getSolicitud_tipoMarcaId() {
-		return solicitud_tipoMarcaId;
-	}
-	public void setSolicitud_tipoMarcaId(String solicitud_tipoMarcaId) {
-		this.solicitud_tipoMarcaId = solicitud_tipoMarcaId;
-	}
-
-	
-	public String getSolicitud_estadoId() {
-		return solicitud_estadoId;
-	}
-	public void setSolicitud_estadoId(String solicitud_estadoId) {
-		this.solicitud_estadoId = solicitud_estadoId;
-	}
-
-	
+		
 	public String getSolicitud_fechaPresentacion() {
 		return solicitud_fechaPresentacion;
 	}
@@ -420,12 +413,6 @@ public class queryBean {
 	}
 
 	
-	public String getInstanciaAdministrativa_estadoInstanciaId() {
-		return instanciaAdministrativa_estadoInstanciaId;
-	}
-	public void setInstanciaAdministrativa_estadoInstanciaId(String instanciaAdministrativa_estadoInstanciaId) {
-		this.instanciaAdministrativa_estadoInstanciaId = instanciaAdministrativa_estadoInstanciaId;
-	}
 
 	
 	public String getTitular_nombre() {
@@ -443,21 +430,6 @@ public class queryBean {
 		this.titular_rut = titular_rut;
 	}
 
-	
-	public Integer getTitular_numeroSolicitud() {
-		return titular_numeroSolicitud;
-	}
-	public void setTitular_numeroSolicitud(Integer titular_numeroSolicitud) {
-		this.titular_numeroSolicitud = titular_numeroSolicitud;
-	}
-
-	public Integer getRepresentante_numeroSolicitud() {
-		return representante_numeroSolicitud;
-	}
-
-	public void setRepresentante_numeroSolicitud(Integer representante_numeroSolicitud) {
-		this.representante_numeroSolicitud = representante_numeroSolicitud;
-	}
 
 	public Integer getRepresentante_rut() {
 		return representante_rut;
@@ -475,13 +447,6 @@ public class queryBean {
 		this.representante_nombre = representante_nombre;
 	}
 
-	public Integer getMarcaCliente_numeroSolicitud() {
-		return marcaCliente_numeroSolicitud;
-	}
-
-	public void setMarcaCliente_numeroSolicitud(Integer marcaCliente_numeroSolicitud) {
-		this.marcaCliente_numeroSolicitud = marcaCliente_numeroSolicitud;
-	}
 
 	public String getMarcaCliente_fechaAlta() {
 		return marcaCliente_fechaAlta;
@@ -598,6 +563,66 @@ public class queryBean {
 
 	public void setMyRs(ResultSet myRs) {
 		this.myRs = myRs;
+	}
+
+	public String getCategoria_id() {
+		return categoria_id;
+	}
+
+	public void setCategoria_id(String categoria_id) {
+		this.categoria_id = categoria_id;
+	}
+
+	public Integer getCobertura_id() {
+		return cobertura_id;
+	}
+
+	public void setCobertura_id(Integer cobertura_id) {
+		this.cobertura_id = cobertura_id;
+	}
+
+	public String getTipoMarca_id() {
+		return tipoMarca_id;
+	}
+
+	public void setTipoMarca_id(String tipoMarca_id) {
+		this.tipoMarca_id = tipoMarca_id;
+	}
+
+	public String getEstado_id() {
+		return estado_id;
+	}
+
+	public void setEstado_id(String estado_id) {
+		this.estado_id = estado_id;
+	}
+
+	public String getEstadoInstancia_id() {
+		return estadoInstancia_id;
+	}
+
+	public void setEstadoInstancia_id(String estadoInstancia_id) {
+		this.estadoInstancia_id = estadoInstancia_id;
+	}
+
+	public String getOpcion_busqueda() {
+		return opcion_busqueda;
+	}
+
+	public void setOpcion_busqueda(String opcion_busqueda) {
+		this.opcion_busqueda = opcion_busqueda;
+	}
+
+
+
+	public ArrayList<String> getColumns() {
+		return columns;
+	}
+
+
+
+	public void setColumns(ArrayList<String> columns) {
+		this.columns = columns;
 	}
 
 	
