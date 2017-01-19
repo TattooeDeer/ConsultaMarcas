@@ -40,7 +40,7 @@ public class SearchBean {
 	
 	private String titular_rut;
 	
-	private String columnas;
+	private static String columnas;
 	
 	
 	/*****************CONSTRUCTOR**********************/
@@ -62,14 +62,30 @@ public class SearchBean {
 		 * WHERE r.numerosolicitud = '1070518'AND r.idpais = p.id;
 		 * 
 		 * */
-
 		//Estas son las columnas a mostar como resultado de la busqueda
 		setColumnas("s.numerosolicitud, s.numeroregistro, e.descripcion, s.fechapresentacion, s.fechapublicacion,"
 				+ "t.nombre, c.descripcion, p.descripcion, r.nombre, i.fecha, i.fechavencimiento, ei.descripcion, i.observacion");
+		setOpcion_busqueda("");
+		
+		
 		
 		
 		
 	}
+	
+	/*Hay que hacer multiples JOINS
+	 * SELECT t.nombre, p.descripcion, r.nombre, s.numerosolicitud 
+	 * FROM solicitud s
+	 *	JOIN titular t
+     *		ON s.numerosolicitud = t.numerosolicitud
+     *  JOIN representante r
+     *		ON s.numerosolicitud = r.numerosolicitud
+	 *	JOIN pais p
+     *		ON t.idpais = p.id
+     *	JOIN pais pa
+     *		ON r.idpais = pa.id
+	 *	WHERE p.descripcion = 'COLOMBIA';
+	 */
 	
 	
 	//METODO DE BUSQUEDA PRINCIPAL, a este se debe llamar desde la vista cuando el usuario envia el formulario
@@ -220,15 +236,15 @@ public class SearchBean {
 
 	
 	
-	public String getColumnas() {
+	public static String getColumnas() {
 		return columnas;
 	}
 
 
-	public void setColumnas(String columnas) {
-		this.columnas = columnas;
+	public void setColumnas(String col) {
+		this.columnas = col;
 	}
-	
+		
 	
 	
 	
