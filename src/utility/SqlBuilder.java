@@ -33,8 +33,8 @@ public class SqlBuilder {
 	
 	public SqlBuilder(){
 		setSELECT_stmt("SELECT ");
-		setFROM_stmt("FROM ");
-		setWHERE_stmt("WHERE ");
+		setFROM_stmt(" FROM ");
+		setWHERE_stmt(" WHERE ");
 		setFinal_stmt("");
 		
 	}
@@ -46,7 +46,7 @@ public class SqlBuilder {
 	
 	//OBS: los nombres de las tablas deben venir con el formato: "nombre_tabla alias"
 	public void FROM_insert(String... nombres_tablas){
-		if(getFROM_stmt() != "FROM "){
+		if(getFROM_stmt() != " FROM "){
 			AddFROM_stmt(", ");
 		}
 		for(String nombre : nombres_tablas){
@@ -56,17 +56,19 @@ public class SqlBuilder {
 	
 	//OBS: el nombre de la tabla y los campos tienen que estar en el formato: 'nombre_tabla alias' y 'alias.campo' 
 	public void FROM_JOIN(String nombre_tabla, String campo_TablaA, String campo_TablaB, String tipo_JOIN){
-		AddFROM_stmt(tipo_JOIN + " " + nombre_tabla + "ON" + campo_TablaA + " = " + campo_TablaB);
+		AddFROM_stmt(" " + tipo_JOIN + " " + nombre_tabla + " ON " + campo_TablaA + " = " + campo_TablaB);
 	}
 	
 	
 	public void WHERE_insert(String nombre_tabla, String valor){
+
 		if(valor.toString() == "" || valor.toString().equals("0"))
 			return;
-		else if(getWHERE_stmt() != "WHERE "){
-			AddWHERE_stmt(" AND ");
+		else if(!getWHERE_stmt().equals(" WHERE ")){
+			AddWHERE_stmt(" AND");
 		}
-		AddWHERE_stmt(nombre_tabla + " = " + "'"+valor.toString()+"'");
+		
+		AddWHERE_stmt(" " + nombre_tabla + " = " + "'"+valor.toString()+"'");
 	}
 	
 	
@@ -78,7 +80,7 @@ public class SqlBuilder {
 		AddFinal_stmt(getSELECT_stmt());
 		AddFinal_stmt(getFROM_stmt());
 		AddFinal_stmt(getWHERE_stmt());
-		AddFinal_stmt(";");
+		AddFinal_stmt(" LIMIT 50;");
 		
 		return getFinal_stmt();
 	}

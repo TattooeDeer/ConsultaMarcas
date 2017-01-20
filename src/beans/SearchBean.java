@@ -23,12 +23,12 @@ public class SearchBean {
 	private String opcion_busqueda;
 	private String input_busqueda;
 	
-	private Date solicitud_fechapresentacion_desde;
-	private Date solicitud_fechapresentacion_hasta;
-	private Date solicitud_fechapublicacion_desde;
-	private Date solicitud_fechapublicacion_hasta;
-	private Date solicitud_fecharegistro_desde;
-	private Date solicitud_fecharegistro_hasta;
+	private Date solicitud_fechaPresentacion_desde;
+	private Date solicitud_fechaPresentacion_hasta;
+	private Date solicitud_fechaPublicacion_desde;
+	private Date solicitud_fechaPublicacion_hasta;
+	private Date solicitud_fechaRegistro_desde;
+	private Date solicitud_fechaRegistro_hasta;
 	
 	private String tipoMarca_id;
 	
@@ -130,14 +130,20 @@ public class SearchBean {
 			sqlBuilder.FROM_JOIN("comuna", "comuna.id", "titular.idcomuna", "JOIN");
 			sqlBuilder.FROM_JOIN("comuna co", "co.id", "representante.idcomuna", "JOIN");
 			
-			switch(getOpcion_busqueda()){
-				case("No. Solicitud"):{sqlBuilder.WHERE_insert("solicitud.numerosolicitud",getInput_busqueda());}
+			
+			if(getOpcion_busqueda().equals("No. Solicitud")){
+
+				sqlBuilder.WHERE_insert("solicitud.numerosolicitud",getInput_busqueda());
+				}
 				
-				case("No. Registro"):{sqlBuilder.WHERE_insert("solicitud.numeroregistro", getInput_busqueda());}
+			else if(getOpcion_busqueda().equals("No. Registro")){
+
+				sqlBuilder.WHERE_insert("solicitud.numeroregistro", getInput_busqueda());
+				}
 				
 				//TODO: hay que ver como meterlo en una busqueda separada para que no deje la caga
 				//case("No. Anotacion")
-			}
+			
 			
 			//TODO: hay que modificar la implementacion de WHERE_insert de forma, hacerlo implementando otro metodo WHERE
 			//sqlBuilder.WHERE_insert("solicitud.fechapresentacion", solicitud_fechaPresentacion_desde);
@@ -147,6 +153,7 @@ public class SearchBean {
 			sqlBuilder.WHERE_insert("estado.id", getEstado_id());
 			sqlBuilder.WHERE_insert("representante.rut", getRepresentante_rut());
 			sqlBuilder.WHERE_insert("titular.rut", getTitular_rut());
+			sqlBuilder.WHERE_insert("categoria.id", getCategoria_id());
 			
 			//Armamos la query final
 			sqlBuilder.buildQuery();
@@ -220,51 +227,51 @@ public class SearchBean {
 	}
 	
 	
-	public Date getSolicitud_fechapresentacion_desde() {
-		return solicitud_fechapresentacion_desde;
+	public Date getSolicitud_fechaPresentacion_desde() {
+		return solicitud_fechaPresentacion_desde;
 	}
-	public void setSolicitud_fechapresentacion_desde(Date solicitud_fechaPresentacion_desde) {
-		this.solicitud_fechapresentacion_desde = solicitud_fechaPresentacion_desde;
-	}
-	
-	
-	public Date getSolicitud_fechapresentacion_hasta() {
-		return solicitud_fechapresentacion_hasta;
-	}
-	public void setSolicitud_fechapresentacion_hasta(Date solicitud_fechaPresentacion_hasta) {
-		this.solicitud_fechapresentacion_hasta = solicitud_fechaPresentacion_hasta;
+	public void setSolicitud_fechaPresentacion_desde(Date solicitud_fechaPresentacion_desde) {
+		this.solicitud_fechaPresentacion_desde = solicitud_fechaPresentacion_desde;
 	}
 	
 	
-	public Date getSolicitud_fechapublicacion_desde() {
-		return solicitud_fechapublicacion_desde;
+	public Date getSolicitud_fechaPresentacion_hasta() {
+		return solicitud_fechaPresentacion_hasta;
+	}
+	public void setSolicitud_fechaPresentacion_hasta(Date solicitud_fechaPresentacion_hasta) {
+		this.solicitud_fechaPresentacion_hasta = solicitud_fechaPresentacion_hasta;
+	}
+	
+	
+	public Date getSolicitud_fechaPublicacion_desde() {
+		return solicitud_fechaPublicacion_desde;
 	}
 	public void setSolicitud_fechapublicacion_desde(Date solicitud_fechaPublicacion_desde) {
-		this.solicitud_fechapublicacion_desde = solicitud_fechaPublicacion_desde;
+		this.solicitud_fechaPublicacion_desde = solicitud_fechaPublicacion_desde;
 	}
 	
 	
-	public Date getSolicitud_fechapublicacion_hasta() {
-		return solicitud_fechapublicacion_hasta;
+	public Date getSolicitud_fechaPublicacion_hasta() {
+		return solicitud_fechaPublicacion_hasta;
 	}
-	public void setSolicitud_fechapublicacion_hasta(Date solicitud_fechaPublicacion_hasta) {
-		this.solicitud_fechapublicacion_hasta = solicitud_fechaPublicacion_hasta;
-	}
-	
-	
-	public Date getSolicitud_fecharegistro_desde() {
-		return solicitud_fecharegistro_desde;
-	}
-	public void setSolicitud_fecharegistro_desde(Date solicitud_fechaRegistro_desde) {
-		this.solicitud_fecharegistro_desde = solicitud_fechaRegistro_desde;
+	public void setSolicitud_fechaPublicacion_hasta(Date solicitud_fechaPublicacion_hasta) {
+		this.solicitud_fechaPublicacion_hasta = solicitud_fechaPublicacion_hasta;
 	}
 	
 	
-	public Date getSolicitud_fecharegistro_hasta() {
-		return solicitud_fecharegistro_hasta;
+	public Date getSolicitud_fechaRegistro_desde() {
+		return solicitud_fechaRegistro_desde;
 	}
-	public void setSolicitud_fecharegistro_hasta(Date solicitud_fechaRegistro_hasta) {
-		this.solicitud_fecharegistro_hasta = solicitud_fechaRegistro_hasta;
+	public void setSolicitud_fechaRegistro_desde(Date solicitud_fechaRegistro_desde) {
+		this.solicitud_fechaRegistro_desde = solicitud_fechaRegistro_desde;
+	}
+	
+	
+	public Date getSolicitud_fechaRegistro_hasta() {
+		return solicitud_fechaRegistro_hasta;
+	}
+	public void setSolicitud_fechaRegistro_hasta(Date solicitud_fechaRegistro_hasta) {
+		this.solicitud_fechaRegistro_hasta = solicitud_fechaRegistro_hasta;
 	}
 	
 	

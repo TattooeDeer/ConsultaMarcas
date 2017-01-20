@@ -15,9 +15,9 @@
 		        <p:outputLabel for="console1" value="Numero de" />
 		        <p:selectOneMenu id="console1" value="#{SearchBean.opcion_busqueda}" style="width:125px">
 		        	<f:selectItem itemLabel="" itemValue="" />
-		            <f:selectItem itemLabel="Anotacion" itemValue="anotacion_numeroinapi" />
-		            <f:selectItem itemLabel="Registro" itemValue="solicitud_numeroregistro" />
-		            <f:selectItem itemLabel="Solicitud" itemValue="solicitud_numerosolicitud" />
+		            <f:selectItem itemLabel="Anotacion" itemValue="No. Anotacion" />
+		            <f:selectItem itemLabel="Registro" itemValue="No. Registro" />
+		            <f:selectItem itemLabel="Solicitud" itemValue="No. Solicitud" />
 		        </p:selectOneMenu>		        
 		        
 		        <p:outputLabel for="input1" value=": " />
@@ -30,33 +30,13 @@
 			
 			<p:outputLabel value="Fecha de presentacion:" />
 			
-			<p:outputLabel for="mask1" value="desde" />
-        	<p:calendar id="mask1" value="#{SearchBean.solicitud_fechaPresentacion_desde}" pattern="dd-MM-yyyy" mask="true" />
- 			
- 			<p:outputLabel for="mask2" value="hasta" />
-        	<p:calendar id="mask2" value="#{SearchBean.solicitud_fechaPresentacion_hasta}" pattern="dd-MM-yyyy" mask="true" />
- 		
- 			<p:outputLabel value="Fecha de publicacion:" />
 			
-			<p:outputLabel for="mask3" value="desde" />
-        	<p:calendar id="mask3" value="#{SearchBean.solicitud_fechaPublicacion_desde}" pattern="dd-MM-yyyy" mask="true" />
- 			
- 			<p:outputLabel for="mask4" value="hasta" />
-        	<p:calendar id="mask4" value="#{SearchBean.solicitud_fechaPublicacion_hasta}" pattern="dd-MM-yyyy" mask="true" />
- 		
- 			<p:outputLabel value="Fecha de regristro:" />
-			
-			<p:outputLabel for="mask5" value="desde" />
-        	<p:calendar id="mask5" value="#{SearchBean.solicitud_fechaRegistro_desde}" pattern="dd-MM-yyyy" mask="true" />
- 			
- 			<p:outputLabel for="mask6" value="hasta" />
-        	<p:calendar id="mask6" value="#{SearchBean.solicitud_fechaRegistro_hasta}" pattern="dd-MM-yyyy" mask="true" />
  		</h:panelGrid>    
  		
  		<h:panelGrid columns="4" style="margin-bottom:10px" cellpadding="5">
  			
  			<p:outputLabel for="console2" value="Tipo de marca:" />
-		    <p:selectOneMenu id="console2" value="#{SearchBean.tipoMarca_descripcion}" style="width:125px">
+		    <p:selectOneMenu id="console2" value="#{SearchBean.tipoMarca_id}" style="width:125px">
 		    	<f:selectItem itemLabel="" itemValue="" />
 		    	<f:selectItem itemLabel="Mixta" itemValue="Y" />
 		    	<f:selectItem itemLabel="Palabra o Denominacion" itemValue="W" />
@@ -68,7 +48,7 @@
 			 </p:selectOneMenu>		
 			 
 			<p:outputLabel for="console3" value="Tipo de categoria:" />
-		    <p:selectOneMenu id="console3" value="#{SearchBean.categoria_descripcion}" style="width:125px">
+		    <p:selectOneMenu id="console3" value="#{SearchBean.categoria_id}" style="width:125px">
 		    	<f:selectItem itemLabel="" itemValue="" />
 		    	<f:selectItem itemLabel="Denominacion de Origen" itemValue="ORG" />
 		    	<f:selectItem itemLabel="Indicacion Geografica" itemValue="GEO" />
@@ -79,7 +59,7 @@
 			</p:selectOneMenu>		
  		
  			<p:outputLabel for="console4" value="Tipo de cobertura:" />
-		    <p:selectOneMenu id="console4" value="#{SearchBean.cobertura_descripcion}" style="width:125px">
+		    <p:selectOneMenu id="console4" value="#{SearchBean.cobertura_id}" style="width:125px">
 		    	<f:selectItem itemLabel="" itemValue="" />
 		    	<f:selectItem itemLabel="Producto" itemValue="1" />
 		    	<f:selectItem itemLabel="Servicio" itemValue="2" />
@@ -90,7 +70,7 @@
 			</p:selectOneMenu>	
 			
 			<p:outputLabel for="console5" value="Estado marca:" />
-		    <p:selectOneMenu id="console5" value="#{SearchBean.estado_descripcion}" style="width:125px">
+		    <p:selectOneMenu id="console5" value="#{SearchBean.estado_id}" style="width:125px">
 		    	<f:selectItem itemLabel="" itemValue="" />
 		    	<f:selectItem itemLabel="Caducado" itemValue="U" />
 		    	<f:selectItem itemLabel="Denegada" itemValue="D" />
@@ -111,8 +91,8 @@
 		</h:panelGrid>  
  		
  
-    <p:commandButton value="Submit" icon="ui-icon-check" update="display" action = "#{SerachBean.search}"/>
-    <h:outputText id="display" value="#{SearchBean.solicitud_query}"/>
+    <p:commandButton value="Submit" icon="ui-icon-check" update="display" action = "#{SearchBean.search}"/>
+    <h:outputText id="display" value="#{SearchBean.myRs}"/>
 	
     
 

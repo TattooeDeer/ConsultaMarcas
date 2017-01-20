@@ -13,7 +13,7 @@ public class conexion {
 		Class.forName("org.postgresql.Driver");
 		Connection conexion = DriverManager.getConnection(URL, USER, PASS);
 		if (conexion != null){
-			System.out.print("Conexion establecida...");
+			System.out.print("Conexion establecida...\n");
 			return conexion;
 		}
 		return null;
