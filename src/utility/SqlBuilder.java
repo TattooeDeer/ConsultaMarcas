@@ -20,7 +20,7 @@ import beans.SearchBean;
  * 
  * 	@ Valor de Retorno: "String", corresponde a la sentencia SQL lista para ser ejecutada en la BD.
  *  @ Parametros: 
- *  	- ArrayList fields: ArrayList con los beans que corresponden a los campos llenados por el usuario.  
+ *   
  * 		- ArrayList responses: ArrayList, en el mismo orden que 'fields' con los valores dados por el usuario
  * 						a cada campo.
  * */

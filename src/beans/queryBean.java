@@ -119,9 +119,9 @@ public class queryBean {
 		setMarcaCliente_fechaAlta(null);
 		setMarcaCliente_fechaBaja(null);
 		
-		setColumns("s.numerosolicitud","s.numeroregistro","s.denominacion","t.titular","e.descripcion","s.fechapresentacion",
-				"s.fechapublicacion","s.fecharegistro","c.descripcion","p.descripcion","r.nombre","r.idcomuna",
-				"r.id","i.fecha","i.observacion");
+		//setColumns("s.numerosolicitud","s.numeroregistro","s.denominacion","t.titular","e.descripcion","s.fechapresentacion",
+			//	"s.fechapublicacion","s.fecharegistro","c.descripcion","p.descripcion","r.nombre","r.idcomuna",
+				//"r.id","i.fecha","i.observacion");
 	}
 	
 		
@@ -271,8 +271,8 @@ public class queryBean {
 			//Se ejecuta la Query sobre la BD
 			
 			switch(getOpcion_busqueda()){
-				case ("Numero de Solicitud"): setMyRs(solicitud_builder.buildQuery(getColumns(), "solicitud", solicitud_fields, opcion_response),myStmt);
-				case ("Numero de Registro"): setMyRs(solicitud_builder.buildQuery(getColumns(), "solicitud", solicitud_fields, opcion_response),myStmt);
+			//	case ("Numero de Solicitud"): setMyRs(solicitud_builder.buildQuery(getColumns(), "solicitud", solicitud_fields, opcion_response),myStmt);
+				//case ("Numero de Registro"): setMyRs(solicitud_builder.buildQuery(getColumns(), "solicitud", solicitud_fields, opcion_response),myStmt);
 			}
 				
 			

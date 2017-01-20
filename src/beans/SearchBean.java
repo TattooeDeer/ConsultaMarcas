@@ -4,10 +4,12 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
 import Connection.conexion;
+import utility.SqlBuilder;
 
 import java.lang.String;
 import java.sql.*;
-import java.util.ArrayList;
+
+
 
 /*****
  * Esta clase es basicamente un 'queryBean' 2.0, con una implementacion mas
@@ -21,26 +23,29 @@ public class SearchBean {
 	private String opcion_busqueda;
 	private String input_busqueda;
 	
-	private Date solicitud_fechaPresentacion_desde;
-	private Date solicitud_fechaPresentacion_hasta;
-	private Date solicitud_fechaPublicacion_desde;
-	private Date solicitud_fechaPublicacion_hasta;
-	private Date solicitud_fechaRegistro_desde;
-	private Date solicitud_fechaRegistro_hasta;
+	private Date solicitud_fechapresentacion_desde;
+	private Date solicitud_fechapresentacion_hasta;
+	private Date solicitud_fechapublicacion_desde;
+	private Date solicitud_fechapublicacion_hasta;
+	private Date solicitud_fecharegistro_desde;
+	private Date solicitud_fecharegistro_hasta;
 	
-	private String tipoMarca_descripcion;
+	private String tipoMarca_id;
 	
-	private String cobertura_descripcion;
+	private String cobertura_id;
 	
-	private String categoria_descripcion;
+	private String categoria_id;
 	
-	private String estado_descripcion;
+	private String estado_id;
 	
 	private String representante_rut;
 	
 	private String titular_rut;
 	
 	private static String columnas;
+	
+	private ResultSet myRs;
+	
 	
 	
 	/*****************CONSTRUCTOR**********************/
@@ -63,16 +68,21 @@ public class SearchBean {
 		 * 
 		 * */
 		//Estas son las columnas a mostar como resultado de la busqueda
-		setColumnas("s.numerosolicitud, s.numeroregistro, e.descripcion, s.fechapresentacion, s.fechapublicacion,"
+		/*setColumnas("solicitud.numerosolicitud, solicitud.numeroregistro, e.descripcion, s.fechapresentacion, s.fechapublicacion,"
 				+ "t.nombre, c.descripcion, p.descripcion, r.nombre, i.fecha, i.fechavencimiento, ei.descripcion, i.observacion");
+				*/
+		setColumnas("titular.nombre, pais.descripcion, representante.nombre, solicitud.numerosolicitud, "
+				+ "solicitud.numeroregistro, estado.descripcion, "
+				+ "solicitud.fechapresentacion, solicitud.fechapublicacion, comuna.descripcion, instancia.fecha, "
+				+ "instancia.fechavencimiento, estadoinstancia.descripcion, "
+				+ "instancia.observacion, categoria.descripcion, tipomarca.descripcion");
 		setOpcion_busqueda("");
-		
-		
-		
+		setInput_busqueda("");
 		
 		
 	}
 	
+
 	/*Hay que hacer multiples JOINS
 	 * SELECT t.nombre, p.descripcion, r.nombre, s.numerosolicitud 
 	 * FROM solicitud s
@@ -101,23 +111,95 @@ public class SearchBean {
 			//De esta forma, si el usuario pregunta por la fecha de una instancia, no se le mostraran TODOS los
 			//titulares que hay en la BD
 			
+			SqlBuilder sqlBuilder = new SqlBuilder();
 			
+			sqlBuilder.SELECT_insert(getColumnas());
+			//A continuacion se agregan las reglas de relacion entre tablas de la BD
+			
+			//Puesto que realizaremos varios JOINS, insertamos solo una tabla: solicitud
+			sqlBuilder.FROM_insert("solicitud");
+			sqlBuilder.FROM_JOIN("titular", "solicitud.numerosolicitud", "titular.numerosolicitud", "JOIN");
+			sqlBuilder.FROM_JOIN("representante", "solicitud.numerosolicitud", "representante.numerosolicitud", "JOIN");
+			sqlBuilder.FROM_JOIN("pais", "titular.idpais", "pais.id", "JOIN");
+			sqlBuilder.FROM_JOIN("pais pa", "pa.id", "representante.idpais", "JOIN");
+			sqlBuilder.FROM_JOIN("categoria", "categoria.id", "solicitud.categoriaid", "JOIN");
+			sqlBuilder.FROM_JOIN("tipomarca", "tipomarca.id", "solicitud.tipomarcaid", "JOIN");
+			sqlBuilder.FROM_JOIN("estado", "estado.id", "solicitud.estadoid", "JOIN");
+			sqlBuilder.FROM_JOIN("instancia", "instancia.numerosolicitud", "solicitud.numerosolicitud", "JOIN");
+			sqlBuilder.FROM_JOIN("estadoinstancia", "estadoinstancia.id", "instancia.estadoinstanciaid", "JOIN");
+			sqlBuilder.FROM_JOIN("comuna", "comuna.id", "titular.idcomuna", "JOIN");
+			sqlBuilder.FROM_JOIN("comuna co", "co.id", "representante.idcomuna", "JOIN");
+			
+			switch(getOpcion_busqueda()){
+				case("No. Solicitud"):{sqlBuilder.WHERE_insert("solicitud.numerosolicitud",getInput_busqueda());}
+				
+				case("No. Registro"):{sqlBuilder.WHERE_insert("solicitud.numeroregistro", getInput_busqueda());}
+				
+				//TODO: hay que ver como meterlo en una busqueda separada para que no deje la caga
+				//case("No. Anotacion")
+			}
+			
+			//TODO: hay que modificar la implementacion de WHERE_insert de forma, hacerlo implementando otro metodo WHERE
+			//sqlBuilder.WHERE_insert("solicitud.fechapresentacion", solicitud_fechaPresentacion_desde);
+			
+			sqlBuilder.WHERE_insert("tipomarca.id", getTipoMarca_id());
+			sqlBuilder.WHERE_insert("cobertura.id", getCobertura_id());
+			sqlBuilder.WHERE_insert("estado.id", getEstado_id());
+			sqlBuilder.WHERE_insert("representante.rut", getRepresentante_rut());
+			sqlBuilder.WHERE_insert("titular.rut", getTitular_rut());
+			
+			//Armamos la query final
+			sqlBuilder.buildQuery();
+			
+			System.out.print(sqlBuilder.getFinal_stmt());
+			//Se envia la sentencia y el objeto myStmt para ser ejecutado en setMyRs()
+			setMyRs(sqlBuilder.getFinal_stmt(), myStmt);
+			
+			//lets see...
+			while(myRs.next()){
+				System.out.println("\n"+"titular:" + myRs.getString(1));
+				System.out.println("Pais:" + myRs.getString(2));
+				System.out.println("Representante: " + myRs.getString(3));
+				System.out.println("Numero de Solicitud: "+myRs.getString(4));
+				System.out.println("Numero de registro: " + myRs.getString(5));
+				System.out.println("Estado de la Solicitud: " + myRs.getString(6));
+				System.out.println("Fecha de Presentacion: " + myRs.getString(7));
+				System.out.println("Fecha de Publicacion: " + myRs.getString(8));
+				System.out.println("Comuna Titular: " + myRs.getString(9));
+				System.out.println("Fecha Instancia: " + myRs.getString(10));
+				System.out.println("Fecha de Vencimiento: " + myRs.getString(11));
+				System.out.println("Estado de la instancia: " + myRs.getString(12));
+				System.out.println("Observacion de la Instancia: " + myRs.getString(13));
+				System.out.println("Categoria: " + myRs.getString(14));
+				System.out.println("Tipo de Marca: " + myRs.getString(15));
+			}
+			
+			/*
+			 * setColumnas("titular.nombre, pais.descripcion, representante.nombre, solicitud.numerosolicitud, "
+				+ "solicitud.numeroregistro, estado.descripcion, "
+				+ "solicitud.fechapresentacion, solicitud.fechapublicacion, comuna.descripcion, instancia.fecha, "
+				+ "instancia.fechavencimiento, estadoinstancia.descripcion, "
+				+ "instancia.observacion, categoria.descripcion, tipomarca.descripcion");
+			 * 
+			 * */
+			if(myRs == null){
+				return "fail";
+			}
+			else{
+				System.out.println("\nExito en la busqueda-1");
+				return "success";
+			}
 			
 			
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			System.out.println("Error al crear la conexion con la BD!");
 			return "fail";
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return "fail";
 		}
-		
-		
-		
-		return "Justice for Harambe!!!";
 	}
 	
 	
@@ -138,83 +220,83 @@ public class SearchBean {
 	}
 	
 	
-	public Date getSolicitud_fechaPresentacion_desde() {
-		return solicitud_fechaPresentacion_desde;
+	public Date getSolicitud_fechapresentacion_desde() {
+		return solicitud_fechapresentacion_desde;
 	}
-	public void setSolicitud_fechaPresentacion_desde(Date solicitud_fechaPresentacion_desde) {
-		this.solicitud_fechaPresentacion_desde = solicitud_fechaPresentacion_desde;
-	}
-	
-	
-	public Date getSolicitud_fechaPresentacion_hasta() {
-		return solicitud_fechaPresentacion_hasta;
-	}
-	public void setSolicitud_fechaPresentacion_hasta(Date solicitud_fechaPresentacion_hasta) {
-		this.solicitud_fechaPresentacion_hasta = solicitud_fechaPresentacion_hasta;
+	public void setSolicitud_fechapresentacion_desde(Date solicitud_fechaPresentacion_desde) {
+		this.solicitud_fechapresentacion_desde = solicitud_fechaPresentacion_desde;
 	}
 	
 	
-	public Date getSolicitud_fechaPublicacion_desde() {
-		return solicitud_fechaPublicacion_desde;
+	public Date getSolicitud_fechapresentacion_hasta() {
+		return solicitud_fechapresentacion_hasta;
 	}
-	public void setSolicitud_fechaPublicacion_desde(Date solicitud_fechaPublicacion_desde) {
-		this.solicitud_fechaPublicacion_desde = solicitud_fechaPublicacion_desde;
-	}
-	
-	
-	public Date getSolicitud_fechaPublicacion_hasta() {
-		return solicitud_fechaPublicacion_hasta;
-	}
-	public void setSolicitud_fechaPublicacion_hasta(Date solicitud_fechaPublicacion_hasta) {
-		this.solicitud_fechaPublicacion_hasta = solicitud_fechaPublicacion_hasta;
+	public void setSolicitud_fechapresentacion_hasta(Date solicitud_fechaPresentacion_hasta) {
+		this.solicitud_fechapresentacion_hasta = solicitud_fechaPresentacion_hasta;
 	}
 	
 	
-	public Date getSolicitud_fechaRegistro_desde() {
-		return solicitud_fechaRegistro_desde;
+	public Date getSolicitud_fechapublicacion_desde() {
+		return solicitud_fechapublicacion_desde;
 	}
-	public void setSolicitud_fechaRegistro_desde(Date solicitud_fechaRegistro_desde) {
-		this.solicitud_fechaRegistro_desde = solicitud_fechaRegistro_desde;
-	}
-	
-	
-	public Date getSolicitud_fechaRegistro_hasta() {
-		return solicitud_fechaRegistro_hasta;
-	}
-	public void setSolicitud_fechaRegistro_hasta(Date solicitud_fechaRegistro_hasta) {
-		this.solicitud_fechaRegistro_hasta = solicitud_fechaRegistro_hasta;
+	public void setSolicitud_fechapublicacion_desde(Date solicitud_fechaPublicacion_desde) {
+		this.solicitud_fechapublicacion_desde = solicitud_fechaPublicacion_desde;
 	}
 	
 	
-	public String getTipoMarca_descripcion() {
-		return tipoMarca_descripcion;
+	public Date getSolicitud_fechapublicacion_hasta() {
+		return solicitud_fechapublicacion_hasta;
 	}
-	public void setTipoMarca_descripcion(String tipoMarca_descripcion) {
-		this.tipoMarca_descripcion = tipoMarca_descripcion;
-	}
-	
-	
-	public String getCobertura_descripcion() {
-		return cobertura_descripcion;
-	}
-	public void setCobertura_descripcion(String cobertura_descripcion) {
-		this.cobertura_descripcion = cobertura_descripcion;
+	public void setSolicitud_fechapublicacion_hasta(Date solicitud_fechaPublicacion_hasta) {
+		this.solicitud_fechapublicacion_hasta = solicitud_fechaPublicacion_hasta;
 	}
 	
 	
-	public String getCategoria_descripcion() {
-		return categoria_descripcion;
+	public Date getSolicitud_fecharegistro_desde() {
+		return solicitud_fecharegistro_desde;
 	}
-	public void setCategoria_descripcion(String categoria_descripcion) {
-		this.categoria_descripcion = categoria_descripcion;
+	public void setSolicitud_fecharegistro_desde(Date solicitud_fechaRegistro_desde) {
+		this.solicitud_fecharegistro_desde = solicitud_fechaRegistro_desde;
 	}
 	
 	
-	public String getEstado_descripcion() {
-		return estado_descripcion;
+	public Date getSolicitud_fecharegistro_hasta() {
+		return solicitud_fecharegistro_hasta;
 	}
-	public void setEstado_descripcion(String estado_descripcion) {
-		this.estado_descripcion = estado_descripcion;
+	public void setSolicitud_fecharegistro_hasta(Date solicitud_fechaRegistro_hasta) {
+		this.solicitud_fecharegistro_hasta = solicitud_fechaRegistro_hasta;
+	}
+	
+	
+	public String getTipoMarca_id() {
+		return tipoMarca_id;
+	}
+	public void setTipoMarca_id(String tipoMarca_id) {
+		this.tipoMarca_id = tipoMarca_id;
+	}
+	
+	
+	public String getCobertura_id() {
+		return cobertura_id;
+	}
+	public void setCobertura_id(String cobertura_id) {
+		this.cobertura_id = cobertura_id;
+	}
+	
+	
+	public String getCategoria_id() {
+		return categoria_id;
+	}
+	public void setCategoria_id(String categoria_id) {
+		this.categoria_id = categoria_id;
+	}
+	
+	
+	public String getEstado_id() {
+		return estado_id;
+	}
+	public void setEstado_id(String estado_id) {
+		this.estado_id = estado_id;
 	}
 	
 	
@@ -242,10 +324,17 @@ public class SearchBean {
 
 
 	public void setColumnas(String col) {
-		this.columnas = col;
+		SearchBean.columnas = col;
 	}
 		
-	
+	public void setMyRs(String stmt, Statement myStmt) throws SQLException {
+		this.myRs = myStmt.executeQuery(stmt);
+		
+	}
+	public ResultSet getMyRs() {
+		return this.myRs;
+	}
+
 	
 	
 }
