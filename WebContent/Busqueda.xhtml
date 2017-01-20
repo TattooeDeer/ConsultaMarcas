@@ -1,83 +1,120 @@
 <html xmlns="http://www.w3c.org/1999/xhtml"
    xmlns:h="http://java.sun.com/jsf/html"
-   xmlns:p="http://primefaces.org/ui">
-<h:head>
-Busqueda
-</h:head>
-<h:form>
-    <p:growl id="msgs" showDetail="true" />
- 
-    <h:panelGrid columns="2" cellpadding="5">
-    
-        <p:outputLabel value="Numero de Solicitud:" for="acSimple1" />
-        <p:inputText id="acSimple1" value="#{queryBean.solicitud_numeroSolicitud}" />
-        
-        <p:outputLabel value="Numero de Registro:" for="acSimple2" />
-        <p:inputText id="acSimple2" value="#{queryBean.solicitud_numeroRegistro}" />
-        
-        <p:outputLabel value="Tipo de Marca:" for="dd1" />
-        <p:inputText id="dd1" dropdown="true" value="#{queryBean.solicitud_tipoMarcaId}" />
- 
- 		<p:outputLabel value="Tipo de Cobertura:" for="acSimple3" />
-        <p:inputText id="acSimple3" value="#{queryBean.solicitud_coberturaId}" />
-        
-        <p:outputLabel value="Tipo de Categoria:" for="dd2" />
-        <p:inputText id="dd2" dropdown="true" value="#{queryBean.solicitud_categoriaId}" />
- 
-		<p:outputLabel value="Estado de Marca:" for="dd3" />
-        <p:inputText id="dd3" dropdown="true" value="#{queryBean.solicitud_estadoId}" />
- 		
- 		<p:outputLabel value="Fecha de Presentacion:" for="mask1"/>
-        <p:calendar id="mask1" value="#{queryBean.solicitud_fechaPresentacion}" pattern="dd-MM-yyyy" mask="true" />
- 	
- 		<p:outputLabel value="Fecha de Publicacion" for="mask2"/>
-        <p:calendar id="mask2" value="#{queryBean.solicitud_fechaPublicacion}" pattern="dd-MM-yyyy" mask="true" />
- 
- 		<p:outputLabel value="Fecha de Presentacion:" for="mask3"/>
-        <p:calendar id="mask3" value="#{queryBean.solicitud_fechaRegistro}" pattern="dd-MM-yyyy" mask="true" />
- 
-		<p:outputLabel value="Estado Anotacion" for="acSimple4" />
-        <p:inputText id="acSimple4" value="#{queryBean.anotacion_estadoAnotacionId}" />
-        
- 		<p:outputLabel value="Fecha creacion Anotacion" for="acSimple5" />
-        <p:inputText id="acSimple5" value="#{queryBean.anotacion_fechaCreacion}" />
-        
-        <p:outputLabel value="Fecha vencimiento Anotacion" for="acSimple6" />
-        <p:inputText id="acSimple6" value="#{queryBean.anotacion_fechaVencimiento}" />
-        
-        <p:outputLabel value="Fecha vencimiento Admin" for="acSimple7" />
-        <p:inputText id="acSimple7" value="#{queryBean.instanciaAdministrativa_fechaVencimiento}" />
-        
-        <p:outputLabel value="Fecha creacion Admin" for="acSimple8" />
-        <p:inputText id="acSimple8" value="#{queryBean.instanciaAdministrativa_fechaCreacion}" />
-        
-        <p:outputLabel value="estado Admin" for="acSimple9" />
-        <p:inputText id="acSimple9" value="#{queryBean.instanciaAdministrativa_estadoInstanciaId}" />
-        
-        <p:outputLabel value="nombre titular" for="acSimple10" />
-        <p:inputText id="acSimple10" value="#{queryBean.titular_nombre}" />
-        
-        <p:outputLabel value="rut titular" for="acSimple11" />
-        <p:inputText id="acSimple11" value="#{queryBean.titular_rut}" />
-        
-        <p:outputLabel value="numero solicitud titular" for="acSimple12" />
-        <p:inputText id="acSimple12" value="#{queryBean.titular_numeroSolicitud}" />
-        
-        <p:outputLabel value="numero solicitud representante" for="acSimple13" />
-        <p:inputText id="acSimple13" value="#{queryBean.representante_numeroSolicitud}" />
-        
-        <p:outputLabel value="rut representante" for="acSimple14" />
-        <p:inputText id="acSimple14" value="#{queryBean.representante_rut}" />
-        
-        <p:outputLabel value="nobmre representante" for="acSimple15" />
-        <p:inputText id="acSimple15" value="#{queryBean.representante_nombre}" />
+   xmlns:p="http://primefaces.org/ui"
+   xmlns:f="http://java.sun.com/jsf/core">
 
- 	</h:panelGrid>
+<h:head>
+</h:head>
+
+<h:form>
+
+<h3>Busqueda Administrativa</h3>
+	<p:growl id="msgs" showDetail="true" />
+    	<h:panelGrid columns="4" style="margin-bottom:10px" cellpadding="5">
+    	
+		        <p:outputLabel for="console1" value="Numero de" />
+		        <p:selectOneMenu id="console1" value="#{SearchBean.opcion_busqueda}" style="width:125px">
+		        	<f:selectItem itemLabel="" itemValue="" />
+		            <f:selectItem itemLabel="Anotacion" itemValue="anotacion_numeroinapi" />
+		            <f:selectItem itemLabel="Registro" itemValue="solicitud_numeroregistro" />
+		            <f:selectItem itemLabel="Solicitud" itemValue="solicitud_numerosolicitud" />
+		        </p:selectOneMenu>		        
+		        
+		        <p:outputLabel for="input1" value=": " />
+		        <p:inputText id="input1" placeholder="" value="#{SearchBean.input_busqueda}" />	
+		        	        
+		</h:panelGrid>        
+		
+		
+		<h:panelGrid columns="5" style="margin-bottom:10px" cellpadding="5">
+			
+			<p:outputLabel value="Fecha de presentacion:" />
+			
+			<p:outputLabel for="mask1" value="desde" />
+        	<p:calendar id="mask1" value="#{SearchBean.solicitud_fechaPresentacion_desde}" pattern="dd-MM-yyyy" mask="true" />
+ 			
+ 			<p:outputLabel for="mask2" value="hasta" />
+        	<p:calendar id="mask2" value="#{SearchBean.solicitud_fechaPresentacion_hasta}" pattern="dd-MM-yyyy" mask="true" />
+ 		
+ 			<p:outputLabel value="Fecha de publicacion:" />
+			
+			<p:outputLabel for="mask3" value="desde" />
+        	<p:calendar id="mask3" value="#{SearchBean.solicitud_fechaPublicacion_desde}" pattern="dd-MM-yyyy" mask="true" />
+ 			
+ 			<p:outputLabel for="mask4" value="hasta" />
+        	<p:calendar id="mask4" value="#{SearchBean.solicitud_fechaPublicacion_hasta}" pattern="dd-MM-yyyy" mask="true" />
+ 		
+ 			<p:outputLabel value="Fecha de regristro:" />
+			
+			<p:outputLabel for="mask5" value="desde" />
+        	<p:calendar id="mask5" value="#{SearchBean.solicitud_fechaRegistro_desde}" pattern="dd-MM-yyyy" mask="true" />
+ 			
+ 			<p:outputLabel for="mask6" value="hasta" />
+        	<p:calendar id="mask6" value="#{SearchBean.solicitud_fechaRegistro_hasta}" pattern="dd-MM-yyyy" mask="true" />
+ 		</h:panelGrid>    
+ 		
+ 		<h:panelGrid columns="4" style="margin-bottom:10px" cellpadding="5">
+ 			
+ 			<p:outputLabel for="console2" value="Tipo de marca:" />
+		    <p:selectOneMenu id="console2" value="#{SearchBean.tipoMarca_descripcion}" style="width:125px">
+		    	<f:selectItem itemLabel="" itemValue="" />
+		    	<f:selectItem itemLabel="Mixta" itemValue="Y" />
+		    	<f:selectItem itemLabel="Palabra o Denominacion" itemValue="W" />
+		    	<f:selectItem itemLabel="Sonora" itemValue="S" />
+				<f:selectItem itemLabel="Etiqueta" itemValue="R" />
+			    <f:selectItem itemLabel="Frase Propaganda" itemValue="P" />
+			    <f:selectItem itemLabel="Denominacion de Origen" itemValue="O" />
+			    <f:selectItem itemLabel="Indicacion Geografica" itemValue="G" />
+			 </p:selectOneMenu>		
+			 
+			<p:outputLabel for="console3" value="Tipo de categoria:" />
+		    <p:selectOneMenu id="console3" value="#{SearchBean.categoria_descripcion}" style="width:125px">
+		    	<f:selectItem itemLabel="" itemValue="" />
+		    	<f:selectItem itemLabel="Denominacion de Origen" itemValue="ORG" />
+		    	<f:selectItem itemLabel="Indicacion Geografica" itemValue="GEO" />
+		    	<f:selectItem itemLabel="Frase de Propaganda" itemValue="FRP" />
+				<f:selectItem itemLabel="Marca Comercial" itemValue="COM" />
+			    <f:selectItem itemLabel="Marca Colectiva" itemValue="COL" />
+			    <f:selectItem itemLabel="Marca de Certificacion" itemValue="CER" />
+			</p:selectOneMenu>		
+ 		
+ 			<p:outputLabel for="console4" value="Tipo de cobertura:" />
+		    <p:selectOneMenu id="console4" value="#{SearchBean.cobertura_descripcion}" style="width:125px">
+		    	<f:selectItem itemLabel="" itemValue="" />
+		    	<f:selectItem itemLabel="Producto" itemValue="1" />
+		    	<f:selectItem itemLabel="Servicio" itemValue="2" />
+		    	<f:selectItem itemLabel="Producto y Servicio" itemValue="3" />
+				<f:selectItem itemLabel="Frase Propaganda" itemValue="4" />
+			    <f:selectItem itemLabel="Establecimiento Comercial" itemValue="5" />
+			    <f:selectItem itemLabel="Establecimiento Industrial" itemValue="6" />
+			</p:selectOneMenu>	
+			
+			<p:outputLabel for="console5" value="Estado marca:" />
+		    <p:selectOneMenu id="console5" value="#{SearchBean.estado_descripcion}" style="width:125px">
+		    	<f:selectItem itemLabel="" itemValue="" />
+		    	<f:selectItem itemLabel="Caducado" itemValue="U" />
+		    	<f:selectItem itemLabel="Denegada" itemValue="D" />
+		    	<f:selectItem itemLabel="*VER INSTANCIA" itemValue="P" />
+				<f:selectItem itemLabel="Error Recepcion" itemValue="E" />
+			    <f:selectItem itemLabel="Desistida" itemValue="D" />
+			    <f:selectItem itemLabel="Concedido" itemValue="C" />
+			    <f:selectItem itemLabel="Abandonada" itemValue="A" />
+			</p:selectOneMenu>	
+			
+			<p:outputLabel for="input2" value="Rut representante" />
+		    <p:inputText id="input2" placeholder="" value="#{SearchBean.representante_rut}" />	
+		    
+		    <p:outputLabel for="input3" value="Rut titular" />
+		    <p:inputText id="input3" placeholder="" value="#{SearchBean.titular_rut}" />	
+		          
+			
+		</h:panelGrid>  
+ 		
  
-    <p:commandButton value="Submit" icon="ui-icon-check" update="display" action = "#{queryBean.search}"/>
-    <h:outputText id="display" value="#{queryBean.myRs}"/>
- 	
- 	
+    <p:commandButton value="Submit" icon="ui-icon-check" update="display" action = "#{SerachBean.search}"/>
+    <h:outputText id="display" value="#{SearchBean.solicitud_query}"/>
+	
     
-</h:form>
+
+</h:form>    
 </html>
