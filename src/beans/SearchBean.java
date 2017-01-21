@@ -116,9 +116,30 @@ public class SearchBean {
 			sqlBuilder.SELECT_insert(getColumnas());
 			//A continuacion se agregan las reglas de relacion entre tablas de la BD
 			
+						
+			
+			if(getOpcion_busqueda().equals("No. Solicitud")){
+
+				sqlBuilder.WHERE_insert("solicitud.numerosolicitud",getInput_busqueda());
+				sqlBuilder.FROM_insert("solicitud");
+				}
+				
+			else if(getOpcion_busqueda().equals("No. Registro")){
+				
+				sqlBuilder.FROM_insert("solicitud");
+				sqlBuilder.WHERE_insert("solicitud.numeroregistro", getInput_busqueda());
+				}
+			else if(getOpcion_busqueda().equals("No. Anotacion")){
+				sqlBuilder.FROM_insert("anotacion");
+				sqlBuilder.WHERE_insert("anotacion.numeroinapi", getInput_busqueda());
+				sqlBuilder.FROM_JOIN("solicitud", "solicitud.numerosolicitud", "anotacion.numerosolicitud", "JOIN");
+			}
+			else{
+				sqlBuilder.FROM_insert("solicitud");
+			}
 			//Puesto que realizaremos varios JOINS, insertamos solo una tabla: solicitud
-			sqlBuilder.FROM_insert("solicitud");
 			sqlBuilder.FROM_JOIN("titular", "solicitud.numerosolicitud", "titular.numerosolicitud", "JOIN");
+			//sqlBuilder.FROM_JOIN("anotacion", "solicitud.numerosolicitud", "anotacion.numerosolicitud", "JOIN");
 			sqlBuilder.FROM_JOIN("representante", "solicitud.numerosolicitud", "representante.numerosolicitud", "JOIN");
 			sqlBuilder.FROM_JOIN("pais", "titular.idpais", "pais.id", "JOIN");
 			sqlBuilder.FROM_JOIN("pais pa", "pa.id", "representante.idpais", "JOIN");
@@ -129,17 +150,7 @@ public class SearchBean {
 			sqlBuilder.FROM_JOIN("estadoinstancia", "estadoinstancia.id", "instancia.estadoinstanciaid", "JOIN");
 			sqlBuilder.FROM_JOIN("comuna", "comuna.id", "titular.idcomuna", "JOIN");
 			sqlBuilder.FROM_JOIN("comuna co", "co.id", "representante.idcomuna", "JOIN");
-			
-			
-			if(getOpcion_busqueda().equals("No. Solicitud")){
 
-				sqlBuilder.WHERE_insert("solicitud.numerosolicitud",getInput_busqueda());
-				}
-				
-			else if(getOpcion_busqueda().equals("No. Registro")){
-
-				sqlBuilder.WHERE_insert("solicitud.numeroregistro", getInput_busqueda());
-				}
 				
 				//TODO: hay que ver como meterlo en una busqueda separada para que no deje la caga
 				//case("No. Anotacion")
