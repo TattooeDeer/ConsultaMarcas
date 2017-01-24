@@ -23,12 +23,15 @@ public class SearchBean {
 	private String opcion_busqueda;
 	private String input_busqueda;
 	
-	private Date solicitud_fechaPresentacion_desde;
-	private Date solicitud_fechaPresentacion_hasta;
-	private Date solicitud_fechaPublicacion_desde;
-	private Date solicitud_fechaPublicacion_hasta;
-	private Date solicitud_fechaRegistro_desde;
-	private Date solicitud_fechaRegistro_hasta;
+	private String opcion_signo;
+	private String input_signo;
+	
+	private String solicitud_fechaPresentacion_desde;
+	private String solicitud_fechaPresentacion_hasta;
+	private String solicitud_fechaPublicacion_desde;
+	private String solicitud_fechaPublicacion_hasta;
+	private String solicitud_fechaRegistro_desde;
+	private String solicitud_fechaRegistro_hasta;
 	
 	private String tipoMarca_id;
 	
@@ -117,7 +120,7 @@ public class SearchBean {
 			//A continuacion se agregan las reglas de relacion entre tablas de la BD
 			
 						
-			
+			//Opcion Busqueda No.
 			if(getOpcion_busqueda().equals("No. Solicitud")){
 
 				sqlBuilder.WHERE_insert("solicitud.numerosolicitud",getInput_busqueda());
@@ -137,6 +140,25 @@ public class SearchBean {
 			else{
 				sqlBuilder.FROM_insert("solicitud");
 			}
+			
+			
+			//Opcion Signo
+			if(getOpcion_busqueda().equals("que_contenga")){
+					sqlBuilder.WHERE_insert("solicitud.denominacion", "%"+getInput_signo()+"%");
+
+				}
+				
+			else if(getOpcion_busqueda().equals("exactamente")){
+					sqlBuilder.WHERE_insert("solicitud.denominacion", getInput_signo());
+				}
+			else if(getOpcion_busqueda().equals("que_empiece")){
+					sqlBuilder.WHERE_insert("solicitud.denominacion", getInput_signo()+"%");
+				
+			}
+			else if(getOpcion_busqueda().equals("que_termine")){
+					sqlBuilder.WHERE_insert("solicitud.denominacion", "%"+getInput_signo());
+			}
+
 			//Puesto que realizaremos varios JOINS, insertamos solo una tabla: solicitud
 			sqlBuilder.FROM_JOIN("titular", "solicitud.numerosolicitud", "titular.numerosolicitud", "JOIN");
 			//sqlBuilder.FROM_JOIN("anotacion", "solicitud.numerosolicitud", "anotacion.numerosolicitud", "JOIN");
@@ -165,6 +187,9 @@ public class SearchBean {
 			sqlBuilder.WHERE_insert("representante.rut", getRepresentante_rut());
 			sqlBuilder.WHERE_insert("titular.rut", getTitular_rut());
 			sqlBuilder.WHERE_insert("categoria.id", getCategoria_id());
+			sqlBuilder.WHERE_OVERLAP(getSolicitud_fechaPresentacion_desde(), getSolicitud_fechaPresentacion_hasta(), "solicitud.fechapresentacion");
+			sqlBuilder.WHERE_OVERLAP(getSolicitud_fechaPublicacion_desde(), getSolicitud_fechaPublicacion_hasta(), "solicitud.fechapublicacion");
+			sqlBuilder.WHERE_OVERLAP(getSolicitud_fechaRegistro_desde(), getSolicitud_fechaRegistro_hasta(), "solicitud.fecharegistro");
 			
 			//Armamos la query final
 			sqlBuilder.buildQuery();
@@ -191,6 +216,8 @@ public class SearchBean {
 				System.out.println("Categoria: " + myRs.getString(14));
 				System.out.println("Tipo de Marca: " + myRs.getString(15));
 			}
+			//Cerramos la conexion...
+			myRs.close();
 			
 			/*
 			 * setColumnas("titular.nombre, pais.descripcion, representante.nombre, solicitud.numerosolicitud, "
@@ -238,51 +265,67 @@ public class SearchBean {
 	}
 	
 	
-	public Date getSolicitud_fechaPresentacion_desde() {
+	public String getOpcion_signo() {
+		return opcion_signo;
+	}
+	public void setOpcion_signo(String opcion_signo) {
+		this.opcion_signo = opcion_signo;
+	}
+
+
+	public String getInput_signo() {
+		return input_signo;
+	}
+	public void setInput_signo(String input_signo) {
+		this.input_signo = input_signo;
+	}
+
+
+	public String getSolicitud_fechaPresentacion_desde() {
 		return solicitud_fechaPresentacion_desde;
 	}
 	public void setSolicitud_fechaPresentacion_desde(Date solicitud_fechaPresentacion_desde) {
-		this.solicitud_fechaPresentacion_desde = solicitud_fechaPresentacion_desde;
+		this.solicitud_fechaPresentacion_desde = solicitud_fechaPresentacion_desde.toString();
 	}
 	
 	
-	public Date getSolicitud_fechaPresentacion_hasta() {
+	public String getSolicitud_fechaPresentacion_hasta() {
 		return solicitud_fechaPresentacion_hasta;
 	}
 	public void setSolicitud_fechaPresentacion_hasta(Date solicitud_fechaPresentacion_hasta) {
-		this.solicitud_fechaPresentacion_hasta = solicitud_fechaPresentacion_hasta;
+		this.solicitud_fechaPresentacion_hasta = solicitud_fechaPresentacion_hasta.toString();
 	}
 	
 	
-	public Date getSolicitud_fechaPublicacion_desde() {
+	public String getSolicitud_fechaPublicacion_desde() {
 		return solicitud_fechaPublicacion_desde;
 	}
 	public void setSolicitud_fechapublicacion_desde(Date solicitud_fechaPublicacion_desde) {
-		this.solicitud_fechaPublicacion_desde = solicitud_fechaPublicacion_desde;
+		this.solicitud_fechaPublicacion_desde = solicitud_fechaPublicacion_desde.toString();
 	}
 	
 	
-	public Date getSolicitud_fechaPublicacion_hasta() {
+	public String getSolicitud_fechaPublicacion_hasta() {
 		return solicitud_fechaPublicacion_hasta;
 	}
 	public void setSolicitud_fechaPublicacion_hasta(Date solicitud_fechaPublicacion_hasta) {
-		this.solicitud_fechaPublicacion_hasta = solicitud_fechaPublicacion_hasta;
+		this.solicitud_fechaPublicacion_hasta = solicitud_fechaPublicacion_hasta.toString();
 	}
 	
 	
-	public Date getSolicitud_fechaRegistro_desde() {
+	public String getSolicitud_fechaRegistro_desde() {
 		return solicitud_fechaRegistro_desde;
 	}
-	public void setSolicitud_fechaRegistro_desde(Date solicitud_fechaRegistro_desde) {
-		this.solicitud_fechaRegistro_desde = solicitud_fechaRegistro_desde;
+	public void setSolicitud_fechaRegistro_desde(String solicitud_fechaRegistro_desde) {
+		this.solicitud_fechaRegistro_desde = solicitud_fechaRegistro_desde.toString();
 	}
 	
 	
-	public Date getSolicitud_fechaRegistro_hasta() {
+	public String getSolicitud_fechaRegistro_hasta() {
 		return solicitud_fechaRegistro_hasta;
 	}
 	public void setSolicitud_fechaRegistro_hasta(Date solicitud_fechaRegistro_hasta) {
-		this.solicitud_fechaRegistro_hasta = solicitud_fechaRegistro_hasta;
+		this.solicitud_fechaRegistro_hasta = solicitud_fechaRegistro_hasta.toString();
 	}
 	
 	

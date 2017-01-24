@@ -71,6 +71,17 @@ public class SqlBuilder {
 		AddWHERE_stmt(" " + nombre_tabla + " = " + "'"+valor.toString()+"'");
 	}
 	
+	//table_name debe tener el formato: tabla.columna
+	public void WHERE_OVERLAP(String start_date, String end_date, String table_name){
+		if((end_date == "" || start_date == "") || (start_date.equals("0") || end_date.equals("0")) || table_name == "")
+			return;
+		else if(!getWHERE_stmt().equals(" WHERE ")){
+			AddWHERE_stmt(" AND");
+		}
+		
+		AddWHERE_stmt(" ("+table_name+", "+table_name+") OVERLAPS ("+"'"+start_date+"'::DATE"+", "+"'"+end_date+"'::DATE)");
+	}
+	
 	
 	
 	

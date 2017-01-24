@@ -7,6 +7,9 @@
 </h:head>
 
 <h:form>
+        
+ 		
+        
 
 <h3>Busqueda Administrativa</h3>
 	<p:growl id="msgs" showDetail="true" />
@@ -80,6 +83,21 @@
 			    <f:selectItem itemLabel="Concedido" itemValue="C" />
 			    <f:selectItem itemLabel="Abandonada" itemValue="A" />
 			</p:selectOneMenu>	
+			
+			        
+ 			<p:outputLabel value="Fecha creacion Anotacion" for="acSimple5" />
+        	<p:inputText id="acSimple5" value="#{queryBean.anotacion_fechaCreacion}" />
+        
+        	<p:outputLabel value="Fecha vencimiento Anotacion" for="acSimple6" />
+        	<p:inputText id="acSimple6" value="#{queryBean.anotacion_fechaVencimiento}" />
+        
+        	<p:outputLabel value="Fecha vencimiento Admin" for="acSimple7" />
+        	<p:inputText id="acSimple7" value="#{queryBean.instanciaAdministrativa_fechaVencimiento}" />
+        
+        	<p:outputLabel value="Fecha creacion Admin" for="acSimple8" />
+        	<p:inputText id="acSimple8" value="#{queryBean.instanciaAdministrativa_fechaCreacion}" />
+        
+			
 			
 			<p:outputLabel for="input2" value="Rut representante" />
 		    <p:inputText id="input2" placeholder="" value="#{SearchBean.representante_rut}" />	
