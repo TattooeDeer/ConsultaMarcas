@@ -10,12 +10,27 @@
 
 <h3>Busqueda Administrativa</h3>
 	<p:growl id="msgs" showDetail="true" />
+		<h:panelGrid columns="4" style="margin-bottom:10px" cellpadding="5">
+    	
+    		<p:outputLabel for="input0" value="Nombre Marca: " />
+			<p:inputText id="input0" placeholder="" value="#{SearchBean.input_signo}" />
+		    
+			<p:outputLabel for="console" value="Buscar por:" />
+        	<p:selectOneRadio id="console" value="#{SearchBean.opcion_signo}">
+           		<f:selectItem itemLabel="exactamente" itemValue="exactamente" />
+           		<f:selectItem itemLabel="que contenga" itemValue="que_contenga" />
+           		<f:selectItem itemLabel="que empiece" itemValue="que_empiece" />
+           		<f:selectItem itemLabel="que termine" itemValue="que_termine" />
+        	</p:selectOneRadio>	        
+		       
+		</h:panelGrid>        
+		    
     	<h:panelGrid columns="4" style="margin-bottom:10px" cellpadding="5">
     	
 		        <p:outputLabel for="console1" value="Numero de" />
 		        <p:selectOneMenu id="console1" value="#{SearchBean.opcion_busqueda}" style="width:125px">
 		        	<f:selectItem itemLabel="" itemValue="" />
-		           <f:selectItem itemLabel="Anotacion" itemValue="No. Anotacion" />
+		            <f:selectItem itemLabel="Anotacion" itemValue="No. Anotacion" />
 		            <f:selectItem itemLabel="Registro" itemValue="No. Registro" />
 		            <f:selectItem itemLabel="Solicitud" itemValue="No. Solicitud" />
 		        </p:selectOneMenu>		        
@@ -30,7 +45,27 @@
 			
 			<p:outputLabel value="Fecha de presentacion:" />
 			
+			<p:outputLabel for="mask1" value="desde" />
+        	<p:calendar id="mask1" value="#{SearchBean.solicitud_fechaPresentacion_desde}" pattern="dd-MM-yyyy" mask="true" />
+ 			
+ 			<p:outputLabel for="mask2" value="hasta" />
+        	<p:calendar id="mask2" value="#{SearchBean.solicitud_fechaPresentacion_hasta}" pattern="dd-MM-yyyy" mask="true" />
+ 		
+ 			<p:outputLabel value="Fecha de publicacion:" />
 			
+			<p:outputLabel for="mask3" value="desde" />
+        	<p:calendar id="mask3" value="#{SearchBean.solicitud_fechaPublicacion_desde}" pattern="dd-MM-yyyy" mask="true" />
+ 			
+ 			<p:outputLabel for="mask4" value="hasta" />
+        	<p:calendar id="mask4" value="#{SearchBean.solicitud_fechaPublicacion_hasta}" pattern="dd-MM-yyyy" mask="true" />
+ 		
+ 			<p:outputLabel value="Fecha de regristro:" />
+			
+			<p:outputLabel for="mask5" value="desde" />
+        	<p:calendar id="mask5" value="#{SearchBean.solicitud_fechaRegistro_desde}" pattern="dd-MM-yyyy" mask="true" />
+ 			
+ 			<p:outputLabel for="mask6" value="hasta" />
+        	<p:calendar id="mask6" value="#{SearchBean.solicitud_fechaRegistro_hasta}" pattern="dd-MM-yyyy" mask="true" />
  		</h:panelGrid>    
  		
  		<h:panelGrid columns="4" style="margin-bottom:10px" cellpadding="5">
@@ -92,7 +127,7 @@
  		
  
     <p:commandButton value="Submit" icon="ui-icon-check" update="display" action = "#{SearchBean.search}"/>
-    <h:outputText id="display" value="#{SearchBean.myRs}"/>
+    <h:outputText id="display" value="#{SearchBean.solicitud_query}"/>
 	
     
 
