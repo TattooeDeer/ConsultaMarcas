@@ -83,7 +83,16 @@ public class SqlBuilder {
 	}
 	
 	
-	
+	public void WHERE_LIKE(String nombre_tabla, String valor){
+		if(valor.toString() == "" || valor.toString().equals("0"))
+			return;
+		else if(!getWHERE_stmt().equals(" WHERE ")){
+			AddWHERE_stmt(" AND");
+		}
+		
+		AddWHERE_stmt(" " + nombre_tabla + " LIKE " + "'"+valor.toString()+"'");
+		
+	}
 	
 	
 	public String buildQuery(){
