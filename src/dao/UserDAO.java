@@ -13,7 +13,7 @@ import beans.SearchBean;
 public class UserDAO {
 	
 	private static ResultSet myRs;
-
+ 
 	public static ArrayList<ResultBean> getData(){
 		try {
 			//Creamos la conexion a la BD
