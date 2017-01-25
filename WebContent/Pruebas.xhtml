@@ -10,7 +10,7 @@
 	
 	<p:ribbon>
     	<p:tab title="Busqueda Administrativa"  >
-	        <p:ribbonGroup id="Buscador"  style="width:500px;"  >
+	        <p:ribbonGroup id="Buscador"  style="width:400px;"  >
 	            
 	            <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
 		    	
@@ -167,15 +167,15 @@
 			
 			</p:ribbonGroup>
 	    	
-	    	<p:ribbonGroup id="Resumen_Resultados" style="width:700px;height:800px;"  >
+	    	<p:ribbonGroup id="Resumen_Resultados" style="width:600px;height:800px;"  >
 	            
 	            <p:dataTable value="#{customer.messages}" var="o" paginator="true" rows="3"
                          paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                         rowsPerPageTemplate="3,5,10" widgetVar="50" style="width: 700px;" >
+                         rowsPerPageTemplate="3,5,10" widgetVar="50" style="width: 600px;" >
                 <f:facet name="header">  
                     Customer List  
                 </f:facet>
-                <p:column  filterBy="#{solicitud}">
+                <p:column  sortBy="#{solicitud}">
                     <f:facet name="header">  
                         <h:outputText value="Solicitud" />  
                     </f:facet>
