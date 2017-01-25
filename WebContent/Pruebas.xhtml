@@ -1,31 +1,291 @@
 <html xmlns="http://www.w3c.org/1999/xhtml"
    xmlns:h="http://java.sun.com/jsf/html"
    xmlns:p="http://primefaces.org/ui"
-   xmlns:f="http://java.sun.com/jsf/core">
-
+   xmlns:f="http://java.sun.com/jsf/core"
+   xmlns:pe="http://primefaces.org/ui/extensions">
 <h:head>
 </h:head>
 
 <h:form>
-
-<h3>Pruebas</h3>
 	
-	<p:inputText id="rut" 
-		validatorMessage="Invalid rut format"
-		value="#{Validators.email}">
+	<p:ribbon>
+    	<p:tab title="Busqueda Administrativa"  >
+	        <p:ribbonGroup id="Buscador"  style="width:500px;"  >
+	            
+	            <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+		    	
+				        <p:outputLabel for="console1" value="Numero de" />
+				        <p:selectOneMenu id="console1" value="#{SearchBean.opcion_busqueda}" style="width:125px">
+				        	<f:selectItem itemLabel="" itemValue="" />
+				            <f:selectItem itemLabel="Anotacion" itemValue="No. Anotacion" />
+				            <f:selectItem itemLabel="Registro" itemValue="No. Registro" />
+				            <f:selectItem itemLabel="Solicitud" itemValue="No. Solicitud" />
+				        </p:selectOneMenu>		        
+				        
+				        <p:outputLabel for="input1" value=": " />
+				        <p:inputText id="input1" placeholder="" value="#{SearchBean.input_busqueda}" >
+				        	<f:validateRegex pattern="[0-9]+" />	
+				        </p:inputText>
+				        
+				        <p:outputLabel for="input4" value="Numero de Clase:" />
+					    <p:inputText id="input4" placeholder="" value="#{SearchBean.solicitud_clases}" >
+					    	<f:validateRegex pattern="[0-9]+" />
+						</p:inputText>	
+				          
+				        
+				        	        
+				</h:panelGrid>
+				
+				<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+		    	
+		    		<p:outputLabel for="input0" value="Nombre Marca: " />
+					<p:inputText id="input0" placeholder="" value="#{SearchBean.input_signo}" >
+						<f:validateRegex pattern="\b" />	
+				    </p:inputText>
+					
+				   	<p:outputLabel for="console" value="Buscar por:" />
+		        	<p:selectOneRadio id="console" value="#{SearchBean.opcion_signo}" layout="grid" columns="2">
+		           		<f:selectItem itemLabel="exactamente" itemValue="exactamente" />
+		           		<f:selectItem itemLabel="que contenga" itemValue="que_contenga" />
+		           		<f:selectItem itemLabel="que empiece" itemValue="que_empiece" />
+		           		<f:selectItem itemLabel="que termine" itemValue="que_termine" />
+		        	</p:selectOneRadio>	
+				</h:panelGrid>        	
+		        			
+		        <p:accordionPanel multiple="true">
+			        <p:tab title="Buscar por Fecha">
+			            <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5"> 
+					
+							<p:outputLabel value="Fecha de presentacion" />
+							<p:outputLabel value=":" />
+							
+							<p:outputLabel for="mask1" value="desde" />
+				        	<p:calendar id="mask1" value="#{SearchBean.solicitud_fechaPresentacion_desde}" pattern="dd-MM-yyyy" mask="true" >
+				 				<f:validateRegex pattern="99-99-9999" />
+				        	</p:calendar>
+				 			
+				 			<p:outputLabel for="mask2" value="hasta" />
+				        	<p:calendar id="mask2" value="#{SearchBean.solicitud_fechaPresentacion_hasta}" pattern="dd-MM-yyyy" mask="true" >
+				 				<f:validateRegex pattern="99-99-9999" />
+				        	</p:calendar>
+				 			
+				 			<p:outputLabel value="Fecha de publicacion" />
+							<p:outputLabel value=":" />
+							
+							<p:outputLabel for="mask3" value="desde" />
+				        	<p:calendar id="mask3" value="#{SearchBean.solicitud_fechaPublicacion_desde}" pattern="dd-MM-yyyy" mask="true" >
+				 				<f:validateRegex pattern="99-99-9999" />
+				        	</p:calendar>
+				 			
+				 			<p:outputLabel for="mask4" value="hasta" />
+				        	<p:calendar id="mask4" value="#{SearchBean.solicitud_fechaPublicacion_hasta}" pattern="dd-MM-yyyy" mask="true" >
+				 				<f:validateRegex pattern="99-99-9999" />
+				        	</p:calendar>
+				 			
+				 			<p:outputLabel value="Fecha de regristro" />
+							<p:outputLabel value=":" />
+							
+							<p:outputLabel for="mask5" value="desde" />
+				        	<p:calendar id="mask5" value="#{SearchBean.solicitud_fechaRegistro_desde}" pattern="dd-MM-yyyy" mask="true" >
+				 				<f:validateRegex pattern="99-99-9999" />
+				        	</p:calendar>
+				        	
+				 			<p:outputLabel for="mask6" value="hasta" />
+				        	<p:calendar id="mask6" value="#{SearchBean.solicitud_fechaRegistro_hasta}" pattern="dd-MM-yyyy" mask="true" >
+				        		<f:validateRegex pattern="99-99-9999" />
+				        	</p:calendar>
+				 		</h:panelGrid>    
+			        </p:tab>
+			        
+			        <p:tab title="Tipo">
+			            <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+		 			
+				 			<p:outputLabel for="console2" value="Tipo de marca:" />
+						    <p:selectOneMenu id="console2" value="#{SearchBean.tipoMarca_id}" style="width:125px">
+						    	<f:selectItem itemLabel="" itemValue="" />
+						    	<f:selectItem itemLabel="Mixta" itemValue="Y" />
+						    	<f:selectItem itemLabel="Palabra o Denominacion" itemValue="W" />
+						    	<f:selectItem itemLabel="Sonora" itemValue="S" />
+								<f:selectItem itemLabel="Etiqueta" itemValue="R" />
+							    <f:selectItem itemLabel="Frase Propaganda" itemValue="P" />
+							    <f:selectItem itemLabel="Denominacion de Origen" itemValue="O" />
+							    <f:selectItem itemLabel="Indicacion Geografica" itemValue="G" />
+							 </p:selectOneMenu>		
+							 
+							<p:outputLabel for="console3" value="Tipo de categoria:" />
+						    <p:selectOneMenu id="console3" value="#{SearchBean.categoria_id}" style="width:125px">
+						    	<f:selectItem itemLabel="" itemValue="" />
+						    	<f:selectItem itemLabel="Denominacion de Origen" itemValue="ORG" />
+						    	<f:selectItem itemLabel="Indicacion Geografica" itemValue="GEO" />
+						    	<f:selectItem itemLabel="Frase de Propaganda" itemValue="FRP" />
+								<f:selectItem itemLabel="Marca Comercial" itemValue="COM" />
+							    <f:selectItem itemLabel="Marca Colectiva" itemValue="COL" />
+							    <f:selectItem itemLabel="Marca de Certificacion" itemValue="CER" />
+							</p:selectOneMenu>		
+				 		
+				 			<p:outputLabel for="console4" value="Tipo de cobertura:" />
+						    <p:selectOneMenu id="console4" value="#{SearchBean.cobertura_id}" style="width:125px">
+						    	<f:selectItem itemLabel="" itemValue="" />
+						    	<f:selectItem itemLabel="Producto" itemValue="1" />
+						    	<f:selectItem itemLabel="Servicio" itemValue="2" />
+						    	<f:selectItem itemLabel="Producto y Servicio" itemValue="3" />
+								<f:selectItem itemLabel="Frase Propaganda" itemValue="4" />
+							    <f:selectItem itemLabel="Establecimiento Comercial" itemValue="5" />
+							    <f:selectItem itemLabel="Establecimiento Industrial" itemValue="6" />
+							</p:selectOneMenu>	
+							
+							<p:outputLabel for="console5" value="Estado marca:" />
+						    <p:selectOneMenu id="console5" value="#{SearchBean.estado_id}" style="width:125px">
+						    	<f:selectItem itemLabel="" itemValue="" />
+						    	<f:selectItem itemLabel="Caducado" itemValue="U" />
+						    	<f:selectItem itemLabel="Denegada" itemValue="D" />
+						    	<f:selectItem itemLabel="*VER INSTANCIA" itemValue="P" />
+								<f:selectItem itemLabel="Error Recepcion" itemValue="E" />
+							    <f:selectItem itemLabel="Desistida" itemValue="D" />
+							    <f:selectItem itemLabel="Concedido" itemValue="C" />
+							    <f:selectItem itemLabel="Abandonada" itemValue="A" />
+							</p:selectOneMenu>	
+			            </h:panelGrid>
+			        </p:tab>
+			        <p:tab title="Rut">
+			            <h:panelGrid columns="2" cellpadding="10">
+			                <p:outputLabel for="input2" value="Rut representante:" />
+						    <p:inputText id="input2"  validatorMessage="Rut invalido" placeholder="" value="#{SearchBean.representante_rut}" >	
+						    	<f:validateRegex pattern="99.999.999-9|9.999.999-9" />
+							</p:inputText>
+							
+						    <p:outputLabel for="input3" value="Rut titular:" />
+						    <p:inputText id="input3" validatorMessage="Rut invalido" placeholder="" value="#{SearchBean.titular_rut}" >	
+						    	<f:validateRegex pattern="99.999.999-9|9.999.999-9" />
+							</p:inputText>
+				    	</h:panelGrid>
+			        </p:tab>
+			    </p:accordionPanel>			
+		        
+				<p:commandButton value="Submit" icon="ui-icon-check" update="display" action = "#{SearchBean.search}"/>
+			    <h:outputText id="display" value=":D"/>
+			
+			</p:ribbonGroup>
+	    	
+	    	<p:ribbonGroup id="Resumen_Resultados" style="width:700px;height:800px;"  >
+	            
+	            <p:dataTable value="#{customer.messages}" var="o" paginator="true" rows="3"
+                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         rowsPerPageTemplate="3,5,10" widgetVar="50" style="width: 700px;" >
+                <f:facet name="header">  
+                    Customer List  
+                </f:facet>
+                <p:column  filterBy="#{solicitud}">
+                    <f:facet name="header">  
+                        <h:outputText value="Solicitud" />  
+                    </f:facet>
+                    <h:outputText value="#{solicitud}"/>
+                </p:column>
+                <p:column sortBy="#{registro}">
+                    <f:facet name="header">  
+                        <h:outputText value="Registro" />  
+                    </f:facet>
+                    <h:outputText value="#{registro}"/>
+                </p:column>
+                <p:column sortBy="#{clase}">
+                    <f:facet name="header">  
+                        <h:outputText value="Clase" />  
+                    </f:facet>
+                    <h:outputText value="#{clase}"/>
+                </p:column>
+                <p:column sortBy="#{signo}">
+                    <f:facet name="header">  
+                        <h:outputText value="Signo" />  
+                    </f:facet>
+                    <h:outputText value="#{signo}"/>
+                </p:column>
+                <p:column sortBy="#{titular}">
+                    <f:facet name="header">  
+                        <h:outputText value="Titular" />  
+                    </f:facet>
+                    <h:outputText value="#{titular}"/>
+                </p:column>
+            </p:dataTable>
+				
 
-	  <f:validateRegex
-		pattern="99.999.999-9|9.999.999-9" />
+	    	</p:ribbonGroup>
+	    	
+	    	<p:ribbonGroup id="Detalles_Resultado" style="width:400px;height:800px;">
+	    		<h3>Marca/Establecimiento Comercial</h3>
+	    		<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+	    		
+		    		<p:outputLabel value="Numero de Solicitud:" />
+		    		<h:outputText  value="numeroSolicitud" />
+		    		    		
+		    		<p:outputLabel value="Numero de Registro:" />	    		
+		    		<h:outputText  value="numeroRegistro" /> 	
+		    			
+		    		<p:outputLabel value="Estado:" />
+		    		<h:outputText  value=" " />
+		    			    		
+		    		<p:outputLabel value="Fecha de Presentacion:" />
+		    		<h:outputText  value=" " />
+		    		
+		    		<p:outputLabel value="Fecha de Publicacion:" />	    		
+		    		<h:outputText  value=" " />
+		    		
+		    		<p:outputLabel value="Fecha de Vigencia:" />
+		    		<h:outputText  value=" " />
+	    		
+	    		</h:panelGrid>
+	    		
+	    		<h3>Titular(es)/Solicitante(s)</h3>
+	    		<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+	    		
+		    		<p:outputLabel value="Nombre/Razon Solcial:" />	
+		    		<h:outputText  value="titular_nombre" />
+		    		
+		    		<p:outputLabel value="Pais:" />		    		
+		    		<h:outputText  value="titular_pais" />
+	    		
+	    		</h:panelGrid>
+	    			    		
+	    		<h3>Representante</h3>
+	            <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+	            
+		            <p:outputLabel value="Nombre/Razon Solcial:" />	
+		    		<h:outputText  value="representante_nombre" />
+		    		
+		    		<p:outputLabel value="Pais:" />		    		
+		    		<h:outputText  value=" " />
+	            </h:panelGrid>
+	            
+	    		<h3>Signo</h3>
+	    		<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+	    		
+		    		<p:outputLabel value="Tipo:" />	
+		    		<h:outputText  value="numeroSolicitud" />
+		    		
+		    		<p:outputLabel value="Signo:" />	
+		    		<h:outputText  value="denominacion" />
+		    		
+		    		<p:outputLabel value="Proteccion:" />
+		    		<h:outputText  value=" " />
+		    		
+		    		<p:outputLabel value="Clase:" />
+		    		<h:outputText  value="clase" />
+	    		
+	    		</h:panelGrid>
+	    		
+	    		<h3>Instancias Administrativas</h3>	
+	            <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+	            </h:panelGrid>
+	    		
+	    		<h3>Anotacion</h3>	
+	            <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+	            </h:panelGrid>
 
-	</p:inputText>
-	
-	<p:watermark for="rut" value="ingrese rut con puntos y guion" />
-	<p:message for="rut" />
+	    	</p:ribbonGroup>
+    	</p:tab>
+    </p:ribbon>
+ 
 
-	<p:commandButton value="test" style="margin:20px"
-		action="#{Validators.register}" ajax="false" />
 
-		
 </h:form>    
 
 </html>
