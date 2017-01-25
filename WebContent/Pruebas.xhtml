@@ -1,0 +1,31 @@
+<html xmlns="http://www.w3c.org/1999/xhtml"
+   xmlns:h="http://java.sun.com/jsf/html"
+   xmlns:p="http://primefaces.org/ui"
+   xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+</h:head>
+
+<h:form>
+
+<h3>Pruebas</h3>
+	
+	<p:inputText id="rut" 
+		validatorMessage="Invalid rut format"
+		value="#{Validators.email}">
+
+	  <f:validateRegex
+		pattern="99.999.999-9|9.999.999-9" />
+
+	</p:inputText>
+	
+	<p:watermark for="rut" value="ingrese rut con puntos y guion" />
+	<p:message for="rut" />
+
+	<p:commandButton value="test" style="margin:20px"
+		action="#{Validators.register}" ajax="false" />
+
+		
+</h:form>    
+
+</html>

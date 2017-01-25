@@ -22,14 +22,19 @@
 		        </p:selectOneMenu>		        
 		        
 		        <p:outputLabel for="input1" value=": " />
-		        <p:inputText id="input1" placeholder="" value="#{SearchBean.input_busqueda}" />	
+		        <p:inputText id="input1" placeholder="" value="#{SearchBean.input_busqueda}" >
+		        	<f:validateRegex pattern="[0-9]+" />	
+		        </p:inputText>
+		        
 		        	        
 		</h:panelGrid>
 		
 		<h:panelGrid columns="4" style="margin-bottom:10px" cellpadding="5">
     	
     		<p:outputLabel for="input0" value="Nombre Marca: " />
-			<p:inputText id="input0" placeholder="" value="#{SearchBean.input_signo}" />
+			<p:inputText id="input0" placeholder="" value="#{SearchBean.input_signo}" >
+				<f:validateRegex pattern="\b" />	
+		    </p:inputText>
 			
 		   	<p:outputLabel for="console" value="Buscar por:" />
         	<p:selectOneRadio id="console" value="#{SearchBean.opcion_signo}" layout="grid" columns="2">
@@ -45,26 +50,38 @@
 			<p:outputLabel value="Fecha de presentacion:" />
 			
 			<p:outputLabel for="mask1" value="desde" />
-        	<p:calendar id="mask1" value="#{SearchBean.solicitud_fechaPresentacion_desde}" pattern="dd-MM-yyyy" mask="true" />
+        	<p:calendar id="mask1" value="#{SearchBean.solicitud_fechaPresentacion_desde}" pattern="dd-MM-yyyy" mask="true" >
+ 				<f:validateRegex pattern="99-99-9999" />
+        	</p:calendar>
  			
  			<p:outputLabel for="mask2" value="hasta" />
-        	<p:calendar id="mask2" value="#{SearchBean.solicitud_fechaPresentacion_hasta}" pattern="dd-MM-yyyy" mask="true" />
- 		
+        	<p:calendar id="mask2" value="#{SearchBean.solicitud_fechaPresentacion_hasta}" pattern="dd-MM-yyyy" mask="true" >
+ 				<f:validateRegex pattern="99-99-9999" />
+        	</p:calendar>
+ 			
  			<p:outputLabel value="Fecha de publicacion:" />
 			
 			<p:outputLabel for="mask3" value="desde" />
-        	<p:calendar id="mask3" value="#{SearchBean.solicitud_fechaPublicacion_desde}" pattern="dd-MM-yyyy" mask="true" />
+        	<p:calendar id="mask3" value="#{SearchBean.solicitud_fechaPublicacion_desde}" pattern="dd-MM-yyyy" mask="true" >
+ 				<f:validateRegex pattern="99-99-9999" />
+        	</p:calendar>
  			
  			<p:outputLabel for="mask4" value="hasta" />
-        	<p:calendar id="mask4" value="#{SearchBean.solicitud_fechaPublicacion_hasta}" pattern="dd-MM-yyyy" mask="true" />
- 		
+        	<p:calendar id="mask4" value="#{SearchBean.solicitud_fechaPublicacion_hasta}" pattern="dd-MM-yyyy" mask="true" >
+ 				<f:validateRegex pattern="99-99-9999" />
+        	</p:calendar>
+ 			
  			<p:outputLabel value="Fecha de regristro:" />
 			
 			<p:outputLabel for="mask5" value="desde" />
-        	<p:calendar id="mask5" value="#{SearchBean.solicitud_fechaRegistro_desde}" pattern="dd-MM-yyyy" mask="true" />
- 			
+        	<p:calendar id="mask5" value="#{SearchBean.solicitud_fechaRegistro_desde}" pattern="dd-MM-yyyy" mask="true" >
+ 				<f:validateRegex pattern="99-99-9999" />
+        	</p:calendar>
+        	
  			<p:outputLabel for="mask6" value="hasta" />
-        	<p:calendar id="mask6" value="#{SearchBean.solicitud_fechaRegistro_hasta}" pattern="dd-MM-yyyy" mask="true" />
+        	<p:calendar id="mask6" value="#{SearchBean.solicitud_fechaRegistro_hasta}" pattern="dd-MM-yyyy" mask="true" >
+        		<f:validateRegex pattern="99-99-9999" />
+        	</p:calendar>
  		</h:panelGrid>    
  		
  		<h:panelGrid columns="4" style="margin-bottom:10px" cellpadding="5">
@@ -114,15 +131,21 @@
 			    <f:selectItem itemLabel="Concedido" itemValue="C" />
 			    <f:selectItem itemLabel="Abandonada" itemValue="A" />
 			</p:selectOneMenu>	
-			
+						
 			<p:outputLabel for="input2" value="Rut representante:" />
-		    <p:inputText id="input2" placeholder="" value="#{SearchBean.representante_rut}" />	
-		    
+		    <p:inputText id="input2"  validatorMessage="Rut invalido" placeholder="" value="#{SearchBean.representante_rut}" >	
+		    	<f:validateRegex pattern="99.999.999-9|9.999.999-9" />
+			</p:inputText>
+			
 		    <p:outputLabel for="input3" value="Rut titular:" />
-		    <p:inputText id="input3" placeholder="" value="#{SearchBean.titular_rut}" />	
+		    <p:inputText id="input3" validatorMessage="Rut invalido" placeholder="" value="#{SearchBean.titular_rut}" >	
+		    	<f:validateRegex pattern="99.999.999-9|9.999.999-9" />
+			</p:inputText>
 		    
 		    <p:outputLabel for="input4" value="Numero de Clase:" />
-		    <p:inputText id="input4" placeholder="" value="#{SearchBean.solicitud_clases}" />	
+		    <p:inputText id="input4" placeholder="" value="#{SearchBean.solicitud_clases}" >
+		    	<f:validateRegex pattern="[0-9]+" />
+			</p:inputText>	
 		          
 			
 		</h:panelGrid>  

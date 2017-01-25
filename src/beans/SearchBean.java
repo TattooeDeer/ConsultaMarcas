@@ -23,10 +23,14 @@ public class SearchBean {
 	private String opcion_busqueda;
 	private String input_busqueda;
 	
+	private String opcion_signo;
+	private String input_signo;
+	
 	private Date solicitud_fechaPresentacion_desde;
 	private Date solicitud_fechaPresentacion_hasta;
 	private Date solicitud_fechaPublicacion_desde;
 	private Date solicitud_fechaPublicacion_hasta;
+	
 	private Date solicitud_fechaRegistro_desde;
 	private Date solicitud_fechaRegistro_hasta;
 	
@@ -46,8 +50,12 @@ public class SearchBean {
 	
 	private ResultSet myRs;
 	
+	private String solicitud_clases;
 	
 	
+	
+
+
 	/*****************CONSTRUCTOR**********************/
 	public SearchBean(){
 		/*OBS: muchas de las cosas que hay que mostrar, como por ejemplo el pais del titular, hay que ir a buscarlas en realidad
@@ -353,6 +361,33 @@ public class SearchBean {
 		return this.myRs;
 	}
 
+	public String getOpcion_signo() {
+		return opcion_signo;
+	}
+
+
+	public void setOpcion_signo(String opcion_signo) {
+		this.opcion_signo = opcion_signo;
+	}
+
+
+	public String getInput_signo() {
+		return input_signo;
+	}
+
+
+	public void setInput_signo(String input_signo) {
+		this.input_signo = input_signo;
+	}
 	
+
+	public String getSolicitud_clases() {
+		return solicitud_clases;
+	}
+
+
+	public void setSolicitud_clases(String solicitud_clases) {
+		this.solicitud_clases = solicitud_clases;
+	}
 	
 }
