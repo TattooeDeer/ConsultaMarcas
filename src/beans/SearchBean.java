@@ -8,6 +8,8 @@ import utility.SqlBuilder;
 
 import java.lang.String;
 import java.sql.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 
 
@@ -166,7 +168,10 @@ public class SearchBean {
 		sqlBuilder.WHERE_OVERLAP(getSolicitud_fechaRegistro_desde(), getSolicitud_fechaRegistro_hasta(), "solicitud.fecharegistro");
 		
 		//Armamos la query final
+		
 		setSqlStmt(sqlBuilder.buildQuery());
+		System.out.println(sqlBuilder.getFinal_stmt());
+		
 
 	}
 	
@@ -355,32 +360,37 @@ public class SearchBean {
 	public String getSolicitud_fechaPresentacion_desde() {
 		return solicitud_fechaPresentacion_desde;
 	}
-	public void setSolicitud_fechaPresentacion_desde(Date solicitud_fechaPresentacion_desde) {
-		this.solicitud_fechaPresentacion_desde = solicitud_fechaPresentacion_desde.toString();
+	public void setSolicitud_fechaPresentacion_desde(String solicitud_fechaPresentacion_desde) {
+		
+		this.solicitud_fechaPresentacion_desde = solicitud_fechaPresentacion_desde;
 	}
 	
 	
 	public String getSolicitud_fechaPresentacion_hasta() {
 		return solicitud_fechaPresentacion_hasta;
 	}
-	public void setSolicitud_fechaPresentacion_hasta(Date solicitud_fechaPresentacion_hasta) {
-		this.solicitud_fechaPresentacion_hasta = solicitud_fechaPresentacion_hasta.toString();
+	public void setSolicitud_fechaPresentacion_hasta(String solicitud_fechaPresentacion_hasta) {
+		
+		this.solicitud_fechaPresentacion_hasta = solicitud_fechaPresentacion_hasta;
 	}
 	
 	
 	public String getSolicitud_fechaPublicacion_desde() {
+		
 		return solicitud_fechaPublicacion_desde;
 	}
-	public void setSolicitud_fechapublicacion_desde(Date solicitud_fechaPublicacion_desde) {
-		this.solicitud_fechaPublicacion_desde = solicitud_fechaPublicacion_desde.toString();
+	public void setSolicitud_fechaPublicacion_desde(String solicitud_fechaPublicacion_desde) {
+		
+		this.solicitud_fechaPublicacion_desde = solicitud_fechaPublicacion_desde;
 	}
 	
 	
 	public String getSolicitud_fechaPublicacion_hasta() {
 		return solicitud_fechaPublicacion_hasta;
 	}
-	public void setSolicitud_fechaPublicacion_hasta(Date solicitud_fechaPublicacion_hasta) {
-		this.solicitud_fechaPublicacion_hasta = solicitud_fechaPublicacion_hasta.toString();
+	public void setSolicitud_fechaPublicacion_hasta(String solicitud_fechaPublicacion_hasta) {
+		
+		this.solicitud_fechaPublicacion_hasta = solicitud_fechaPublicacion_hasta;
 	}
 	
 	
@@ -388,15 +398,16 @@ public class SearchBean {
 		return solicitud_fechaRegistro_desde;
 	}
 	public void setSolicitud_fechaRegistro_desde(String solicitud_fechaRegistro_desde) {
-		this.solicitud_fechaRegistro_desde = solicitud_fechaRegistro_desde.toString();
+		
+		this.solicitud_fechaRegistro_desde = solicitud_fechaRegistro_desde;
 	}
 	
 	
 	public String getSolicitud_fechaRegistro_hasta() {
 		return solicitud_fechaRegistro_hasta;
 	}
-	public void setSolicitud_fechaRegistro_hasta(Date solicitud_fechaRegistro_hasta) {
-		this.solicitud_fechaRegistro_hasta = solicitud_fechaRegistro_hasta.toString();
+	public void setSolicitud_fechaRegistro_hasta(String solicitud_fechaRegistro_hasta) {
+		this.solicitud_fechaRegistro_hasta = solicitud_fechaRegistro_hasta;
 	}
 	
 	

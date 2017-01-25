@@ -27,10 +27,8 @@
 				        	<f:validateRegex pattern="[0-9]+" />	
 				        </p:inputText>
 				        
-				        <p:outputLabel for="input4" value="Numero de Clase:" />
-					    <p:inputText id="input4" placeholder="" value="#{SearchBean.solicitud_clases}" >
-					    	<f:validateRegex pattern="[0-9]+" />
-						</p:inputText>	
+				        
+					    	
 				          
 				        
 				        	        
@@ -162,30 +160,30 @@
 			        </p:tab>
 			    </p:accordionPanel>			
 		        
-				<p:commandButton value="Submit" icon="ui-icon-check" update="display" action = "#{SearchBean.search}"/>
+				<p:commandButton value="Submit" icon="ui-icon-check" update="display" action = "#{SearchBean.CreateSQL}"/>
 			    <h:outputText id="display" value=":D"/>
 			
 			</p:ribbonGroup>
 	    	
 	    	<p:ribbonGroup id="Resumen_Resultados" style="width:600px;height:800px;"  >
 	            
-	            <p:dataTable value="#{customer.messages}" var="o" paginator="true" rows="3"
+	            <p:dataTable value="#{result.getRecords}" var="o" paginator="true" rows="3"
                          paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                          rowsPerPageTemplate="3,5,10" widgetVar="50" style="width: 600px;" >
                 <f:facet name="header">  
                     Customer List  
                 </f:facet>
-                <p:column  sortBy="#{solicitud}">
+                <p:column  sortBy="#{numeroSolicitud}">
                     <f:facet name="header">  
                         <h:outputText value="Solicitud" />  
                     </f:facet>
-                    <h:outputText value="#{solicitud}"/>
+                    <h:outputText value="#{numeroSolicitud}"/>
                 </p:column>
-                <p:column sortBy="#{registro}">
+                <p:column sortBy="#{numeroRegistro}">
                     <f:facet name="header">  
                         <h:outputText value="Registro" />  
                     </f:facet>
-                    <h:outputText value="#{registro}"/>
+                    <h:outputText value="#{numeroRegistro}"/>
                 </p:column>
                 <p:column sortBy="#{clase}">
                     <f:facet name="header">  
@@ -193,17 +191,17 @@
                     </f:facet>
                     <h:outputText value="#{clase}"/>
                 </p:column>
-                <p:column sortBy="#{signo}">
+                <p:column sortBy="#{denominacion}">
                     <f:facet name="header">  
                         <h:outputText value="Signo" />  
                     </f:facet>
-                    <h:outputText value="#{signo}"/>
+                    <h:outputText value="#{denominacion}"/>
                 </p:column>
-                <p:column sortBy="#{titular}">
+                <p:column sortBy="#{titular_nombre}">
                     <f:facet name="header">  
                         <h:outputText value="Titular" />  
                     </f:facet>
-                    <h:outputText value="#{titular}"/>
+                    <h:outputText value="#{titular_nombre}"/>
                 </p:column>
             </p:dataTable>
 				

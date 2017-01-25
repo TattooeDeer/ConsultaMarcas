@@ -10,7 +10,7 @@ import dao.UserDAO;
 
 
 
-@ManagedBean(name="result")
+@ManagedBean(name="ResultBean")
 @SessionScoped
 public class ResultBean {
 	private String numeroSolicitud;
