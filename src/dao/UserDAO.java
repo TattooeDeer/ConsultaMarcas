@@ -23,7 +23,7 @@ public class UserDAO {
 			Statement myStmt = my_conn.createStatement();
 	
 			//Se envia la sentencia y el objeto myStmt para ser ejecutado en setMyRs()
-			setMyRs(SearchBean.getSQL_stmt(), myStmt);
+			setMyRs(SearchBean.getSqlStmt(), myStmt);
 			
 			ArrayList<ResultBean> resultados_busqueda = new ArrayList<ResultBean>();
 			

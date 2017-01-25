@@ -49,7 +49,7 @@ public class SearchBean {
 	
 	private ResultSet myRs;
 	
-	
+	private static String SqlStmt;
 	
 	/*****************CONSTRUCTOR**********************/
 	public SearchBean(){
@@ -85,20 +85,91 @@ public class SearchBean {
 		
 	}
 	
+	
+	public void CreateSQL(){
+		
+		SqlBuilder sqlBuilder = new SqlBuilder();
+		
+		sqlBuilder.SELECT_insert(getColumnas());
+		//A continuacion se agregan las reglas de relacion entre tablas de la BD
+		
+					
+		//Opcion Busqueda No.
+		if(getOpcion_busqueda().equals("No. Solicitud")){
 
-	/*Hay que hacer multiples JOINS
-	 * SELECT t.nombre, p.descripcion, r.nombre, s.numerosolicitud 
-	 * FROM solicitud s
-	 *	JOIN titular t
-     *		ON s.numerosolicitud = t.numerosolicitud
-     *  JOIN representante r
-     *		ON s.numerosolicitud = r.numerosolicitud
-	 *	JOIN pais p
-     *		ON t.idpais = p.id
-     *	JOIN pais pa
-     *		ON r.idpais = pa.id
-	 *	WHERE p.descripcion = 'COLOMBIA';
-	 */
+			sqlBuilder.WHERE_insert("solicitud.numerosolicitud",getInput_busqueda());
+			sqlBuilder.FROM_insert("solicitud");
+			}
+			
+		else if(getOpcion_busqueda().equals("No. Registro")){
+			
+			sqlBuilder.FROM_insert("solicitud");
+			sqlBuilder.WHERE_insert("solicitud.numeroregistro", getInput_busqueda());
+			}
+		else if(getOpcion_busqueda().equals("No. Anotacion")){
+			sqlBuilder.FROM_insert("anotacion");
+			sqlBuilder.WHERE_insert("anotacion.numeroinapi", getInput_busqueda());
+			sqlBuilder.FROM_JOIN("solicitud", "solicitud.numerosolicitud", "anotacion.numerosolicitud", "JOIN");
+		}
+		else{
+			sqlBuilder.FROM_insert("solicitud");
+		}
+		
+		
+		//Opcion Signo
+		if(getOpcion_busqueda().equals("que_contenga")){
+				sqlBuilder.WHERE_insert("solicitud.denominacion", "%"+getInput_signo()+"%");
+
+			}
+			
+		else if(getOpcion_busqueda().equals("exactamente")){
+				sqlBuilder.WHERE_insert("solicitud.denominacion", getInput_signo());
+			}
+		else if(getOpcion_busqueda().equals("que_empiece")){
+				sqlBuilder.WHERE_insert("solicitud.denominacion", getInput_signo()+"%");
+			
+		}
+		else if(getOpcion_busqueda().equals("que_termine")){
+				sqlBuilder.WHERE_insert("solicitud.denominacion", "%"+getInput_signo());
+		}
+
+		//Puesto que realizaremos varios JOINS, insertamos solo una tabla: solicitud
+		sqlBuilder.FROM_JOIN("titular", "solicitud.numerosolicitud", "titular.numerosolicitud", "JOIN");
+		//sqlBuilder.FROM_JOIN("anotacion", "solicitud.numerosolicitud", "anotacion.numerosolicitud", "JOIN");
+		sqlBuilder.FROM_JOIN("representante", "solicitud.numerosolicitud", "representante.numerosolicitud", "JOIN");
+		sqlBuilder.FROM_JOIN("pais", "titular.idpais", "pais.id", "JOIN");
+		sqlBuilder.FROM_JOIN("pais pa", "pa.id", "representante.idpais", "JOIN");
+		sqlBuilder.FROM_JOIN("categoria", "categoria.id", "solicitud.categoriaid", "JOIN");
+		sqlBuilder.FROM_JOIN("tipomarca", "tipomarca.id", "solicitud.tipomarcaid", "JOIN");
+		sqlBuilder.FROM_JOIN("estado", "estado.id", "solicitud.estadoid", "JOIN");
+		sqlBuilder.FROM_JOIN("instancia", "instancia.numerosolicitud", "solicitud.numerosolicitud", "JOIN");
+		sqlBuilder.FROM_JOIN("estadoinstancia", "estadoinstancia.id", "instancia.estadoinstanciaid", "JOIN");
+		sqlBuilder.FROM_JOIN("comuna", "comuna.id", "titular.idcomuna", "JOIN");
+		sqlBuilder.FROM_JOIN("comuna co", "co.id", "representante.idcomuna", "JOIN");
+
+			
+			//TODO: hay que ver como meterlo en una busqueda separada para que no deje la caga
+			//case("No. Anotacion")
+		
+		
+		//TODO: hay que modificar la implementacion de WHERE_insert de forma, hacerlo implementando otro metodo WHERE
+		//sqlBuilder.WHERE_insert("solicitud.fechapresentacion", solicitud_fechaPresentacion_desde);
+		
+		sqlBuilder.WHERE_insert("tipomarca.id", getTipoMarca_id());
+		sqlBuilder.WHERE_insert("cobertura.id", getCobertura_id());
+		sqlBuilder.WHERE_insert("estado.id", getEstado_id());
+		sqlBuilder.WHERE_insert("representante.rut", getRepresentante_rut());
+		sqlBuilder.WHERE_insert("titular.rut", getTitular_rut());
+		sqlBuilder.WHERE_insert("categoria.id", getCategoria_id());
+		sqlBuilder.WHERE_OVERLAP(getSolicitud_fechaPresentacion_desde(), getSolicitud_fechaPresentacion_hasta(), "solicitud.fechapresentacion");
+		sqlBuilder.WHERE_OVERLAP(getSolicitud_fechaPublicacion_desde(), getSolicitud_fechaPublicacion_hasta(), "solicitud.fechapublicacion");
+		sqlBuilder.WHERE_OVERLAP(getSolicitud_fechaRegistro_desde(), getSolicitud_fechaRegistro_hasta(), "solicitud.fecharegistro");
+		
+		//Armamos la query final
+		setSqlStmt(sqlBuilder.buildQuery());
+
+	}
+	
 	
 	
 	//METODO DE BUSQUEDA PRINCIPAL, a este se debe llamar desde la vista cuando el usuario envia el formulario
@@ -394,6 +465,16 @@ public class SearchBean {
 	}
 	public ResultSet getMyRs() {
 		return this.myRs;
+	}
+
+
+	public static String getSqlStmt() {
+		return SqlStmt;
+	}
+
+
+	public void setSqlStmt(String sQL_stmt) {
+		SqlStmt = sQL_stmt;
 	}
 
 	
