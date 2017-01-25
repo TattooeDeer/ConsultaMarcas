@@ -37,17 +37,15 @@
 				<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
 		    	
 		    		<p:outputLabel for="input0" value="Nombre Marca: " />
-					<p:inputText id="input0" placeholder="" value="#{SearchBean.input_signo}" >
-						<f:validateRegex pattern="\b" />	
-				    </p:inputText>
+					<p:inputText id="input0" placeholder="" value="#{SearchBean.input_signo}" />
 					
 				   	<p:outputLabel for="console" value="Buscar por:" />
-		        	<p:selectOneRadio id="console" value="#{SearchBean.opcion_signo}" layout="grid" columns="2">
+		        	<p:selectOneMenu id="console" value="#{SearchBean.opcion_signo}" layout="grid" columns="2">
 		           		<f:selectItem itemLabel="exactamente" itemValue="exactamente" />
 		           		<f:selectItem itemLabel="que contenga" itemValue="que_contenga" />
 		           		<f:selectItem itemLabel="que empiece" itemValue="que_empiece" />
 		           		<f:selectItem itemLabel="que termine" itemValue="que_termine" />
-		        	</p:selectOneRadio>	
+		        	</p:selectOneMenu>	
 				</h:panelGrid>        	
 		        			
 		        <p:accordionPanel multiple="true">
