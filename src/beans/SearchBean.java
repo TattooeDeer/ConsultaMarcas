@@ -119,20 +119,25 @@ public class SearchBean {
 		
 		
 		//Opcion Signo
-		if(getOpcion_busqueda().equals("que_contenga")){
+		System.out.println(getOpcion_signo());
+		if(getOpcion_signo().equals("que_contenga")){
 				sqlBuilder.WHERE_insert("solicitud.denominacion", "%"+getInput_signo()+"%");
+				System.out.println("\nque contenga: \n"+sqlBuilder.getWHERE_stmt());
 
 			}
 			
-		else if(getOpcion_busqueda().equals("exactamente")){
+		else if(getOpcion_signo().equals("exactamente")){
 				sqlBuilder.WHERE_insert("solicitud.denominacion", getInput_signo());
+				System.out.println("\nexactamente: \n"+sqlBuilder.getWHERE_stmt());
 			}
-		else if(getOpcion_busqueda().equals("que_empiece")){
+		else if(getOpcion_signo().equals("que_empiece")){
 				sqlBuilder.WHERE_insert("solicitud.denominacion", getInput_signo()+"%");
+				System.out.println("\nque empiece: \n"+sqlBuilder.getWHERE_stmt());
 			
 		}
-		else if(getOpcion_busqueda().equals("que_termine")){
+		else if(getOpcion_signo().equals("que_termine")){
 				sqlBuilder.WHERE_insert("solicitud.denominacion", "%"+getInput_signo());
+				System.out.println("\nque termine: \n"+sqlBuilder.getWHERE_stmt());
 		}
 
 		//Puesto que realizaremos varios JOINS, insertamos solo una tabla: solicitud
