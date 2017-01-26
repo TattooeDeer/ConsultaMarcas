@@ -23,6 +23,7 @@ public class UserDAO {
 			Statement myStmt = my_conn.createStatement();
 	
 			//Se envia la sentencia y el objeto myStmt para ser ejecutado en setMyRs()
+			System.out.print("\nAqui hay: "+SearchBean.getSqlStmt());
 			setMyRs(SearchBean.getSqlStmt(), myStmt);
 			
 			ArrayList<ResultBean> resultados_busqueda = new ArrayList<ResultBean>();
@@ -68,6 +69,7 @@ public class UserDAO {
 			
 	}
 
+	
 	public ResultSet getMyRs() {
 		return myRs;
 	}

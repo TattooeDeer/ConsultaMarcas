@@ -10,7 +10,7 @@ import dao.UserDAO;
 
 
 
-@ManagedBean(name="ResultBean")
+@ManagedBean(name = "result")
 @SessionScoped
 public class ResultBean {
 	private String numeroSolicitud;
@@ -30,7 +30,10 @@ public class ResultBean {
 	private String observacionInstancia;
 	private String categoria;
 	private String tipoMarca;
+	private ArrayList<ResultBean> records;
 	
+	
+
 	public ArrayList<ResultBean> getRecords(){
 		return UserDAO.getData();
 		

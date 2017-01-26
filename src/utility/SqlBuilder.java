@@ -95,14 +95,12 @@ public class SqlBuilder {
 	}
 	
 	
-	public String buildQuery(){
+	public void buildQuery(){
 		//Simplemente se arma la query
 		AddFinal_stmt(getSELECT_stmt());
 		AddFinal_stmt(getFROM_stmt());
 		AddFinal_stmt(getWHERE_stmt());
 		AddFinal_stmt(" LIMIT 50;");
-		
-		return getFinal_stmt();
 	}
 		
 		

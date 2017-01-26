@@ -83,7 +83,7 @@ public class SearchBean {
 				+ "instancia.observacion, categoria.descripcion, tipomarca.descripcion");
 		setOpcion_busqueda("");
 		setInput_busqueda("");
-		
+		setSqlStmt("");
 		
 	}
 	
@@ -170,8 +170,10 @@ public class SearchBean {
 		
 		//Armamos la query final
 		
-		setSqlStmt(sqlBuilder.buildQuery());
-		System.out.println(sqlBuilder.getFinal_stmt());
+		System.out.println("\nEsto es: " + sqlBuilder.getFinal_stmt());
+		sqlBuilder.buildQuery();
+		setSqlStmt(sqlBuilder.getFinal_stmt());
+		
 		
 
 	}
