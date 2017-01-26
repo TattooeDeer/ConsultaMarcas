@@ -20,7 +20,16 @@ public class ResultBean {
 	private String titular_nombre;
 	private String titular_pais;
 	private String representante_nombre;
-	
+	private String estadoSolicitud;
+	private String fechaPresentacion;
+	private String fechaPublicacion;
+	private String titular_comuna;
+	private String fechaInstancia;
+	private String fechaVencimiento;
+	private String estadoInstancia;
+	private String observacionInstancia;
+	private String categoria;
+	private String tipoMarca;
 	
 	public ArrayList<ResultBean> getRecords(){
 		return UserDAO.getData();
@@ -130,16 +139,7 @@ public class ResultBean {
 	public void setTipoMarca(String tipoMarca) {
 		this.tipoMarca = tipoMarca;
 	}
-	private String estadoSolicitud;
-	private String fechaPresentacion;
-	private String fechaPublicacion;
-	private String titular_comuna;
-	private String fechaInstancia;
-	private String fechaVencimiento;
-	private String estadoInstancia;
-	private String observacionInstancia;
-	private String categoria;
-	private String tipoMarca;
+	
 	
 	
 }
