@@ -171,41 +171,41 @@
 	    	
 	    	<p:ribbonGroup id="Resumen_Resultados" style="width:600px;height:800px;"  >
 	            
-	            <p:dataTable value="#{result.getRecords}" var="o" paginator="true" rows="3"
+	            <p:dataTable value="#{ResultBean.getRecords}" var="o" paginator="true" rows="3"
                          paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                          rowsPerPageTemplate="3,5,10" widgetVar="50" style="width: 600px;" >
                 <f:facet name="header">  
                     Customer List  
                 </f:facet>
-                <p:column  sortBy="#{numeroSolicitud}">
+                <p:column  sortBy="#{o.numeroSolicitud}">
                     <f:facet name="header">  
                         <h:outputText value="Solicitud" />  
                     </f:facet>
-                    <h:outputText value="#{numeroSolicitud}"/>
+                    <h:outputText value="#{o.numeroSolicitud}"/>
                 </p:column>
-                <p:column sortBy="#{numeroRegistro}">
+                <p:column sortBy="#{o.numeroRegistro}">
                     <f:facet name="header">  
                         <h:outputText value="Registro" />  
                     </f:facet>
-                    <h:outputText value="#{numeroRegistro}"/>
+                    <h:outputText value="#{o.numeroRegistro}"/>
                 </p:column>
-                <p:column sortBy="#{clase}">
+                <p:column sortBy="#{o.clase}">
                     <f:facet name="header">  
                         <h:outputText value="Clase" />  
                     </f:facet>
-                    <h:outputText value="#{clase}"/>
+                    <h:outputText value="#{o.clase}"/>
                 </p:column>
-                <p:column sortBy="#{denominacion}">
+                <p:column sortBy="#{o.denominacion}">
                     <f:facet name="header">  
                         <h:outputText value="Signo" />  
                     </f:facet>
-                    <h:outputText value="#{denominacion}"/>
+                    <h:outputText value="#{o.denominacion}"/>
                 </p:column>
-                <p:column sortBy="#{titular_nombre}">
+                <p:column sortBy="#{o.titular_nombre}">
                     <f:facet name="header">  
                         <h:outputText value="Titular" />  
                     </f:facet>
-                    <h:outputText value="#{titular_nombre}"/>
+                    <h:outputText value="#{o.titular_nombre}"/>
                 </p:column>
             </p:dataTable>
 				
@@ -217,33 +217,33 @@
 	    		<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
 	    		
 		    		<p:outputLabel value="Numero de Solicitud:" />
-		    		<h:outputText  value="numeroSolicitud" />
+		    		<h:outputText  value="#{ResultBean.numeroSolicitud}" />
 		    		    		
 		    		<p:outputLabel value="Numero de Registro:" />	    		
-		    		<h:outputText  value="numeroRegistro" /> 	
+		    		<h:outputText  value="#{ResultBean.numeroRegistro}" /> 	
 		    			
 		    		<p:outputLabel value="Estado:" />
-		    		<h:outputText  value=" " />
+		    		<h:outputText  value="#{ResultBean.estadoInstancia}" />
 		    			    		
 		    		<p:outputLabel value="Fecha de Presentacion:" />
-		    		<h:outputText  value=" " />
+		    		<h:outputText  value="#{ResultBean.fechaPresentacion}" />
 		    		
 		    		<p:outputLabel value="Fecha de Publicacion:" />	    		
-		    		<h:outputText  value=" " />
+		    		<h:outputText  value="#{ResultBean.fechaPublicacion}" />
 		    		
-		    		<p:outputLabel value="Fecha de Vigencia:" />
-		    		<h:outputText  value=" " />
+		    		<p:outputLabel value="Fecha de Vencimiento/Vigencia(?):" />
+		    		<h:outputText  value="#{ResultBean.fechaVencimiento}" />
 	    		
 	    		</h:panelGrid>
-	    		
-	    		<h3>Titular(es)/Solicitante(s)</h3>
+			
+			<h3>Titular(es)/Solicitante(s)</h3>
 	    		<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
 	    		
 		    		<p:outputLabel value="Nombre/Razon Solcial:" />	
-		    		<h:outputText  value="titular_nombre" />
+		    		<h:outputText  value="#{ResultBean.titular_nombre}" />
 		    		
 		    		<p:outputLabel value="Pais:" />		    		
-		    		<h:outputText  value="titular_pais" />
+		    		<h:outputText  value="#{ResultBean.titular_pais}" />
 	    		
 	    		</h:panelGrid>
 	    			    		
@@ -251,26 +251,26 @@
 	            <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
 	            
 		            <p:outputLabel value="Nombre/Razon Solcial:" />	
-		    		<h:outputText  value="representante_nombre" />
+		    		<h:outputText  value="#{ResultBean.representante_nombre}" />
 		    		
 		    		<p:outputLabel value="Pais:" />		    		
-		    		<h:outputText  value=" " />
+		    		<h:outputText  value="representante pais" />
 	            </h:panelGrid>
 	            
 	    		<h3>Signo</h3>
 	    		<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
 	    		
 		    		<p:outputLabel value="Tipo:" />	
-		    		<h:outputText  value="numeroSolicitud" />
+		    		<h:outputText  value="#{ResultBean.tipoMarca}" />
 		    		
 		    		<p:outputLabel value="Signo:" />	
-		    		<h:outputText  value="denominacion" />
+		    		<h:outputText  value="#{ResultBean.denominacion}" />
 		    		
 		    		<p:outputLabel value="Proteccion:" />
 		    		<h:outputText  value=" " />
 		    		
 		    		<p:outputLabel value="Clase:" />
-		    		<h:outputText  value="clase" />
+		    		<h:outputText  value="#{ResultBean.clase}" />
 	    		
 	    		</h:panelGrid>
 	    		
@@ -281,6 +281,24 @@
 	    		<h3>Anotacion</h3>	
 	            <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
 	            </h:panelGrid>
+	            
+	            
+	            
+	            
+	            
+	            
+	            
+	          
+	            
+	            
+	            
+	            
+	            
+	            
+	            
+	            
+	            
+	            
 
 	    	</p:ribbonGroup>
     	</p:tab>
@@ -290,66 +308,6 @@
 
 </h:form>    
 
-</html>
- 		<h:outputText  value=" " />
-		    		
-		    		<p:outputLabel value="Fecha de Vigencia:" />
-		    		<h:outputText  value=" " />
-	    		
-	    		</h:panelGrid>
-	    		
-	    		<h3>Titular(es)/Solicitante(s)</h3>
-	    		<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
-	    		
-		    		<p:outputLabel value="Nombre/Razon Solcial:" />	
-		    		<h:outputText  value="titular_nombre" />
-		    		
-		    		<p:outputLabel value="Pais:" />		    		
-		    		<h:outputText  value="titular_pais" />
-	    		
-	    		</h:panelGrid>
-	    			    		
-	    		<h3>Representante</h3>
-	            <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
-	            
-		            <p:outputLabel value="Nombre/Razon Solcial:" />	
-		    		<h:outputText  value="representante_nombre" />
-		    		
-		    		<p:outputLabel value="Pais:" />		    		
-		    		<h:outputText  value=" " />
-	            </h:panelGrid>
-	            
-	    		<h3>Signo</h3>
-	    		<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
-	    		
-		    		<p:outputLabel value="Tipo:" />	
-		    		<h:outputText  value="numeroSolicitud" />
-		    		
-		    		<p:outputLabel value="Signo:" />	
-		    		<h:outputText  value="denominacion" />
-		    		
-		    		<p:outputLabel value="Proteccion:" />
-		    		<h:outputText  value=" " />
-		    		
-		    		<p:outputLabel value="Clase:" />
-		    		<h:outputText  value="clase" />
-	    		
-	    		</h:panelGrid>
-	    		
-	    		<h3>Instancias Administrativas</h3>	
-	            <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
-	            </h:panelGrid>
-	    		
-	    		<h3>Anotacion</h3>	
-	            <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
-	            </h:panelGrid>
-
-	    	</p:ribbonGroup>
-    	</p:tab>
-    </p:ribbon>
- 
-
-
-</h:form>    
+  
 
 </html>
