@@ -5,16 +5,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 
 import Connection.conexion;
-import beans.ResultBean;
+import beans.FilaReporte;
 import beans.SearchBean;
 
 public class UserDAO {
 	
 	private static ResultSet myRs;
  
-	public static ArrayList<ResultBean> getData(){
+	public static List<FilaReporte> buildReport(){
 		try {
 			//Creamos la conexion a la BD
 			Connection my_conn;
@@ -26,11 +27,11 @@ public class UserDAO {
 			System.out.print("\nAqui hay: "+SearchBean.getSqlStmt());
 			setMyRs(SearchBean.getSqlStmt(), myStmt);
 			
-			ArrayList<ResultBean> resultados_busqueda = new ArrayList<ResultBean>();
+			List<FilaReporte> resultados_busqueda = new ArrayList<FilaReporte>();
 			
 			boolean found = false;
 			while(myRs.next()){
-				ResultBean r = new ResultBean();
+				FilaReporte r = new FilaReporte();
 				
 				r.setTitular_nombre(myRs.getString(1));
 				r.setTitular_pais(myRs.getString(2));
@@ -48,6 +49,7 @@ public class UserDAO {
 				r.setCategoria(myRs.getString(14));
 				r.setTipoMarca(myRs.getString(15));
 				
+				resultados_busqueda.add(r);
 				found = true;
 			}
 			//Cerramos la conexion...
@@ -55,7 +57,7 @@ public class UserDAO {
 			if (found) {
                 return resultados_busqueda;
             } else {
-                return null; // no entires found
+                return resultados_busqueda; // no entires found
             }
 			
 			

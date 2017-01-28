@@ -4,10 +4,13 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
 import Connection.conexion;
+import dao.UserDAO;
 import utility.SqlBuilder;
 
 import java.lang.String;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 
@@ -52,6 +55,12 @@ public class SearchBean {
 	private ResultSet myRs;
 	
 	private static String SqlStmt;
+	
+	private List<FilaReporte> records = new ArrayList<FilaReporte>();
+
+	public List<FilaReporte> getRecords() {
+		return records;		
+	}
 	
 	/*****************CONSTRUCTOR**********************/
 	public SearchBean(){
@@ -178,7 +187,10 @@ public class SearchBean {
 
 	}
 	
-	
+	public void search2() {
+		CreateSQL();
+        records = UserDAO.buildReport();
+	}
 	
 	//METODO DE BUSQUEDA PRINCIPAL, a este se debe llamar desde la vista cuando el usuario envia el formulario
 	public String search(){

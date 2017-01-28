@@ -155,7 +155,7 @@
 			        </p:tab>
 			    </p:accordionPanel>			
 		        
-				<p:commandButton value="Submit" icon="ui-icon-check" update="display" action = "#{SearchBean.CreateSQL}"/>
+				<p:commandButton value="Submit" icon="ui-icon-check" update="display" action = "#{SearchBean.search2}" inmediate="true"/>
 			    <h:outputText id="display" value=":)"/>
 			
 			</p:ribbonGroup>
@@ -172,7 +172,7 @@
 	    	<p:ribbonGroup id="Resumen_Resultados" style="width:600px;height:800px;"  >
 	            
 	            
-	            <p:dataTable value="#{result.records}" var="o" paginator="true" rows="3"
+	            <p:dataTable value="#{SearchBean.records}" var="o" paginator="true" rows="3"
                          paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                          rowsPerPageTemplate="3,5,10" widgetVar="50" style="width: 600px;">
                 <f:facet name="header">  

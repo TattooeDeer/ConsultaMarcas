@@ -1,18 +1,6 @@
 package beans;
 
-import java.util.ArrayList;
-
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
-
-import dao.UserDAO;
-
-
-
-
-@ManagedBean(name = "result")
-@SessionScoped
-public class ResultBean {
+public class FilaReporte {
 	private String numeroSolicitud;
 	private String numeroRegistro;
 	private String clase;
@@ -30,16 +18,7 @@ public class ResultBean {
 	private String observacionInstancia;
 	private String categoria;
 	private String tipoMarca;
-	private ArrayList<ResultBean> records;
-	
-	
 
-	public ArrayList<ResultBean> getRecords(){
-		return UserDAO.getData();
-		
-	}
-	
-	
 	public String getNumeroSolicitud() {
 		return numeroSolicitud;
 	}
