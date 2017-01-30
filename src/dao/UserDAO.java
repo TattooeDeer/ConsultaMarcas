@@ -24,7 +24,7 @@ public class UserDAO {
 			Statement myStmt = my_conn.createStatement();
 	
 			//Se envia la sentencia y el objeto myStmt para ser ejecutado en setMyRs()
-			System.out.print("\nAqui hay: "+SearchBean.getSqlStmt());
+			System.out.print("\nOrigen:UserDAO, SqlStmt(SearchBean): "+SearchBean.getSqlStmt());
 			setMyRs(SearchBean.getSqlStmt(), myStmt);
 			
 			List<FilaReporte> resultados_busqueda = new ArrayList<FilaReporte>();
@@ -48,6 +48,10 @@ public class UserDAO {
 				r.setObservacionInstancia(myRs.getString(13));
 				r.setCategoria(myRs.getString(14));
 				r.setTipoMarca(myRs.getString(15));
+
+				System.out.println(r.getTitular_nombre()+"\n"+r.getTitular_pais()+"\n"+r.getTitular_comuna()+"\n"+r.getRepresentante_nombre()+"\n"+r.getNumeroSolicitud()+"\n"+r.getNumeroRegistro()+"\n"+r.getEstadoSolicitud()+"\n"+r.getFechaPresentacion()+"\n"+r.getFechaPublicacion()+"\n"+r.getFechaInstancia()+"\n"+r.getFechaVencimiento()+"\n"+r.getEstadoInstancia()+"\n"+r.getObservacionInstancia()+"\n"+r.getCategoria()+"\n"+r.getTipoMarca());
+				
+				
 				
 				resultados_busqueda.add(r);
 				found = true;

@@ -45,49 +45,7 @@
 					</p:tab>
 			
 			
-			        <p:tab title="Buscar por Fecha">
-			            <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5"> 
-					
-							<p:outputLabel value="Fecha de presentacion" />
-							<p:outputLabel value=":" />
-							
-							<p:outputLabel for="mask1" value="desde" />
-				        	<p:calendar id="mask1" value="#{SearchBean.solicitud_fechaPresentacion_desde}" pattern="dd-MM-yyyy" mask="true" >
-				 				<f:validateRegex pattern="99-99-9999" />
-				        	</p:calendar>
-				 			
-				 			<p:outputLabel for="mask2" value="hasta" />
-				        	<p:calendar id="mask2" value="#{SearchBean.solicitud_fechaPresentacion_hasta}" pattern="dd-MM-yyyy" mask="true" >
-				 				<f:validateRegex pattern="99-99-9999" />
-				        	</p:calendar>
-				 			
-				 			<p:outputLabel value="Fecha de publicacion" />
-							<p:outputLabel value=":" />
-							
-							<p:outputLabel for="mask3" value="desde" />
-				        	<p:calendar id="mask3" value="#{SearchBean.solicitud_fechaPublicacion_desde}" pattern="dd-MM-yyyy" mask="true" >
-				 				<f:validateRegex pattern="99-99-9999" />
-				        	</p:calendar>
-				 			
-				 			<p:outputLabel for="mask4" value="hasta" />
-				        	<p:calendar id="mask4" value="#{SearchBean.solicitud_fechaPublicacion_hasta}" pattern="dd-MM-yyyy" mask="true" >
-				 				<f:validateRegex pattern="99-99-9999" />
-				        	</p:calendar>
-				 			
-				 			<p:outputLabel value="Fecha de regristro" />
-							<p:outputLabel value=":" />
-							
-							<p:outputLabel for="mask5" value="desde" />
-				        	<p:calendar id="mask5" value="#{SearchBean.solicitud_fechaRegistro_desde}" pattern="dd-MM-yyyy" mask="true" >
-				 				<f:validateRegex pattern="99-99-9999" />
-				        	</p:calendar>
-				        	
-				 			<p:outputLabel for="mask6" value="hasta" />
-				        	<p:calendar id="mask6" value="#{SearchBean.solicitud_fechaRegistro_hasta}" pattern="dd-MM-yyyy" mask="true" >
-				        		<f:validateRegex pattern="99-99-9999" />
-				        	</p:calendar>
-				 		</h:panelGrid>    
-			        </p:tab>
+			       
 			        
 			        
 			        <p:tab title="Tipo">
@@ -160,19 +118,11 @@
 			
 			</p:ribbonGroup>
 	    	
-	    	
-	    	
-	    	
-	    	
-	    	
-	    	
-	    	
-	    	
-	    	
+	        	
 	    	<p:ribbonGroup id="Resumen_Resultados" style="width:600px;height:800px;"  >
 	            
 	            
-	            <p:dataTable value="#{SearchBean.records}" var="o" paginator="true" rows="3"
+	            <p:dataTable inmediate="true" value="#{SearchBean.records}" var="o" paginator="true" rows="3"
                          paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                          rowsPerPageTemplate="3,5,10" widgetVar="50" style="width: 600px;">
                 <f:facet name="header">  
@@ -218,22 +168,22 @@
 	    		<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
 	    		
 		    		<p:outputLabel value="Numero de Solicitud:" />
-		    		<h:outputText  value="#{ResultBean.numeroSolicitud}" />
+		    		<h:outputText  value="numeroSolicitud" />
 		    		    		
 		    		<p:outputLabel value="Numero de Registro:" />	    		
-		    		<h:outputText  value="#{ResultBean.numeroRegistro}" /> 	
+		    		<h:outputText  value="numeroRegistro" /> 	
 		    			
 		    		<p:outputLabel value="Estado:" />
-		    		<h:outputText  value="#{ResultBean.estadoInstancia}" />
+		    		<h:outputText  value="estadoInstancia" />
 		    			    		
 		    		<p:outputLabel value="Fecha de Presentacion:" />
-		    		<h:outputText  value="#{ResultBean.fechaPresentacion}" />
+		    		<h:outputText  value="fechaPresentacion" />
 		    		
 		    		<p:outputLabel value="Fecha de Publicacion:" />	    		
-		    		<h:outputText  value="#{ResultBean.fechaPublicacion}" />
+		    		<h:outputText  value="fechaPublicacion" />
 		    		
 		    		<p:outputLabel value="Fecha de Vencimiento/Vigencia(?):" />
-		    		<h:outputText  value="#{ResultBean.fechaVencimiento}" />
+		    		<h:outputText  value="fechaVencimiento" />
 	    		
 	    		</h:panelGrid>
 			
@@ -241,10 +191,10 @@
 	    		<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
 	    		
 		    		<p:outputLabel value="Nombre/Razon Solcial:" />	
-		    		<h:outputText  value="#{ResultBean.titular_nombre}" />
+		    		<h:outputText  value="titular_nombre" />
 		    		
 		    		<p:outputLabel value="Pais:" />		    		
-		    		<h:outputText  value="#{ResultBean.titular_pais}" />
+		    		<h:outputText  value="titular_pais" />
 	    		
 	    		</h:panelGrid>
 	    			    		
@@ -252,7 +202,7 @@
 	            <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
 	            
 		            <p:outputLabel value="Nombre/Razon Solcial:" />	
-		    		<h:outputText  value="#{ResultBean.representante_nombre}" />
+		    		<h:outputText  value="representante_nombre" />
 		    		
 		    		<p:outputLabel value="Pais:" />		    		
 		    		<h:outputText  value="representante pais" />
@@ -262,16 +212,16 @@
 	    		<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
 	    		
 		    		<p:outputLabel value="Tipo:" />	
-		    		<h:outputText  value="#{ResultBean.tipoMarca}" />
+		    		<h:outputText  value="tipoMarca" />
 		    		
 		    		<p:outputLabel value="Signo:" />	
-		    		<h:outputText  value="#{ResultBean.denominacion}" />
+		    		<h:outputText  value="denominacion" />
 		    		
 		    		<p:outputLabel value="Proteccion:" />
 		    		<h:outputText  value=" " />
 		    		
 		    		<p:outputLabel value="Clase:" />
-		    		<h:outputText  value="#{ResultBean.clase}" />
+		    		<h:outputText  value="clase" />
 	    		
 	    		</h:panelGrid>
 	    		

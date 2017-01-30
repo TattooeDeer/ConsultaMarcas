@@ -16,6 +16,7 @@ import java.util.List;
 
 
 
+
 /*****
  * Esta clase es basicamente un 'queryBean' 2.0, con una implementacion mas
  * sencilla y reducida, acotada a la vista entregada
@@ -23,7 +24,7 @@ import java.util.List;
 
 @ManagedBean(name="SearchBean")
 @SessionScoped
-public class SearchBean {
+public class SearchBean{
 	//El formato de los atributos es (excepto en los atributos de opcion_busqueda e input_busqueda): tabla_atributo
 	private String opcion_busqueda;
 	private String input_busqueda;
@@ -93,7 +94,16 @@ public class SearchBean {
 		setOpcion_busqueda("");
 		setInput_busqueda("");
 		setSqlStmt("");
+		setOpcion_signo("");
+		/*
 		
+		setSolicitud_fechaPresentacion_desde("1989-03-22");
+		setSolicitud_fechaPublicacion_desde("2013-08-22");
+		setSolicitud_fechaRegistro_desde("2003-04-23");
+		setSolicitud_fechaPresentacion_hasta("2017-01-30");
+		setSolicitud_fechaPublicacion_hasta("2017-01-30");
+		setSolicitud_fechaRegistro_hasta("2017-01-30");
+		*/
 	}
 	
 	
@@ -105,7 +115,6 @@ public class SearchBean {
 		//A continuacion se agregan las reglas de relacion entre tablas de la BD
 		
 		//Opcion Signo
-		System.out.println(getOpcion_signo());
 		if(getOpcion_signo().equals("que_contenga")){
 			sqlBuilder.WHERE_LIKE("solicitud.denominacion", "%"+getInput_signo()+"%");		
 		}
@@ -173,13 +182,14 @@ public class SearchBean {
 		sqlBuilder.WHERE_insert("representante.rut", getRepresentante_rut());
 		sqlBuilder.WHERE_insert("titular.rut", getTitular_rut());
 		sqlBuilder.WHERE_insert("categoria.id", getCategoria_id());
+		/*
 		sqlBuilder.WHERE_OVERLAP(getSolicitud_fechaPresentacion_desde(), getSolicitud_fechaPresentacion_hasta(), "solicitud.fechapresentacion");
 		sqlBuilder.WHERE_OVERLAP(getSolicitud_fechaPublicacion_desde(), getSolicitud_fechaPublicacion_hasta(), "solicitud.fechapublicacion");
 		sqlBuilder.WHERE_OVERLAP(getSolicitud_fechaRegistro_desde(), getSolicitud_fechaRegistro_hasta(), "solicitud.fecharegistro");
-		
+		*/
 		//Armamos la query final
 		
-		System.out.println("\nEsto es: " + sqlBuilder.getFinal_stmt());
+		
 		sqlBuilder.buildQuery();
 		setSqlStmt(sqlBuilder.getFinal_stmt());
 		
