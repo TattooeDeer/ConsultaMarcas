@@ -14,8 +14,10 @@ import org.primefaces.event.UnselectEvent;
 @ManagedBean(name="SelectionView")
 @ViewScoped
 public class SelectionView implements Serializable {
-
+	
 	private FilaReporte selectedRow;
+	
+	
 	
 	public FilaReporte getSelectedRow() {
         return selectedRow;
@@ -25,9 +27,9 @@ public class SelectionView implements Serializable {
     }
 	
 	public void onRowSelect(SelectEvent event) {
-        FacesMessage msg = new FacesMessage("Fila Seleccionada", ((FilaReporte) event.getObject()).getNumeroSolicitud());
-        FacesContext.getCurrentInstance().addMessage(null, msg);
-    }
+		FilaReporte selecedRow = ((FilaReporte) event.getObject());
+		setSelectedRow(selectedRow);
+	}
 	
 	
 }
