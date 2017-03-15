@@ -124,10 +124,11 @@
 	            
 	            <p:dataTable inmediate="true" value="#{SearchBean.records}" var="o" paginator="true" rows="3"
                          paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                         rowsPerPageTemplate="3,5,10" widgetVar="50" style="width: 600px;">
+                         rowsPerPageTemplate="3,5,10" widgetVar="50" style="width: 600px;" selectionmode="single" selection="#{dtSelectionView.selectedRow}" rowkey="#{FilaReporte.numeroSolicitud}">
                 <f:facet name="header">  
                     Customer List  
                 </f:facet>
+                <p:ajax event="rowSelect" update=":Detalles_Resultado" /> 
                 <p:column  sortBy="#{o.numeroSolicitud}">
                     <f:facet name="header">  
                         <h:outputText value="Solicitud" />  
@@ -158,24 +159,20 @@
                     </f:facet>
                     <h:outputText value="#{o.titular_nombre}"/>
                 </p:column>
-                <p:column>
-                    <f:facet name="header">  
-                        <h:outputText value="Detalles" />  
-                    </f:facet>
-                    <h:commandLink action="edit" actionListener="#{o.}"] value="Ver mas"/>
-                </p:column>
+                
                 
             </p:dataTable>
 				
 
 	    	</p:ribbonGroup>
 	    	
-	    	<p:ribbonGroup id="Detalles_Resultado" style="width:400px;height:800px;">
+	    	<p:ribbonGroup id="Detalles_Resultado" style="width:400px;height:800px;>
+	    	
 	    		<h3>Marca/Establecimiento Comercial</h3>
 	    		<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
 	    		
 		    		<p:outputLabel value="Numero de Solicitud:" />
-		    		<h:outputText  value="numeroSolicitud" />
+		    		<h:outputText  value="#{SelectionView.numeroSolicitud}" />
 		    		    		
 		    		<p:outputLabel value="Numero de Registro:" />	    		
 		    		<h:outputText  value="numeroRegistro" /> 	
@@ -198,10 +195,10 @@
 	    		<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
 	    		
 		    		<p:outputLabel value="Nombre/Razon Solcial:" />	
-		    		<h:outputText  value="titular_nombre" />
+		    		<h:outputText  value="#{FilaReporte.titular_nombre}" />
 		    		
 		    		<p:outputLabel value="Pais:" />		    		
-		    		<h:outputText  value="titular_pais" />
+		    		<h:outputText  value="#{FilaReporte.titular_pais}" />
 	    		
 	    		</h:panelGrid>
 	    			    		
