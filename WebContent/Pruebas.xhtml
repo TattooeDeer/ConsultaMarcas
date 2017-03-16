@@ -7,13 +7,10 @@
 </h:head>
 
 <h:form>
-	
 	<p:ribbon>
     	<p:tab title="Busqueda Administrativa"  >
 	        <p:ribbonGroup id="Buscador"  style="width:400px;"  >
-	            
-	            
-	            <p:accordionPanel multiple="true">            
+	        	<p:accordionPanel multiple="true">            
 			        <p:tab title="Buscar por ">			            
 			            <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">		    	
 							<p:outputLabel for="console1" value="Numero de" />
@@ -43,14 +40,8 @@
 				        	</p:selectOneRadio>	
 						</h:panelGrid>        
 					</p:tab>
-			
-			
-			       
-			        
-			        
 			        <p:tab title="Tipo">
 			            <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
-		 			
 				 			<p:outputLabel for="console2" value="Tipo de marca:" />
 						    <p:selectOneMenu id="console2" value="#{SearchBean.tipoMarca_id}" style="width:125px">
 						    	<f:selectItem itemLabel="" itemValue="" />
@@ -113,68 +104,64 @@
 			        </p:tab>
 			    </p:accordionPanel>			
 		        
-				<p:commandButton value="Submit" icon="ui-icon-check" update="display" action = "#{SearchBean.search2}" inmediate="true"/>
-			    <h:outputText id="display" value=":)"/>
-			
+				<p:commandButton value="Submit" icon="ui-icon-check" update="display" action = "#{SearchBean.search2}" />		
 			</p:ribbonGroup>
 	    	
 	        	
-	    	<p:ribbonGroup id="Resumen_Resultados" style="width:600px;height:800px;"  >
-	            
-	            
-	            <p:dataTable inmediate="true" value="#{SearchBean.records}" var="o" paginator="true" rows="3"
-                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                         rowsPerPageTemplate="10,25,40" widgetVar="50" style="width: 600px;" 
-                         selectionmode="single" rowkey="#{o.numeroSolicitud}"> 
-                <f:facet name="header">  
-                    Resultados Busqueda Administrativa 
-                </f:facet>
-                <p:ajax event="rowSelect" listener="#{SelectionView.onRowSelect}" />
-                <p:ajax event="rowSelect" update=":Detalles_Resultado" /> 
-                <p:column  sortBy="#{o.numeroSolicitud}">
-                    <f:facet name="header">  
-                        <h:outputText value="Solicitud" />  
-                    </f:facet>
-                    <h:outputText value="#{o.numeroSolicitud}"/>
-                </p:column>
-                <p:column sortBy="#{o.numeroRegistro}">
-                    <f:facet name="header">  
-                        <h:outputText value="Registro" />  
-                    </f:facet>
-                    <h:outputText value="#{o.numeroRegistro}"/>
-                </p:column>
-                <p:column sortBy="#{o.clase}">
-                    <f:facet name="header">  
-                        <h:outputText value="Clase" />  
-                    </f:facet>
-                    <h:outputText value="#{o.clase}"/>
-                </p:column>
-                <p:column sortBy="#{o.denominacion}">
-                    <f:facet name="header">  
-                        <h:outputText value="Signo" />  
-                    </f:facet>
-                    <h:outputText value="#{o.denominacion}"/>
-                </p:column>
-                <p:column sortBy="#{o.titular_nombre}">
-                    <f:facet name="header">  
-                        <h:outputText value="Titular" />  
-                    </f:facet>
-                    <h:outputText value="#{o.titular_nombre}"/>
-                </p:column>
-                
-                
-            </p:dataTable>
-				
-
+	    	<p:ribbonGroup style="width:600px;height:800px;" >
+	    		<h:panelGroup id="display">
+		            <p:dataTable inmediate="true" value="#{SearchBean.records}" var="o" paginator="true" rows="3"
+	                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+	                         rowsPerPageTemplate="3,5,10" widgetVar="50" style="width: 600px;">
+		                <f:facet name="header">  
+		                    Customer List  
+		                </f:facet>
+		                <p:column  sortBy="#{o.numeroSolicitud}">
+		                    <f:facet name="header">  
+		                        <h:outputText value="Solicitud" />  
+		                    </f:facet>
+		                    <h:outputText value="#{o.numeroSolicitud}"/>
+		                </p:column>
+		                <p:column sortBy="#{o.numeroRegistro}">
+		                    <f:facet name="header">  
+		                        <h:outputText value="Registro" />  
+		                    </f:facet>
+		                    <h:outputText value="#{o.numeroRegistro}"/>
+		                </p:column>
+		                <p:column sortBy="#{o.clase}">
+		                    <f:facet name="header">  
+		                        <h:outputText value="Clase" />  
+		                    </f:facet>
+		                    <h:outputText value="#{o.clase}"/>
+		                </p:column>
+		                <p:column sortBy="#{o.denominacion}">
+		                    <f:facet name="header">  
+		                        <h:outputText value="Signo" />  
+		                    </f:facet>
+		                    <h:outputText value="#{o.denominacion}"/>
+		                </p:column>
+		                <p:column sortBy="#{o.titular_nombre}">
+		                    <f:facet name="header">  
+		                        <h:outputText value="Titular" />  
+		                    </f:facet>
+		                    <h:outputText value="#{o.titular_nombre}"/>
+		                </p:column>
+		                <p:column>
+		                    <f:facet name="header">  
+		                        <h:outputText value="Detalles" />  
+		                    </f:facet>
+		                    <h:commandLink action="edit" value="Ver mas"/>
+		                </p:column>                
+	           		</p:dataTable>
+           		</h:panelGroup>
 	    	</p:ribbonGroup>
 	    	
-	    	<p:ribbonGroup id="Detalles_Resultado" style="width:400px;height:800px" >
-	    	
+	    	<p:ribbonGroup id="Detalles_Resultado" style="width:400px;height:800px;">
 	    		<h3>Marca/Establecimiento Comercial</h3>
 	    		<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
 	    		
 		    		<p:outputLabel value="Numero de Solicitud:" />
-		    		<h:outputText  value="#{SelectionView.numeroSolicitud}" />
+		    		<h:outputText  value="numeroSolicitud" />
 		    		    		
 		    		<p:outputLabel value="Numero de Registro:" />	    		
 		    		<h:outputText  value="numeroRegistro" /> 	
@@ -197,10 +184,10 @@
 	    		<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
 	    		
 		    		<p:outputLabel value="Nombre/Razon Solcial:" />	
-		    		<h:outputText  value="#{FilaReporte.titular_nombre}" />
+		    		<h:outputText  value="titular_nombre" />
 		    		
 		    		<p:outputLabel value="Pais:" />		    		
-		    		<h:outputText  value="#{FilaReporte.titular_pais}" />
+		    		<h:outputText  value="titular_pais" />
 	    		
 	    		</h:panelGrid>
 	    			    		
@@ -238,31 +225,9 @@
 	    		<h3>Anotacion</h3>	
 	            <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
 	            </h:panelGrid>
-	            
-	            
-	            
-	            
-	            
-	            
-	            
-	          
-	            
-	            
-	            
-	            
-	            
-	            
-	            
-	            
-	            
-	            
-
 	    	</p:ribbonGroup>
     	</p:tab>
     </p:ribbon>
- 
-
-
 </h:form>    
 
   
