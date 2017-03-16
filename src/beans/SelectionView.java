@@ -1,19 +1,14 @@
 package beans;
 
-import java.io.Serializable;
-import java.util.List;
-import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
 import org.primefaces.event.SelectEvent;
-import org.primefaces.event.UnselectEvent;
+import org.primefaces.model.SelectableDataModel;  
+
 
 @ManagedBean(name="SelectionView")
 @ViewScoped
-public class SelectionView implements Serializable {
+public class SelectionView{
 	
 	private FilaReporte selectedRow;
 	
@@ -27,8 +22,8 @@ public class SelectionView implements Serializable {
     }
 	
 	public void onRowSelect(SelectEvent event) {
-		FilaReporte selecedRow = ((FilaReporte) event.getObject());
-		setSelectedRow(selectedRow);
+		FilaReporte selectedRow = ((FilaReporte) event.getObject());
+		int i = 1+1;
 	}
 	
 	

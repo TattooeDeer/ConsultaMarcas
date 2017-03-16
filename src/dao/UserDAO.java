@@ -30,9 +30,11 @@ public class UserDAO {
 			List<FilaReporte> resultados_busqueda = new ArrayList<FilaReporte>();
 			
 			boolean found = false;
+			int i=1;
 			while(myRs.next()){
 				FilaReporte r = new FilaReporte();
 				
+				r.setIdRow(i);
 				r.setTitular_nombre(myRs.getString(1));
 				r.setTitular_pais(myRs.getString(2));
 				r.setTitular_comuna(myRs.getString(9));
@@ -49,10 +51,10 @@ public class UserDAO {
 				r.setCategoria(myRs.getString(14));
 				r.setTipoMarca(myRs.getString(15));
 
-				System.out.println(r.getTitular_nombre()+"\n"+r.getTitular_pais()+"\n"+r.getTitular_comuna()+"\n"+r.getRepresentante_nombre()+"\n"+r.getNumeroSolicitud()+"\n"+r.getNumeroRegistro()+"\n"+r.getEstadoSolicitud()+"\n"+r.getFechaPresentacion()+"\n"+r.getFechaPublicacion()+"\n"+r.getFechaInstancia()+"\n"+r.getFechaVencimiento()+"\n"+r.getEstadoInstancia()+"\n"+r.getObservacionInstancia()+"\n"+r.getCategoria()+"\n"+r.getTipoMarca());
+				System.out.println("\n"+r.getIdRow()+"\n"+r.getTitular_nombre()+"\n"+r.getTitular_pais()+"\n"+r.getTitular_comuna()+"\n"+r.getRepresentante_nombre()+"\n"+r.getNumeroSolicitud()+"\n"+r.getNumeroRegistro()+"\n"+r.getEstadoSolicitud()+"\n"+r.getFechaPresentacion()+"\n"+r.getFechaPublicacion()+"\n"+r.getFechaInstancia()+"\n"+r.getFechaVencimiento()+"\n"+r.getEstadoInstancia()+"\n"+r.getObservacionInstancia()+"\n"+r.getCategoria()+"\n"+r.getTipoMarca());
 				
 				
-				
+				i++;
 				resultados_busqueda.add(r);
 				found = true;
 			}

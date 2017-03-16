@@ -298,10 +298,10 @@ public class SearchBean{
 			System.out.print(sqlBuilder.getFinal_stmt());
 			//Se envia la sentencia y el objeto myStmt para ser ejecutado en setMyRs()
 			setMyRs(sqlBuilder.getFinal_stmt(), myStmt);
-			
+			/*
 			//lets see...
 			while(myRs.next()){
-				System.out.println("\n"+"titular:" + myRs.getString(1));
+				System.out.println("titular:" + myRs.getString(1));
 				System.out.println("Pais:" + myRs.getString(2));
 				System.out.println("Representante: " + myRs.getString(3));
 				System.out.println("Numero de Solicitud: "+myRs.getString(4));
@@ -317,6 +317,7 @@ public class SearchBean{
 				System.out.println("Categoria: " + myRs.getString(14));
 				System.out.println("Tipo de Marca: " + myRs.getString(15));
 			}
+			*/
 			//Cerramos la conexion...
 			myRs.close();
 			

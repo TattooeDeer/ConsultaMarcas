@@ -1,6 +1,8 @@
 package beans;
 
 public class FilaReporte {
+	
+	private int idRow;
 	private String numeroSolicitud;
 	private String numeroRegistro;
 	private String clase;
@@ -19,6 +21,15 @@ public class FilaReporte {
 	private String categoria;
 	private String tipoMarca;
 
+	
+	
+	public int getIdRow() {
+		return idRow;
+	}
+	public void setIdRow(int idRow) {
+		this.idRow = idRow;
+	}
+	
 	public String getNumeroSolicitud() {
 		return numeroSolicitud;
 	}
