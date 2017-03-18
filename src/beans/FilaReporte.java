@@ -1,6 +1,8 @@
 package beans;
 
-public class FilaReporte {
+
+
+public class FilaReporte{
 	
 	private int idRow;
 	private String numeroSolicitud;
@@ -23,6 +25,7 @@ public class FilaReporte {
 
 	
 	public FilaReporte(){
+		setIdRow(0);
 		setNumeroSolicitud("");
 		setNumeroRegistro("");
 		setClase("");
@@ -154,6 +157,9 @@ public class FilaReporte {
 	public void setTipoMarca(String tipoMarca) {
 		this.tipoMarca = tipoMarca;
 	}
+
+
+
 	
 	
 	

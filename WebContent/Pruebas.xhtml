@@ -110,49 +110,49 @@
 	        	
 	    	<p:ribbonGroup style="width:600px;height:800px;" >
 	    		<h:panelGroup id="display">
-		            <p:dataTable inmediate="true" value="#{SearchBean.records}" var="o" paginator="true" rows="3"
+		            <p:dataTable inmediate="true" value="#{SearchBean.records}" var="record" paginator="true" rows="3"
 	                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 	                         rowsPerPageTemplate="3,5,10" widgetVar="50" style="width: 600px;"
-	                         selectionMode = "single" rowkey="#{o.idRow}" selection="#{SelectionView.selectedRow}">
+	                          rowkey="#{record.idRow}">
 		                <f:facet name="header">  
 		                    Customer List  
 		                </f:facet>
 		                <p:ajax event="rowSelect" listener="#{SelectionView.onRowSelect}"/>
-		                <p:column sortBy="#{o.idRow}">
+		                <p:column sortBy="#{record.idRow}">
 		                    <f:facet name="header">  
 		                        <h:outputText value="ID" />  
 		                    </f:facet>
-		                    <h:outputText value="#{o.idRow}"/>
+		                    <h:outputText value="#{record.idRow}"/>
 		                </p:column>
-		                <p:column  sortBy="#{o.numeroSolicitud}">
+		                <p:column  sortBy="#{record.numeroSolicitud}">
 		                    <f:facet name="header">  
 		                        <h:outputText value="Solicitud" />  
 		                    </f:facet>
-		                    <h:outputText value="#{o.numeroSolicitud}"/>
+		                    <h:outputText value="#{record.numeroSolicitud}"/>
 		                </p:column>
-		                <p:column sortBy="#{o.numeroRegistro}">
+		                <p:column sortBy="#{record.numeroRegistro}">
 		                    <f:facet name="header">  
 		                        <h:outputText value="Registro" />  
 		                    </f:facet>
-		                    <h:outputText value="#{o.numeroRegistro}"/>
+		                    <h:outputText value="#{record.numeroRegistro}"/>
 		                </p:column>
-		                <p:column sortBy="#{o.clase}">
+		                <p:column sortBy="#{record.clase}">
 		                    <f:facet name="header">  
 		                        <h:outputText value="Clase" />  
 		                    </f:facet>
-		                    <h:outputText value="#{o.clase}"/>
+		                    <h:outputText value="#{record.clase}"/>
 		                </p:column>
-		                <p:column sortBy="#{o.denominacion}">
+		                <p:column sortBy="#{record.denominacion}">
 		                    <f:facet name="header">  
 		                        <h:outputText value="Signo" />  
 		                    </f:facet>
-		                    <h:outputText value="#{o.denominacion}"/>
+		                    <h:outputText value="#{record.denominacion}"/>
 		                </p:column>
-		                <p:column sortBy="#{o.titular_nombre}">
+		                <p:column sortBy="#{record.titular_nombre}">
 		                    <f:facet name="header">  
 		                        <h:outputText value="Titular" />  
 		                    </f:facet>
-		                    <h:outputText value="#{o.titular_nombre}"/>
+		                    <h:outputText value="#{record.titular_nombre}"/>
 		                </p:column>
 		                
 		                <p:column>

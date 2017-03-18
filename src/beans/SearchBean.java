@@ -3,6 +3,7 @@ package beans;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
+
 import Connection.conexion;
 import dao.UserDAO;
 import utility.SqlBuilder;
@@ -62,6 +63,7 @@ public class SearchBean{
 	public List<FilaReporte> getRecords() {
 		return records;		
 	}
+	
 	
 	/*****************CONSTRUCTOR**********************/
 	public SearchBean(){
@@ -513,6 +515,7 @@ public class SearchBean{
 	public void setSqlStmt(String sQL_stmt) {
 		SqlStmt = sQL_stmt;
 	}
+
 
 	
 	

@@ -9,6 +9,7 @@ import org.primefaces.event.SelectEvent;
 
 
 
+
 @ManagedBean(name="SelectionView")
 @ViewScoped
 public class SelectionView{
@@ -29,8 +30,9 @@ public class SelectionView{
 	
 	public void onRowSelect(SelectEvent event) {
 		FilaReporte selectedRow = ((FilaReporte) event.getObject());
-		int i = 1+1;
+		setSelectedRow(selectedRow);
 	}
+	
 	
 	
 }
