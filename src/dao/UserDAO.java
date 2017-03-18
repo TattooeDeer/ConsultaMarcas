@@ -29,6 +29,7 @@ public class UserDAO {
 			
 			List<FilaReporte> resultados_busqueda = new ArrayList<FilaReporte>();
 			
+			
 			boolean found = false;
 			int i=1;
 			while(myRs.next()){
@@ -63,6 +64,8 @@ public class UserDAO {
 			if (found) {
                 return resultados_busqueda;
             } else {
+            	FilaReporte dummy = new FilaReporte();
+            	resultados_busqueda.add(dummy);
                 return resultados_busqueda; // no entires found
             }
 			

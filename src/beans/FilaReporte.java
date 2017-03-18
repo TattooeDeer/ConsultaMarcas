@@ -22,6 +22,28 @@ public class FilaReporte {
 	private String tipoMarca;
 
 	
+	public FilaReporte(){
+		setNumeroSolicitud("");
+		setNumeroRegistro("");
+		setClase("");
+		setDenominacion("");
+		setTitular_nombre("");
+		setTitular_pais("");
+		setRepresentante_nombre("");
+		setEstadoSolicitud("");
+		setFechaPresentacion("");
+		setFechaPublicacion("");
+		setFechaInstancia("");
+		setFechaVencimiento("");
+		setEstadoInstancia("");
+		setObservacionInstancia("");
+		setCategoria("");
+		setTipoMarca("");
+		
+	}
+	
+	
+	
 	
 	public int getIdRow() {
 		return idRow;
