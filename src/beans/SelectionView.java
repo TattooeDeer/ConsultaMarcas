@@ -4,7 +4,7 @@ package beans;
 
 import javax.faces.bean.ManagedBean;
 
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.SessionScoped;
 import org.primefaces.event.SelectEvent;
 
 
@@ -12,11 +12,9 @@ import org.primefaces.event.SelectEvent;
 
 
 @ManagedBean(name="SelectionView")
-@ViewScoped
+@SessionScoped
 public class SelectionView{
 	
-	
-
 	
 	private FilaReporte selectedRow;
 	
@@ -33,7 +31,8 @@ public class SelectionView{
 		FilaReporte selectedRow = ((FilaReporte) event.getObject());
 		setSelectedRow(selectedRow);
 	}
-	
-	
-	
+	public void select(){
+		System.out.println(selectedRow);
+	}
+
 }
