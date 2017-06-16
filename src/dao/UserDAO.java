@@ -1,9 +1,7 @@
 package dao;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -79,7 +77,39 @@ public class UserDAO {
 			
 	}
 
+	public static boolean login(String user, String password) {
+        Connection con = null;
+        PreparedStatement ps = null;
+        try {
+			con = conexion.crearConexion();
+    		//Cambiar la tabla userinfo para la tabla original
+            ps = con.prepareStatement(
+                    "select user, pass from userinfo where \"user\"= ? and pass= ?");
+            ps.setString(1, user);
+            ps.setString(2, password);
+            System.out.println("\nStatement: "+ps);
+            ResultSet rs = ps.executeQuery();
+            
+            if (rs.next()) // found
+            {
+            	System.out.println("\n Estoy en if UserDAO, linea 95 \n");
+                System.out.println(rs.getString(1));
+                return true;
+            }
+            else {
+            	System.out.println("\n Estoy en else UserDAO, linea 99 \n");
+            	System.out.println(rs.getString(1));
+                return false;
+            }
+        } catch (Exception ex) {
+            System.out.println("Error en UserDAO.login() --> " + ex.getMessage());
+            return false;
+        } finally {
+            conexion.close(con);
+        }
+    }
 	
+	/******************* GETTER/SETTER ************************/
 	public ResultSet getMyRs() {
 		return myRs;
 	}

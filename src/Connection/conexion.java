@@ -19,6 +19,13 @@ public class conexion {
 		return null;
 	}
 	
+	public static void close(Connection con) {
+        try {
+            con.close();
+        } catch (Exception ex) {
+        	}
+    }
+	
 /*
 	public conexion() throws ClassNotFoundException, SQLException{
 		Class.forName("org.postgresql.Driver");

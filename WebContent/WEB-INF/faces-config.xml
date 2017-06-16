@@ -5,14 +5,14 @@
     xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
     version="2.2">
 	<navigation-rule>
-		<display-name>Busqueda.xhtml</display-name>
-		<from-view-id>/Busqueda.xhtml</from-view-id>
+	
+		<from-view-id>/login.xhtml</from-view-id>
 		<navigation-case>
-			<from-action>#{queryBean.search}</from-action>
-			<from-outcome>sucess</from-outcome>
-			<to-view-id>/Resultado.xhtml</to-view-id>
+			
+			<from-outcome>valido</from-outcome>
+			<to-view-id>/Pruebas.xhtml</to-view-id>
+			<redirect />
 		</navigation-case>
 	</navigation-rule>
-	
 
 </faces-config>
