@@ -25,6 +25,6 @@
 			<attribute name="owner.project.facets" value="jst.jsf"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/Users/Ignacio/Documents/DevTools/phsearch.jar"/>
+	<classpathentry kind="lib" path="/Users/Ignacio/Documents/workspace/gitConsultaMarcas/lib/phsearch.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
